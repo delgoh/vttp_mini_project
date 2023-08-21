@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Location {
 
-    private String locationId;
+    private Integer locationId;
 
-    private String exhibitorId;
+    private Integer exhibitorId;
+
+    private String boothCode;
     
 }

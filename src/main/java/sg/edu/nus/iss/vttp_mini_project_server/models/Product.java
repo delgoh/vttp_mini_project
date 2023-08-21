@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Product {
 
-    private String productId;
+    private Integer productId;
 
-    private String exhibitorId;
+    private Integer exhibitorId;
 
     private String productName;
 
-    private Float unitPrice;
+    private Float price;
 
     private String description;
 

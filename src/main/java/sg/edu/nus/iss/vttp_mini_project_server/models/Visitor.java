@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Visitor {
 
-    private String visitorId;
+    private Integer visitorId;
     
     private String username;
 
@@ -17,6 +17,6 @@ public class Visitor {
 
     private String password;
 
-    private String name;
+    // private String googleAuthToken;
 
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Exhibitor {
 
-    private String exhibitorId;
+    private Integer exhibitorId;
 
     private String exhibitorName;
 
