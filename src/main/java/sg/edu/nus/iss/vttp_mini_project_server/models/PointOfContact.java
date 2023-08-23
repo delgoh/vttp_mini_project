@@ -7,12 +7,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Location {
+public class PointOfContact {
 
-    private Integer locationId;
+    private String pocId;
+    
+    private String exhibitorId;
 
-    private Integer exhibitorId;
+    private String pocName;
 
-    private String boothCode;
+    private String pocPhone;
+
+    private String pocEmail;
     
 }
