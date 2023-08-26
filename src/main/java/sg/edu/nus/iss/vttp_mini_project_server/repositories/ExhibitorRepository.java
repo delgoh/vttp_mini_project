@@ -1,8 +1,8 @@
 package sg.edu.nus.iss.vttp_mini_project_server.repositories;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -35,8 +35,14 @@ public class ExhibitorRepository {
         return generatedKeyHolder.getKey().intValue();
     }
 
-    public Exhibitor getExhibitorById(Integer exhibitorId) {
-        return jdbcTemplate.queryForObject(SQL_GET_EXHIBITOR_BY_EXHIBITOR_ID, Exhibitor.class, exhibitorId);
+    public Optional<Exhibitor> getExhibitorById(Integer exhibitorId) {
+        List<Exhibitor> result = jdbcTemplate.query(SQL_GET_EXHIBITOR_BY_EXHIBITOR_ID, BeanPropertyRowMapper.newInstance(Exhibitor.class), exhibitorId);
+
+        if (result.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(result.get(0));
+        }
     }
 
     public List<Exhibitor> getAllExhibitors() {

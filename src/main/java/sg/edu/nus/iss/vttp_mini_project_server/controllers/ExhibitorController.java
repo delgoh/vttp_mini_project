@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.websocket.server.PathParam;
 import sg.edu.nus.iss.vttp_mini_project_server.dtos.ExhibitorRegistrationDTO;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Exhibitor;
 import sg.edu.nus.iss.vttp_mini_project_server.services.ExhibitorService;
@@ -30,7 +30,7 @@ public class ExhibitorController {
     }
 
     @GetMapping(path = "/{exhibitor-id}")
-    public ResponseEntity<Exhibitor> getExhibitorById(@PathParam("exhibitor-id") Integer exhibitorId) {
+    public ResponseEntity<Exhibitor> getExhibitorById(@PathVariable("exhibitor-id") Integer exhibitorId) {
         return ResponseEntity.ok(exhibitorService.getExhibitorById(exhibitorId));
     }
 
@@ -41,7 +41,7 @@ public class ExhibitorController {
     }
 
     @PutMapping(path = "/{exhibitor-id}")
-    public ResponseEntity<Boolean> updateExhibitorById(@PathParam("exhibitor-id") Integer exhibitorId, @RequestBody ExhibitorRegistrationDTO dto) {
+    public ResponseEntity<Boolean> updateExhibitorById(@PathVariable("exhibitor-id") Integer exhibitorId, @RequestBody ExhibitorRegistrationDTO dto) {
         return ResponseEntity.ok(exhibitorService.updateExhibitorById(exhibitorId, dto));
     }
     
