@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductListingsComponent } from './booth-store/product-listings/product-listings.component';
+import { StoreListingsComponent } from './booth-store/store-listings/store-listings.component';
+import { ProductSummaryCardComponent } from './booth-store/product-summary-card/product-summary-card.component';
 
 const routes: Routes = [
-  { path: 'booth', component: ProductListingsComponent, title: "Products" },
+  { path: 'booth', component: StoreListingsComponent, title: "Products" }
   // { path: 'deck/:deckId', component: DeckComponent },
   // { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];

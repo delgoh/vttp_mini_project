@@ -1,1 +1,7 @@
-<p>product-summary-card works!</p>
+<mat-card class="product-card" *ngIf="product != null">
+  <img mat-card-image [src]="product.imageUrl" alt="Photo of a Shiba Inu">
+  <mat-card-footer class="product-footer">
+    <mat-card-title>{{product.productName}}</mat-card-title>
+    <mat-card-title>$ {{product.price}}</mat-card-title>
+  </mat-card-footer>
+</mat-card>

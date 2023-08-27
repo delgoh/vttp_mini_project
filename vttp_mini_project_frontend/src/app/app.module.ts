@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { ProductListingsComponent } from './booth-store/product-listings/product-listings.component';
+import { StoreListingsComponent } from './booth-store/store-listings/store-listings.component';
 import { UserVisitorComponent } from './user-visitor/user-visitor.component';
 import { UserOrganizerComponent } from './user-organizer/user-organizer.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -18,7 +18,7 @@ import { ProductDetailsDialogComponent } from './booth-store/product-details-dia
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListingsComponent,
+    StoreListingsComponent,
     UserVisitorComponent,
     UserOrganizerComponent,
     PaymentComponent,
