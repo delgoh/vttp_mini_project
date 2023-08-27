@@ -1,0 +1,10 @@
+.product-card {
+  padding: 0.2em;
+  max-width: 200px;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+}
