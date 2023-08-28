@@ -11,14 +11,16 @@ export class StoreListingsComponent implements OnInit {
 
   boothStoreService = inject(BoothStoreService)
 
+  boothName: string = ""
   products: Product[] = []
 
   ngOnInit(): void {
     console.log("this ran")
 
-    this.boothStoreService.getAllProductsByExhibitorId(3)
+    this.boothStoreService.getBoothByExhibitorId(2)
       .then(result => {
-        this.products = result
+        this.boothName = result[0].exhibitorName
+        this.products = result[1]
       })
   }
 
