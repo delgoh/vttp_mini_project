@@ -14,6 +14,7 @@ import { UserExhibitorComponent } from './user-exhibitor/user-exhibitor.componen
 import { CartComponent } from './cart/cart.component';
 import { ProductSummaryCardComponent } from './booth-store/product-summary-card/product-summary-card.component';
 import { ProductDetailsDialogComponent } from './booth-store/product-details-dialog/product-details-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ProductDetailsDialogComponent } from './booth-store/product-details-dia
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

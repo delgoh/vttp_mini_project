@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import sg.edu.nus.iss.vttp_mini_project_server.models.Product;
 import sg.edu.nus.iss.vttp_mini_project_server.services.ProductService;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/api/exhibitors/{exhibitor-id}/products")
 public class ProductController {
     

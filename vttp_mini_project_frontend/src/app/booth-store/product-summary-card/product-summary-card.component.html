@@ -1,5 +1,6 @@
 <mat-card class="product-card" *ngIf="product != null">
-  <img mat-card-image [src]="product.imageUrl" alt="Photo of a Shiba Inu">
+  <!-- <img mat-card-image src="https://picsum.photos/200" alt="Product image"> -->
+  <img mat-card-image [src]="product.imageUrl" alt="Product image">
   <mat-card-footer class="product-footer">
     <mat-card-title>{{product.productName}}</mat-card-title>
     <mat-card-title>$ {{product.price}}</mat-card-title>
