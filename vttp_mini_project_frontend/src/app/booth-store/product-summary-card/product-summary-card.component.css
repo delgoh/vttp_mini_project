@@ -3,6 +3,10 @@
   /* max-width: 200px; */
 }
 
+.product-card:hover{
+  box-shadow: 3px 8px 20px 3px rgba(0,0,0,0.2);
+}
+
 .product-footer {
   display: flex;
   justify-content: space-between;

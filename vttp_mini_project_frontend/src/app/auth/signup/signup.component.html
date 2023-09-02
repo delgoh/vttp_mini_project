@@ -1,0 +1,57 @@
+<mat-toolbar color="primary">
+  <span>VenteSphere</span>
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button aria-label="Example icon button with a home icon">
+    <mat-icon>home</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-card class="signup-card">
+  <mat-card-header>
+    <mat-card-title class="title">Sign Up</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="signupForm" class="signup-form">
+      <mat-form-field class="signup-control">
+
+        <mat-label>Email address</mat-label>
+        <input type="email" matInput formControlName="email">
+        <mat-error *ngIf="signupForm.get('email')!.errors != null">{{getValidationError('email')}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="signup-control password-hint-gap">
+        <mat-label>Enter your password</mat-label>
+        <input matInput formControlName="password" [type]="isPasswordShown ? 'password' : 'text'">
+        <mat-hint>
+          <mat-icon
+            [fontIcon]="isPasswordConditionMet('minlength') ? 'check' : 'close'"
+            [class]="isPasswordConditionMet('minlength') ? 'valid' : 'invalid'"
+          ></mat-icon>
+          <span >At least 8 characters</span><br>
+          <mat-icon
+            [fontIcon]="isPasswordConditionMet('noLowercase') ? 'check' : 'close'"
+            [class]="isPasswordConditionMet('noLowercase') ? 'valid' : 'invalid'"
+          ></mat-icon>
+          One lowercase letter<br>
+          <mat-icon
+            [fontIcon]="isPasswordConditionMet('noUppercase') ? 'check' : 'close'"
+            [class]="isPasswordConditionMet('noUppercase') ? 'valid' : 'invalid'"
+          ></mat-icon>
+          One uppercase letter<br>
+          <mat-icon
+            [fontIcon]="isPasswordConditionMet('noNumeric') ? 'check' : 'close'"
+            [class]="isPasswordConditionMet('noNumeric') ? 'valid' : 'invalid'"
+          ></mat-icon>
+          One number
+        </mat-hint>
+        <button mat-icon-button matSuffix (click)="togglePasswordShown()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordShown">
+          <mat-icon>{{isPasswordShown ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-fab extended color="primary" [disabled]="signupForm.invalid">Sign Up</button>
+    </form>
+  </mat-card-content>
+  <mat-card-footer class="footer">
+    <span>Have an account? <a [routerLink]="['/']">Log In</a></span>
+  </mat-card-footer>
+</mat-card>

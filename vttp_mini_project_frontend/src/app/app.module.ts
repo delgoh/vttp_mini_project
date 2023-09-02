@@ -15,6 +15,11 @@ import { CartComponent } from './cart/cart.component';
 import { ProductSummaryCardComponent } from './booth-store/product-summary-card/product-summary-card.component';
 import { ProductDetailsDialogComponent } from './booth-store/product-details-dialog/product-details-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BoothLocationComponent } from './booth-location/booth-location.component';
+import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +32,19 @@ import { HttpClientModule } from '@angular/common/http';
     UserExhibitorComponent,
     CartComponent,
     ProductSummaryCardComponent,
-    ProductDetailsDialogComponent
+    ProductDetailsDialogComponent,
+    BoothLocationComponent,
+    AuthComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,61 @@
+/* * {
+  border: 1px solid red;
+} */
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.title {
+  font-weight: bolder;
+  padding-bottom: 20px;
+}
+
+.login-card {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  padding: 25px;
+}
+
+@media screen and (max-width: 800px) {
+  .login-card {
+    width: 100%;
+  }
+}
+
+.login-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-control {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.password-gap {
+  margin-bottom: 40px;
+}
+
+.footer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+
+.invalid {
+  color: red;
+  font-weight: bolder;
+}
+
+.valid {
+  color: green;
+  font-weight: bolder;
+}
