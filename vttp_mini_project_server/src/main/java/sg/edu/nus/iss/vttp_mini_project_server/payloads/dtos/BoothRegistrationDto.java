@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.vttp_mini_project_server.dtos;
+package sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import sg.edu.nus.iss.vttp_mini_project_server.models.Exhibitor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoothRegistrationDTO {
+public class BoothRegistrationDto {
 
     private Exhibitor exhibitor;
 

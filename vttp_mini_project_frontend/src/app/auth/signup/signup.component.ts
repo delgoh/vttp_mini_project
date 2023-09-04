@@ -1,3 +1,4 @@
+import { SignupService } from './signup.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from './password.validator';
@@ -9,9 +10,10 @@ import { passwordValidator } from './password.validator';
 })
 export class SignupComponent implements OnInit {
 
-  signupForm!: FormGroup
   fb: FormBuilder = inject(FormBuilder)
+  signupService: SignupService = inject(SignupService)
 
+  signupForm!: FormGroup
   isPasswordShown: boolean = true
 
   ngOnInit(): void {
@@ -41,6 +43,20 @@ export class SignupComponent implements OnInit {
       }
     }
     return "";
+  }
+
+  onSignup() {
+    const signupFormValue = this.signupForm.value
+    this.signupService.signupUser({
+      username: signupFormValue.email,
+      email: signupFormValue.email,
+      password: signupFormValue.password,
+      role: "ROLE_EXHIBITOR"
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
 }

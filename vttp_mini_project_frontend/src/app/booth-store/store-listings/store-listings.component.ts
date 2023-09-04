@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/_models/product';
 import { BoothStoreService } from '../booth-store.service';
 
 @Component({

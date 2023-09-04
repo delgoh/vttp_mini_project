@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import sg.edu.nus.iss.vttp_mini_project_server.dtos.NewProductDTO;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Product;
+import sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos.NewProductDto;
 import sg.edu.nus.iss.vttp_mini_project_server.services.ProductService;
 
 @RestController
-@CrossOrigin
 @RequestMapping(path = "/api/exhibitors/{exhibitor-id}/products")
 public class ProductController {
     
@@ -38,12 +37,12 @@ public class ProductController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> addNewProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @RequestBody NewProductDTO dto) {
+    public ResponseEntity<Boolean> addNewProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @RequestBody NewProductDto dto) {
         return ResponseEntity.ok(productService.addNewProduct(exhibitorId, dto.getProductName(), dto.getPrice(), dto.getDescription()));
     }
 
     @PutMapping(path = "/{product-id}")
-    public ResponseEntity<Boolean> updateProductById(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId, @RequestBody NewProductDTO dto) {
+    public ResponseEntity<Boolean> updateProductById(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId, @RequestBody NewProductDto dto) {
         return ResponseEntity.ok(productService.updateProductById(exhibitorId, productId, dto.getProductName(), dto.getPrice(), dto.getDescription()));
     }
 

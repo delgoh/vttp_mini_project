@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './_material/material.module';
 import { StoreListingsComponent } from './booth-store/store-listings/store-listings.component';
 import { UserVisitorComponent } from './user-visitor/user-visitor.component';
 import { UserOrganizerComponent } from './user-organizer/user-organizer.component';

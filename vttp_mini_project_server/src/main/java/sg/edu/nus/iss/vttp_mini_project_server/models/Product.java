@@ -13,7 +13,7 @@ public class Product {
 
     private Integer exhibitorId;
 
-    private String productName;
+    private String name;
 
     private Float price;
 

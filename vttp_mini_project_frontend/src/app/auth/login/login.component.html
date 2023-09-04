@@ -10,7 +10,7 @@
     <mat-card-title class="title">Log In</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="loginForm" class="login-form">
+    <form [formGroup]="loginForm" (submit)="onLogin()" class="login-form">
       <mat-form-field class="login-control">
 
         <mat-label>Email address</mat-label>
@@ -21,7 +21,7 @@
       <mat-form-field class="login-control password-gap">
         <mat-label>Enter your password</mat-label>
         <input matInput formControlName="password" [type]="isPasswordShown ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="isPasswordShown = !isPasswordShown" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordShown">
+        <button mat-icon-button matSuffix type="button" (click)="isPasswordShown = !isPasswordShown" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordShown">
           <mat-icon>{{isPasswordShown ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         <mat-error *ngIf="loginForm.get('password')!.errors != null">{{getValidationError('password')}}</mat-error>

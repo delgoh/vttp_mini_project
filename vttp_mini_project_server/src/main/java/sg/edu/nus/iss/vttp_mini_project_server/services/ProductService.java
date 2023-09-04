@@ -20,9 +20,9 @@ public class ProductService {
     @Autowired
     private ExhibitorService exhibitorService;
 
-    public Boolean addNewProduct(Integer exhibitorId, String productName, Float price, String description) {
+    public Boolean addNewProduct(Integer exhibitorId, String name, Float price, String description) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
-        return productRepository.insertNewProduct(exhibitorId, productName, price, description);
+        return productRepository.insertNewProduct(exhibitorId, name, price, description);
     }
 
     public List<Product> getAllProductsByExhibitorId(Integer exhibitorId) {
@@ -43,7 +43,7 @@ public class ProductService {
         return product;
     }
 
-    public Boolean updateProductById(Integer exhibitorId, Integer productId, String productName, Float price, String description) {
+    public Boolean updateProductById(Integer exhibitorId, Integer productId, String name, Float price, String description) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
         Optional<Product> productOpt = productRepository.getProductById(productId);
         if (productOpt.isEmpty()) {
@@ -53,10 +53,10 @@ public class ProductService {
         if (productToUpdate.getExhibitorId() != exhibitorId) {
             throw new InvalidProductExhibitorException("Product with ID %s does not belong to Exhibitor with ID %s.".formatted(productId.toString(), exhibitorId.toString()));
         }
-        productToUpdate.setProductName(productName);
+        productToUpdate.setName(name);
         productToUpdate.setPrice(price);
         productToUpdate.setDescription(description);
-        return productRepository.updateProductById(productId, productName, price, description);
+        return productRepository.updateProductById(productId, name, price, description);
     } 
 
     public Boolean removeProductById(Integer exhibitorId, Integer productId) {

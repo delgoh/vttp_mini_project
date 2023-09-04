@@ -18,18 +18,20 @@ public class ExhibitorRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     
-    private final String SQL_INSERT_NEW_EXHIBITOR = "INSERT INTO exhibitors VALUES (null, ?, ?)";
+    private final String SQL_INSERT_NEW_EXHIBITOR = "INSERT INTO exhibitors VALUES (null, ?, ?, ?)";
     private final String SQL_GET_EXHIBITOR_BY_EXHIBITOR_ID = "SELECT * FROM exhibitors WHERE exhibitor_id = ?";
+    private final String SQL_GET_EXHIBITOR_BY_EMAIL = "SELECT * FROM exhibitors WHERE email = ?";
     private final String SQL_GET_ALL_EXHIBITORS = "SELECT * FROM exhibitors";
-    private final String SQL_UPDATE_EXHIBITOR_BY_EXHIBITOR_ID = "UPDATE exhibitors SET exhibitor_name = ?, exhibitor_email = ? WHERE exhibitor_id = ?";
+    private final String SQL_UPDATE_EXHIBITOR_BY_EXHIBITOR_ID = "UPDATE exhibitors SET name = ?, email = ?, password = ? WHERE exhibitor_id = ?";
     private final String SQL_DELETE_EXHIBITOR_BY_EXHIBITOR_ID = "DELETE FROM exhibitors WHERE exhibitor_id = ?";
 
-    public Integer insertNewExhibitor(String exhibitorName, String exhibitorEmail) {
+    public Integer insertNewExhibitor(String name, String email, String password) {
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update((connection) -> {
             PreparedStatement ps = connection.prepareStatement(SQL_INSERT_NEW_EXHIBITOR, new String[] {"exhibitor_id"});
-            ps.setString(1, exhibitorName);
-            ps.setString(2, exhibitorEmail);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, password);
             return ps;
         }, generatedKeyHolder);
         return generatedKeyHolder.getKey().intValue();
@@ -45,12 +47,22 @@ public class ExhibitorRepository {
         }
     }
 
+    public Optional<Exhibitor> getExhibitorByEmail(String email) {
+        List<Exhibitor> result = jdbcTemplate.query(SQL_GET_EXHIBITOR_BY_EMAIL, BeanPropertyRowMapper.newInstance(Exhibitor.class), email);
+
+        if (result.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(result.get(0));
+        }
+    }
+
     public List<Exhibitor> getAllExhibitors() {
         return jdbcTemplate.query(SQL_GET_ALL_EXHIBITORS, BeanPropertyRowMapper.newInstance(Exhibitor.class));
     }
 
-    public Boolean updateExhibitorById(Integer exhibitorId, String exhibitorName, String exhibitorEmail) {
-        return jdbcTemplate.update(SQL_UPDATE_EXHIBITOR_BY_EXHIBITOR_ID, exhibitorName, exhibitorEmail, exhibitorId) > 0;
+    public Boolean updateExhibitorById(Integer exhibitorId, String name, String email, String password) {
+        return jdbcTemplate.update(SQL_UPDATE_EXHIBITOR_BY_EXHIBITOR_ID, name, email, password, exhibitorId) > 0;
     }
 
     public Boolean deleteExhibitorById(Integer exhibitorId) {

@@ -11,8 +11,11 @@ import org.springframework.web.context.request.WebRequest;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ExhibitorNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleExhibitorNotFound(ExhibitorNotFoundException ex, WebRequest req) {
+    @ExceptionHandler({
+        UserNotFoundException.class,
+        ProductNotFoundException.class
+    })
+    public ResponseEntity<ApiErrorResponse> handleEntityNotFound(RuntimeException ex, WebRequest req) {
         return new ResponseEntity<ApiErrorResponse>(
             new ApiErrorResponse(
                 HttpStatus.NOT_FOUND,
@@ -23,15 +26,27 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleProductNotFound(ProductNotFoundException ex, WebRequest req) {
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<ApiErrorResponse> handleInvalidPassword(InvalidPasswordException ex, WebRequest req) {
         return new ResponseEntity<ApiErrorResponse>(
             new ApiErrorResponse(
-                HttpStatus.NOT_FOUND,
+                HttpStatus.UNAUTHORIZED,
                 new Date(),
                 ex.getMessage(),
                 req.getDescription(false)
-            ), HttpStatus.NOT_FOUND
+            ), HttpStatus.UNAUTHORIZED
+        );
+    }
+
+    @ExceptionHandler(ConflictingRegistrationException.class)
+    public ResponseEntity<ApiErrorResponse> handleConflictingRegistration(ConflictingRegistrationException ex, WebRequest req) {
+        return new ResponseEntity<ApiErrorResponse>(
+            new ApiErrorResponse(
+                HttpStatus.CONFLICT,
+                new Date(),
+                ex.getMessage(),
+                req.getDescription(false)
+            ), HttpStatus.CONFLICT
         );
     }
 

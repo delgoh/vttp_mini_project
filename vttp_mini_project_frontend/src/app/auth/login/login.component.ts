@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +10,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm!: FormGroup
   fb: FormBuilder = inject(FormBuilder)
+  http: HttpClient = inject(HttpClient)
+  loginService: LoginService = inject(LoginService)
 
+  loginForm!: FormGroup
   isPasswordShown: boolean = true
 
   ngOnInit(): void {
@@ -42,6 +46,19 @@ export class LoginComponent implements OnInit {
         }
     }
     return "";
+  }
+
+  onLogin() {
+    const loginFormValue = this.loginForm.value
+    this.loginService.loginUser({
+      username: loginFormValue.email,
+      password: loginFormValue.password,
+      role: "ROLE_EXHIBITOR"
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
 }
