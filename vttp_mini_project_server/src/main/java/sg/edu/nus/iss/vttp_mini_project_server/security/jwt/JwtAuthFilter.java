@@ -2,6 +2,8 @@ package sg.edu.nus.iss.vttp_mini_project_server.security.jwt;
 
 import java.io.IOException;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -9,18 +11,23 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
-public class JwtAuthFilter extends OncePerRequestFilter {@Override
+@AllArgsConstructor
+public class JwtAuthFilter extends OncePerRequestFilter {
+    
+    private UserAuthProvider userAuthProvider;
+    
+    @Override
     protected void doFilterInternal(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        FilterChain filterChain
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
     ) throws ServletException, IOException {
 
-        final String authHeader = request.getHeader("Authorization");
+
+        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -28,9 +35,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {@Override
         }
 
         final String jwt = authHeader.substring(7);
+        try {
+            SecurityContextHolder.getContext().setAuthentication(userAuthProvider.validateToken(jwt));
+        } catch (RuntimeException ex) {
+            SecurityContextHolder.clearContext();
+            throw ex;
+        }
 
+        filterChain.doFilter(request, response);
     }
-
-
-    
 }

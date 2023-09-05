@@ -12,6 +12,7 @@ import jakarta.json.Json;
 import sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos.UserDto;
 import sg.edu.nus.iss.vttp_mini_project_server.payloads.requests.LoginRequest;
 import sg.edu.nus.iss.vttp_mini_project_server.payloads.requests.SignupRequest;
+import sg.edu.nus.iss.vttp_mini_project_server.security.jwt.UserAuthProvider;
 import sg.edu.nus.iss.vttp_mini_project_server.security.services.UserService;
 
 @RestController
@@ -20,10 +21,14 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserAuthProvider userAuthProvider;
     
     @PostMapping(path = "/login")
     public ResponseEntity<UserDto> login(@RequestBody LoginRequest req) {
         UserDto loggedInUser = userService.loginUser(req);
+        loggedInUser.setToken(userAuthProvider.createToken(loggedInUser));
         return ResponseEntity.ok(loggedInUser);
         // return ResponseEntity.ok(new UserDto(12345, "this works", "yay"));
     }
