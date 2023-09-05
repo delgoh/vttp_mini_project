@@ -16,10 +16,10 @@ import { ProductSummaryCardComponent } from './booth-store/product-summary-card/
 import { ProductDetailsDialogComponent } from './booth-store/product-details-dialog/product-details-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BoothLocationComponent } from './booth-location/booth-location.component';
-import { AuthComponent } from './auth/auth.component';
-import { LoginComponent } from './auth/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SignupComponent } from './auth/signup/signup.component';
+import { SignupComponent } from './signup/signup.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import { SignupComponent } from './auth/signup/signup.component';
     ProductSummaryCardComponent,
     ProductDetailsDialogComponent,
     BoothLocationComponent,
-    AuthComponent,
     LoginComponent,
     SignupComponent
   ],
@@ -44,7 +43,13 @@ import { SignupComponent } from './auth/signup/signup.component';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem("ACCESS_TOKEN"),
+        allowedDomains: ["localhost:4200"]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
