@@ -21,11 +21,13 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [autologinGuard],
     title: "Login | VenteSphere"
   },
   {
     path: 'signup',
     component: SignupComponent,
+    canActivate: [autologinGuard],
     title: "Sign Up | VenteSphere"
   },
   {

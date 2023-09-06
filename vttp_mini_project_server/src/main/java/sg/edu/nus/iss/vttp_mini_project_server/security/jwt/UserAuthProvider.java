@@ -25,6 +25,9 @@ public class UserAuthProvider {
 
     private SecretKey secretKey;
 
+    // private final Integer EXPIRY_DURATION = 3600000; // expiry in milliseconds
+    private final Integer EXPIRY_DURATION = 20000; // expiry in milliseconds
+
     @PostConstruct
     protected void init() {
         secretKey = Keys.hmacShaKeyFor(rawSecretKey.getBytes(StandardCharsets.UTF_8));
@@ -32,7 +35,7 @@ public class UserAuthProvider {
 
     public String createToken(UserDto dto) {
         Date now = new Date();
-        Date expiry = new Date(now.getTime() + 3600000);
+        Date expiry = new Date(now.getTime() + EXPIRY_DURATION);
 
         return Jwts.builder()
             .setIssuer(dto.getUsername())

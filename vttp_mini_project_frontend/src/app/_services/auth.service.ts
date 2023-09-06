@@ -21,7 +21,7 @@ export class AuthService {
 
     if (this.jwtHelper.isTokenExpired(token)) {
       console.log(">> AuthService: Token has expired! Deleting token...")
-      localStorage.removeItem("access_token")
+      this.clearToken()
       return false
     }
 
@@ -36,5 +36,9 @@ export class AuthService {
     }
 
     return this.jwtHelper.decodeToken(token).role
+  }
+
+  clearToken(): void {
+    localStorage.removeItem("access_token")
   }
 }
