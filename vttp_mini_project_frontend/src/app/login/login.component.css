@@ -1,7 +1,3 @@
-/* * {
-  border: 1px solid red;
-} */
-
 .toolbar-spacer {
   flex: 1 1 auto;
 }
@@ -40,8 +36,11 @@
   padding-top: 10px;
 }
 
-.password-gap {
-  margin-bottom: 40px;
+.user-type-radio {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin-bottom: 20px;
 }
 
 .footer {

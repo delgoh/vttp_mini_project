@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email:["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(8)]]
+      password: ["", [Validators.required, Validators.minLength(8)]],
+      userType: ["VISITOR"]
     })
   }
 
@@ -52,13 +53,20 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     const loginFormValue = this.loginForm.value
+
     this.loginService.loginUser({
       username: loginFormValue.email,
       password: loginFormValue.password,
-      role: "ROLE_EXHIBITOR"
+      role: loginFormValue.userType
+
     }).then(res => {
       localStorage.setItem("access_token", res['token'])
-      this.router.navigate(['/exhibitor'])
+      if (res['role'] === "EXHIBITOR") {
+        this.router.navigate(['/exhibitor'])
+      } else if (res['role'] === "VISITOR") {
+        this.router.navigate(['/visitor'])
+      }
+
     }).catch(err => {
       console.log(err)
     })

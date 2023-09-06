@@ -40,6 +40,13 @@
   margin-bottom: 80px;
 }
 
+.user-type-radio {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin-bottom: 20px;
+}
+
 .footer {
   margin-top: 30px;
   text-align: center;

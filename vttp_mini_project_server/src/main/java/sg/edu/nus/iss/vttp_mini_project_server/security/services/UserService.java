@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
 
     public UserDto loginUser(LoginRequest loginUser) {
 
-        if (loginUser.getRole().equals("ROLE_VISITOR")) {
+        if (loginUser.getRole().equals("VISITOR")) {
             Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(loginUser.getUsername());
             if (optVisitor.isEmpty()) {
                 throw new UserNotFoundException("Visitor not found.");
@@ -63,7 +63,7 @@ public class UserService implements UserDetailsService {
             }
             return Visitor.toUserDto(retrievedVisitor);
 
-        } else if (loginUser.getRole().equals("ROLE_EXHIBITOR")) {
+        } else if (loginUser.getRole().equals("EXHIBITOR")) {
             Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(loginUser.getUsername());
             if (optExhibitor.isEmpty()) {
                 throw new UserNotFoundException("Exhibitor not found.");
@@ -82,7 +82,7 @@ public class UserService implements UserDetailsService {
 
     public Boolean signupUser(SignupRequest newUser) {
 
-        if (newUser.getRole().equals("ROLE_VISITOR")) {
+        if (newUser.getRole().equals("VISITOR")) {
             Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(newUser.getEmail());
             if (optVisitor.isPresent()) {
                 throw new ConflictingRegistrationException("Email is already registered.");
@@ -90,7 +90,7 @@ public class UserService implements UserDetailsService {
             Boolean isAdded = visitorRepository.insertNewVisitor(newUser.getUsername(), newUser.getEmail(), passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
             return isAdded;
 
-        } else if (newUser.getRole().equals("ROLE_EXHIBITOR")) {
+        } else if (newUser.getRole().equals("EXHIBITOR")) {
             Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(newUser.getEmail());
             if (optExhibitor.isPresent()) {
                 throw new ConflictingRegistrationException("Email is already registered.");
@@ -99,7 +99,7 @@ public class UserService implements UserDetailsService {
             return isAdded > 0;
         }
 
-        return null;
+        return false;
     }
     
 }

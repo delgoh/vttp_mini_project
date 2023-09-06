@@ -47,6 +47,11 @@
         </button>
       </mat-form-field>
 
+      <mat-radio-group formControlName="userType" aria-label="Select user type" class="user-type-radio">
+        <mat-radio-button value="VISITOR">Visitor</mat-radio-button>
+        <mat-radio-button value="EXHIBITOR">Exhibitor</mat-radio-button>
+      </mat-radio-group>
+
       <button mat-fab extended color="primary" [disabled]="signupForm.invalid">Sign Up</button>
     </form>
   </mat-card-content>

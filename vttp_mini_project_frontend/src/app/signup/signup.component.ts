@@ -2,6 +2,8 @@ import { SignupService } from './signup.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from './password.validator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,8 +12,10 @@ import { passwordValidator } from './password.validator';
 })
 export class SignupComponent implements OnInit {
 
-  fb: FormBuilder = inject(FormBuilder)
-  signupService: SignupService = inject(SignupService)
+  signupService = inject(SignupService)
+  fb = inject(FormBuilder)
+  router = inject(Router)
+  snackBar = inject(MatSnackBar)
 
   signupForm!: FormGroup
   isPasswordShown: boolean = true
@@ -19,7 +23,8 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.signupForm = this.fb.group({
       email:["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(8), passwordValidator]]
+      password: ["", [Validators.required, Validators.minLength(8), passwordValidator]],
+      userType: ["VISITOR"]
     })
   }
 
@@ -51,9 +56,18 @@ export class SignupComponent implements OnInit {
       username: signupFormValue.email,
       email: signupFormValue.email,
       password: signupFormValue.password,
-      role: "ROLE_EXHIBITOR"
+      role: signupFormValue.userType
     }).then(res => {
-      console.log(res)
+      if (res['isAdded']) {
+        this.snackBar.open("Successfully registered! You may now log in.", "Dismiss", {
+          duration: 20000
+        })
+        this.router.navigate(['/'])
+      } else {
+        this.snackBar.open("Something went wrong. Please try again in a few seconds.", "Dismiss", {
+          duration: 20000
+        })
+      }
     }).catch(err => {
       console.log(err)
     })

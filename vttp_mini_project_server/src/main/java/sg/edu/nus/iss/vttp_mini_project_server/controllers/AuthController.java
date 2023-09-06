@@ -28,9 +28,9 @@ public class AuthController {
     @PostMapping(path = "/login")
     public ResponseEntity<UserDto> login(@RequestBody LoginRequest req) {
         UserDto loggedInUser = userService.loginUser(req);
+        
         loggedInUser.setToken(userAuthProvider.createToken(loggedInUser));
         return ResponseEntity.ok(loggedInUser);
-        // return ResponseEntity.ok(new UserDto(12345, "this works", "yay"));
     }
 
     @PostMapping(path = "/logout")

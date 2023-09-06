@@ -20,6 +20,8 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HeaderComponent } from './shared/layout/header/header/header.component';
+import { FooterComponent } from './shared/layout/footer/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { JwtModule } from '@auth0/angular-jwt';
     ProductDetailsDialogComponent,
     BoothLocationComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

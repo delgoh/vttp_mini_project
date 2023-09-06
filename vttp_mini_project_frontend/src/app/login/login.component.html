@@ -5,14 +5,17 @@
     <mat-icon>home</mat-icon>
   </button>
 </mat-toolbar>
+
+
 <mat-card class="login-card">
+
   <mat-card-header>
     <mat-card-title class="title">Log In</mat-card-title>
   </mat-card-header>
+
   <mat-card-content>
     <form [formGroup]="loginForm" (submit)="onLogin()" class="login-form">
       <mat-form-field class="login-control">
-
         <mat-label>Email address</mat-label>
         <input type="email" matInput formControlName="email">
         <mat-error *ngIf="loginForm.get('email')!.errors != null">{{getValidationError('email')}}</mat-error>
@@ -26,12 +29,20 @@
         </button>
         <mat-error *ngIf="loginForm.get('password')!.errors != null">{{getValidationError('password')}}</mat-error>
       </mat-form-field>
+
+      <mat-radio-group formControlName="userType" aria-label="Select user type" class="user-type-radio">
+        <mat-radio-button value="VISITOR">Visitor</mat-radio-button>
+        <mat-radio-button value="EXHIBITOR">Exhibitor</mat-radio-button>
+      </mat-radio-group>
+
       <button mat-fab extended color="primary" [disabled]="loginForm.invalid">Log In</button>
     </form>
   </mat-card-content>
+
   <mat-card-footer class="footer">
     <span>New to VenteSphere? <a [routerLink]="['/signup']">Sign up for free</a></span>
   </mat-card-footer>
+
 </mat-card>
 
 
