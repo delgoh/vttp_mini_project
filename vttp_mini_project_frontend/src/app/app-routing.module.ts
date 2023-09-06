@@ -8,12 +8,14 @@ import { UserExhibitorComponent } from './user-exhibitor/user-exhibitor.componen
 import { UserVisitorComponent } from './user-visitor/user-visitor.component';
 import { authGuard } from './_guards/auth.guard';
 import { roleGuard } from './_guards/role.guard';
+import { autologinGuard } from './_guards/autologin.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
     pathMatch: 'full',
+    canActivate: [autologinGuard],
     title: "Login | VenteSphere"
   },
   {
@@ -37,7 +39,7 @@ const routes: Routes = [
     component: UserExhibitorComponent,
     canActivate: [authGuard, roleGuard],
     data: {
-      expectedRole: "ROLE_EXHIBITOR"
+      expectedRole: "EXHIBITOR"
     },
     title: "Events - Exhibitor | VenteSphere"
   },
@@ -46,7 +48,7 @@ const routes: Routes = [
     component: UserVisitorComponent,
     canActivate: [authGuard, roleGuard],
     data: {
-      expectedRole: "ROLE_VISITOR"
+      expectedRole: "VISITOR"
     },
     title: "Events - Visitor | VenteSphere"
   },

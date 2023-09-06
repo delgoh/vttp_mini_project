@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   fb: FormBuilder = inject(FormBuilder)
   http: HttpClient = inject(HttpClient)
   loginService: LoginService = inject(LoginService)
+  router: Router = inject(Router)
 
   loginForm!: FormGroup
   isPasswordShown: boolean = true
@@ -55,7 +57,8 @@ export class LoginComponent implements OnInit {
       password: loginFormValue.password,
       role: "ROLE_EXHIBITOR"
     }).then(res => {
-      console.log(res)
+      localStorage.setItem("access_token", res['token'])
+      this.router.navigate(['/exhibitor'])
     }).catch(err => {
       console.log(err)
     })

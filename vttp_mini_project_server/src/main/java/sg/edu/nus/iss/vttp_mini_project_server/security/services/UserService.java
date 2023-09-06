@@ -4,6 +4,9 @@ import java.nio.CharBuffer;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,7 @@ import sg.edu.nus.iss.vttp_mini_project_server.repositories.ExhibitorRepository;
 import sg.edu.nus.iss.vttp_mini_project_server.repositories.VisitorRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private ExhibitorRepository exhibitorRepository;
@@ -29,6 +32,21 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(username);
+        Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(username);
+        if (optVisitor.isEmpty() && optExhibitor.isEmpty()) {
+            throw new UsernameNotFoundException("Username not found");
+        }
+
+        if (optVisitor.isPresent()) {
+            return Visitor.toUserDto(optVisitor.get());
+        } else {
+            return Exhibitor.toUserDto(optExhibitor.get());
+        }
+    }
 
     public UserDto loginUser(LoginRequest loginUser) {
 

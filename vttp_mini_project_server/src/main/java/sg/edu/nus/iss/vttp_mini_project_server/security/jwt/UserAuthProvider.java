@@ -40,6 +40,7 @@ public class UserAuthProvider {
             .setExpiration(expiry)
             .claim("id", dto.getId())
             .claim("username", dto.getUsername())
+            .claim("role", dto.getRole())
             .signWith(secretKey)
             .compact();
     }
@@ -54,6 +55,7 @@ public class UserAuthProvider {
         UserDto validatedUser = new UserDto();
         validatedUser.setId(jwtClaims.get("id", Integer.class));
         validatedUser.setUsername(jwtClaims.get("username", String.class));
+        validatedUser.setRole(jwtClaims.get("role", String.class));
         
         return new UsernamePasswordAuthenticationToken(validatedUser, null, Collections.emptyList());
     }

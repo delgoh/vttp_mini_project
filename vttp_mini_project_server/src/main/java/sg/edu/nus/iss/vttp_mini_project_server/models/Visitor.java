@@ -24,6 +24,7 @@ public class Visitor {
         UserDto userDto = new UserDto();
         userDto.setUsername(visitor.getEmail());
         userDto.setId(visitor.getVisitorId());
+        userDto.setRole("VISITOR");
         return userDto;
     }
 

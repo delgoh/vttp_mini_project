@@ -22,6 +22,7 @@ public class Exhibitor {
         UserDto userDto = new UserDto();
         userDto.setUsername(exhibitor.getEmail());
         userDto.setId(exhibitor.getExhibitorId());
+        userDto.setRole("EXHIBITOR");
         return userDto;
     }
     
