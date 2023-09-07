@@ -32,7 +32,7 @@ public class UserAuthProvider {
     private SecretKey secretKey;
 
     // private final Integer EXPIRY_DURATION = 3600000; // expiry in milliseconds
-    private final Integer EXPIRY_DURATION = 5 * 60 * 1000; // expiry in milliseconds
+    private final Integer EXPIRY_DURATION = 60 * 60 * 1000; // expiry in milliseconds
 
     @PostConstruct
     protected void init() {

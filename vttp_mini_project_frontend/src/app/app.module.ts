@@ -22,6 +22,9 @@ import { SignupComponent } from './signup/signup.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HeaderComponent } from './shared/layout/header/header/header.component';
 import { FooterComponent } from './shared/layout/footer/footer/footer.component';
+import { ProductEditWrapperComponent } from './booth-store/product-edit-wrapper/product-edit-wrapper.component';
+import { ProductNewCardComponent } from './booth-store/product-new-card/product-new-card.component';
+import { ProductEditDialogComponent } from './booth-store/product-edit-dialog/product-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { FooterComponent } from './shared/layout/footer/footer/footer.component'
     LoginComponent,
     SignupComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProductEditWrapperComponent,
+    ProductNewCardComponent,
+    ProductEditDialogComponent
   ],
   imports: [
     BrowserModule,

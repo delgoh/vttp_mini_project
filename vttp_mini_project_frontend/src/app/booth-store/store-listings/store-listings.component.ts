@@ -14,9 +14,9 @@ export class StoreListingsComponent implements OnInit {
   boothName: string = ""
   products: Product[] = []
 
-  ngOnInit(): void {
-    console.log("this ran")
+  isEdit: boolean = true
 
+  ngOnInit(): void {
     this.boothStoreService.getBoothByExhibitorId(1)
       .then(result => {
         console.log(result)
@@ -25,60 +25,7 @@ export class StoreListingsComponent implements OnInit {
       })
   }
 
-  // products: Product[] = [
-  //   {
-  //     productName: "Product 1",
-  //     price: 3.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  //   {
-  //     productName: "Product 2",
-  //     price: 4.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  //   {
-  //     productName: "Product 3",
-  //     price: 5.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  //   {
-  //     productName: "Product 1",
-  //     price: 3.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  //   {
-  //     productName: "Product 2",
-  //     price: 4.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  //   {
-  //     productName: "Product 3",
-  //     price: 5.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  //   {
-  //     productName: "Product 1",
-  //     price: 3.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  //   {
-  //     productName: "Product 2",
-  //     price: 4.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  //   {
-  //     productName: "Product 3",
-  //     price: 5.00,
-  //     imageUrl: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-  //     description: "wassup"
-  //   },
-  // ]
+  toggleEdit() {
+    this.isEdit = !this.isEdit
+  }
 }

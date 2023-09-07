@@ -1,0 +1,18 @@
+.edit-overlay {
+  width: max-content;
+  height: max-content;
+}
+
+.edit-overlay:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.edit-icon {
+  position: absolute;
+  z-index: 1;
+  transform-origin: center;
+  transform: translate(135px, 160px) scale(4);
+  color: white;
+  pointer-events: none;
+}

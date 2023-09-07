@@ -1,0 +1,38 @@
+<div class="dialog-container" *ngIf="product != null">
+  <img class="product-image" [src]="product.imageUrl" />
+
+  <form>
+    <div class="product-text-header">
+      <mat-form-field>
+        <mat-label>Product Name</mat-label>
+        <input matInput [value]="product.name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Price (SGD)</mat-label>
+        <input matInput [value]="product.price">
+      </mat-form-field>
+    </div>
+    <div class="description-text-container">
+      <mat-form-field class="description-text">
+        <mat-label>Product Description</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="7"
+          [value]="product.description"
+        ></textarea>
+      </mat-form-field>
+    </div>
+    <div class="dialog-footer" mat-dialog-actions align="end">
+      <button mat-raised-button color="warn" mat-dialog-close>Delete Product</button>
+      <span></span>
+      <button mat-stroked-button color="warn" mat-dialog-close>Discard Changes</button>
+      <button mat-raised-button color="primary" mat-dialog-close>Save Changes</button>
+    </div>
+
+
+  </form>
+
+
+</div>

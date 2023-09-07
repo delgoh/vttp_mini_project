@@ -1,6 +1,7 @@
 .product-card {
   padding: 0.2em;
-  /* max-width: 200px; */
+  width: 280px;
+  height: 330px;
 }
 
 .product-card:hover{

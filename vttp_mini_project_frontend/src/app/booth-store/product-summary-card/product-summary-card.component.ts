@@ -10,14 +10,12 @@ import { ProductDetailsDialogComponent } from '../product-details-dialog/product
 })
 export class ProductSummaryCardComponent {
 
-  @Input()
-  product?: Product
-
   dialog = inject(MatDialog)
 
+  @Input() product?: Product
+  @Input() isClickEnabled: boolean = true
+
   openProductDetails(product: Product) {
-    console.log(">>> called during clicking of card");
-    console.log(product);
     const dialogRef = this.dialog.open(ProductDetailsDialogComponent, {
       data: { product: product }
     })

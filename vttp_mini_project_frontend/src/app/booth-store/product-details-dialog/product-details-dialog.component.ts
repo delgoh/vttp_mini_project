@@ -7,13 +7,8 @@ import { Product } from 'src/app/_models/product';
   templateUrl: './product-details-dialog.component.html',
   styleUrls: ['./product-details-dialog.component.css']
 })
-export class ProductDetailsDialogComponent implements OnInit {
+export class ProductDetailsDialogComponent {
 
   product: Product = inject(MAT_DIALOG_DATA).product
-
-  ngOnInit(): void {
-    console.log(">>> dialog initialized")
-    console.log(this.product)
-  }
 
 }
