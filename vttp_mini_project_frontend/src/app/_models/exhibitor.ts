@@ -1,4 +1,4 @@
 export interface Exhibitor {
-  exhibitorName: string
-  exhibitorEmail: string
+  name: string
+  email: string
 }

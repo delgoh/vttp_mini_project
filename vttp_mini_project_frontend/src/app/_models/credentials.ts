@@ -1,6 +1,6 @@
 export interface Credentials {
-  username: string
-  email?: string
+  name?: string
+  email: string
   password: string
   role: string
 }

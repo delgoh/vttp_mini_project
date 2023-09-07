@@ -1,6 +1,6 @@
 import { SignupService } from './signup.service';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from './password.validator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -22,9 +22,10 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
+      userType: ["VISITOR"],
       email:["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(8), passwordValidator]],
-      userType: ["VISITOR"]
+      name: [""]
     })
   }
 
@@ -46,17 +47,35 @@ export class SignupComponent implements OnInit {
       } else if (this.signupForm.hasError('email', fieldName)) {
         return "Please enter a valid email."
       }
+    } else if (fieldName === 'name') {
+      if (this.signupForm.hasError('required', fieldName)) {
+        return "Company/Exhibitor name is required."
+      }
     }
     return "";
+  }
+
+  onUserTypeChanged() {
+    const nameControl = this.signupForm.get('name')
+    if (nameControl === null) {
+      return
+    }
+
+    if (this.signupForm.get('userType')!.value === "VISITOR") {
+      nameControl.setValidators(null)
+    } else if (this.signupForm.get('userType')!.value === "EXHIBITOR") {
+      nameControl.setValidators([Validators.required])
+    }
+    nameControl.reset()
   }
 
   onSignup() {
     const signupFormValue = this.signupForm.value
     this.signupService.signupUser({
-      username: signupFormValue.email,
+      role: signupFormValue.userType,
+      name: signupFormValue.name,
       email: signupFormValue.email,
-      password: signupFormValue.password,
-      role: signupFormValue.userType
+      password: signupFormValue.password
     }).then(res => {
       if (res['isAdded']) {
         this.snackBar.open("Successfully registered! You may now log in.", "Dismiss", {

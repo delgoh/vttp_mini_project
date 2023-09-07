@@ -1,14 +1,20 @@
 package sg.edu.nus.iss.vttp_mini_project_server.security.jwt;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -26,7 +32,7 @@ public class UserAuthProvider {
     private SecretKey secretKey;
 
     // private final Integer EXPIRY_DURATION = 3600000; // expiry in milliseconds
-    private final Integer EXPIRY_DURATION = 20000; // expiry in milliseconds
+    private final Integer EXPIRY_DURATION = 5 * 60 * 1000; // expiry in milliseconds
 
     @PostConstruct
     protected void init() {
@@ -59,8 +65,11 @@ public class UserAuthProvider {
         validatedUser.setId(jwtClaims.get("id", Integer.class));
         validatedUser.setUsername(jwtClaims.get("username", String.class));
         validatedUser.setRole(jwtClaims.get("role", String.class));
+
+        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority(jwtClaims.get("role", String.class)));
         
-        return new UsernamePasswordAuthenticationToken(validatedUser, null, Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(validatedUser, null, authorities);
     }
     
 }

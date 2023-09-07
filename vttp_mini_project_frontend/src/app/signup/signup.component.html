@@ -6,6 +6,12 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="signupForm" (submit)="onSignup()" class="signup-form">
+
+      <mat-radio-group formControlName="userType" (change)="onUserTypeChanged()" aria-label="Select user type" class="user-type-radio">
+        <mat-radio-button value="VISITOR">Visitor</mat-radio-button>
+        <mat-radio-button value="EXHIBITOR">Exhibitor</mat-radio-button>
+      </mat-radio-group>
+
       <mat-form-field class="signup-control">
         <mat-label>Email address</mat-label>
         <input type="email" matInput formControlName="email">
@@ -42,10 +48,11 @@
         </button>
       </mat-form-field>
 
-      <mat-radio-group formControlName="userType" aria-label="Select user type" class="user-type-radio">
-        <mat-radio-button value="VISITOR">Visitor</mat-radio-button>
-        <mat-radio-button value="EXHIBITOR">Exhibitor</mat-radio-button>
-      </mat-radio-group>
+      <mat-form-field class="signup-control">
+        <mat-label>{{signupForm.get('userType')!.value === "VISITOR" ? "Username (optional)" : "Company/Exhibitor Name"}}</mat-label>
+        <input type="text" matInput formControlName="name">
+        <mat-error *ngIf="signupForm.get('name')!.errors != null">{{getValidationError('name')}}</mat-error>
+      </mat-form-field>
 
       <button mat-fab extended color="primary" [disabled]="signupForm.invalid">Sign Up</button>
     </form>

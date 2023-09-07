@@ -12,7 +12,7 @@ public class Visitor {
 
     private Integer visitorId;
     
-    private String username;
+    private String name;
 
     private String email;
 

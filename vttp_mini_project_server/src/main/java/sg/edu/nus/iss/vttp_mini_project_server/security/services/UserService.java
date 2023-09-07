@@ -34,11 +34,11 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(username);
-        Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(email);
+        Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(email);
         if (optVisitor.isEmpty() && optExhibitor.isEmpty()) {
-            throw new UsernameNotFoundException("Username not found");
+            throw new UsernameNotFoundException("Email not found");
         }
 
         if (optVisitor.isPresent()) {
@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
     public UserDto loginUser(LoginRequest loginUser) {
 
         if (loginUser.getRole().equals("VISITOR")) {
-            Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(loginUser.getUsername());
+            Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(loginUser.getEmail());
             if (optVisitor.isEmpty()) {
                 throw new UserNotFoundException("Visitor not found.");
             }
@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
             return Visitor.toUserDto(retrievedVisitor);
 
         } else if (loginUser.getRole().equals("EXHIBITOR")) {
-            Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(loginUser.getUsername());
+            Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(loginUser.getEmail());
             if (optExhibitor.isEmpty()) {
                 throw new UserNotFoundException("Exhibitor not found.");
             }
@@ -87,7 +87,7 @@ public class UserService implements UserDetailsService {
             if (optVisitor.isPresent()) {
                 throw new ConflictingRegistrationException("Email is already registered.");
             }
-            Boolean isAdded = visitorRepository.insertNewVisitor(newUser.getUsername(), newUser.getEmail(), passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
+            Boolean isAdded = visitorRepository.insertNewVisitor(newUser.getName(), newUser.getEmail(), passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
             return isAdded;
 
         } else if (newUser.getRole().equals("EXHIBITOR")) {
@@ -95,7 +95,7 @@ public class UserService implements UserDetailsService {
             if (optExhibitor.isPresent()) {
                 throw new ConflictingRegistrationException("Email is already registered.");
             }
-            Integer isAdded = exhibitorRepository.insertNewExhibitor(newUser.getUsername(), newUser.getEmail(), passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
+            Integer isAdded = exhibitorRepository.insertNewExhibitor(newUser.getName(), newUser.getEmail(), passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
             return isAdded > 0;
         }
 

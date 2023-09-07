@@ -1,7 +1,7 @@
 <div class="dialog-container" *ngIf="product != null">
   <img class="product-image" [src]="product.imageUrl" />
   <div class="product-text-header">
-    <h1 mat-dialog-title>{{product.productName}}</h1>
+    <h1 mat-dialog-title>{{product.name}}</h1>
     <h1 mat-dialog-title>$ {{product.price}}</h1>
   </div>
   <div mat-dialog-content>{{product.description}}</div>

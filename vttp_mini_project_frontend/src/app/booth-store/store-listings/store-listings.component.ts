@@ -17,9 +17,10 @@ export class StoreListingsComponent implements OnInit {
   ngOnInit(): void {
     console.log("this ran")
 
-    this.boothStoreService.getBoothByExhibitorId(2)
+    this.boothStoreService.getBoothByExhibitorId(1)
       .then(result => {
-        this.boothName = result[0].exhibitorName
+        console.log(result)
+        this.boothName = result[0].name
         this.products = result[1]
       })
   }
