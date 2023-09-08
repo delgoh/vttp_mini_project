@@ -20,9 +20,9 @@ public class ProductService {
     @Autowired
     private ExhibitorService exhibitorService;
 
-    public Boolean addNewProduct(Integer exhibitorId, String name, Float price, String description) {
+    public Boolean addNewProduct(Integer exhibitorId, String name, Float price, String imageUrl, String description) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
-        return productRepository.insertNewProduct(exhibitorId, name, price, description);
+        return productRepository.insertNewProduct(exhibitorId, name, price, imageUrl, description);
     }
 
     public List<Product> getAllProductsByExhibitorId(Integer exhibitorId) {
@@ -43,7 +43,7 @@ public class ProductService {
         return product;
     }
 
-    public Boolean updateProductById(Integer exhibitorId, Integer productId, String name, Float price, String description) {
+    public Boolean updateProductById(Integer exhibitorId, Integer productId, String name, Float price, String imageUrl, String description) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
         Optional<Product> productOpt = productRepository.getProductById(productId);
         if (productOpt.isEmpty()) {
@@ -55,8 +55,9 @@ public class ProductService {
         }
         productToUpdate.setName(name);
         productToUpdate.setPrice(price);
+        productToUpdate.setImageUrl(imageUrl);
         productToUpdate.setDescription(description);
-        return productRepository.updateProductById(productId, name, price, description);
+        return productRepository.updateProductById(productId, name, price, imageUrl, description);
     } 
 
     public Boolean removeProductById(Integer exhibitorId, Integer productId) {

@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/_models/product';
 import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-dialog.component';
@@ -10,20 +10,22 @@ import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-
 })
 export class ProductEditWrapperComponent {
 
-  dialog = inject(MatDialog)
+  editDialog = inject(MatDialog)
 
   @Input() product!: Product
+  @Input() exhibitorId!: number
+  @Output() productUpdatedEvent = new EventEmitter<boolean>();
   isHovered: boolean = false
 
-  ngOnInit() {
-    const dialogRef = this.dialog.open(ProductEditDialogComponent, {
-      data: { product: this.product }
-    })
-  }
-
   openProductEdit(product: Product) {
-    const dialogRef = this.dialog.open(ProductEditDialogComponent, {
-      data: { product: this.product }
+    const dialogRef = this.editDialog.open(ProductEditDialogComponent, {
+      data: {
+        product: this.product,
+        exhibitorId: this.exhibitorId
+      }
+    })
+    dialogRef.afterClosed().subscribe(() => {
+      this.productUpdatedEvent.emit(true)
     })
   }
 

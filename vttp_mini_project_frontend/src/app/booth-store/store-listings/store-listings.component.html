@@ -1,19 +1,34 @@
 <mat-toolbar>
     <span>{{boothName}}</span>
     <span class="toolbar-spacer"></span>
-    <button type="button" (click)="toggleEdit()" [color]="isEdit ? 'primary' : ''" mat-raised-button aria-label="Edit Products">
-      <mat-icon>edit</mat-icon>
-      {{!isEdit ? "Edit Products" : "Save Changes"}}
+    <button
+      type="button"
+      (click)="toggleEdit()"
+      [color]="isEdit ? 'primary' : ''"
+      mat-raised-button
+      aria-label="Edit Products"
+    >
+      <mat-icon>{{!isEdit ? "edit" : "check"}}</mat-icon>
+      {{!isEdit ? "Edit Products" : "Done Editing"}}
     </button>
 </mat-toolbar>
 <div class="responsive-grid">
   <div *ngFor="let product of products">
-    <app-product-edit-wrapper [product]="product" *ngIf="isEdit; else notEdit">
+    <app-product-edit-wrapper
+      [product]="product"
+      [exhibitorId]="exhibitorId"
+      (productUpdatedEvent)="loadProducts()"
+      *ngIf="isEdit; else notEdit"
+    >
       <app-product-summary-card [isClickEnabled]="false" [product]="product"></app-product-summary-card>
     </app-product-edit-wrapper>
     <ng-template #notEdit>
       <app-product-summary-card [isClickEnabled]="true" [product]="product"></app-product-summary-card>
     </ng-template>
   </div>
-  <app-product-new-card *ngIf="isEdit"></app-product-new-card>
+  <app-product-new-card
+    (click)="addNewProduct()"
+    *ngIf="isEdit"
+  >
+  </app-product-new-card>
 </div>

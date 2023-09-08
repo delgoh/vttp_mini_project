@@ -25,6 +25,7 @@ import { FooterComponent } from './shared/layout/footer/footer/footer.component'
 import { ProductEditWrapperComponent } from './booth-store/product-edit-wrapper/product-edit-wrapper.component';
 import { ProductNewCardComponent } from './booth-store/product-new-card/product-new-card.component';
 import { ProductEditDialogComponent } from './booth-store/product-edit-dialog/product-edit-dialog.component';
+import { ProductDeleteConfirmationComponent } from './booth-store/product-delete-confirmation/product-delete-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ProductEditDialogComponent } from './booth-store/product-edit-dialog/pr
     FooterComponent,
     ProductEditWrapperComponent,
     ProductNewCardComponent,
-    ProductEditDialogComponent
+    ProductEditDialogComponent,
+    ProductDeleteConfirmationComponent
   ],
   imports: [
     BrowserModule,

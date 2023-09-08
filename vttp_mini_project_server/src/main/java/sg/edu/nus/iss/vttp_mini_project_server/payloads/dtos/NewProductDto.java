@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NewProductDto {
 
-    private String productName;
+    private String name;
 
     private Float price;
+
+    private String imageUrl;
 
     private String description;
     

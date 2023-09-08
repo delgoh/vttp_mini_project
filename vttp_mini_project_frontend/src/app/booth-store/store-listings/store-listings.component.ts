@@ -13,16 +13,39 @@ export class StoreListingsComponent implements OnInit {
 
   boothName: string = ""
   products: Product[] = []
+  exhibitorId: number = 1;
 
   isEdit: boolean = true
 
   ngOnInit(): void {
-    this.boothStoreService.getBoothByExhibitorId(1)
-      .then(result => {
-        console.log(result)
-        this.boothName = result[0].name
-        this.products = result[1]
+    this.loadProducts()
+  }
+
+  loadProducts() {
+    this.boothStoreService.getBoothByExhibitorId(this.exhibitorId)
+      .then(res => {
+        this.boothName = res[0].name
+        this.products = res[1]
+      }).catch(err => {
+        console.error(err)
       })
+  }
+
+  addNewProduct() {
+    const newProduct: Product = {
+      name: 'New Product',
+      price: 0,
+      imageUrl: 'https://picsum.photos/200',
+      description: 'Enter product description'
+    }
+    this.boothStoreService.addNewProduct(this.exhibitorId, newProduct)
+    .then(res => {
+      if (res['isAdded']) {
+        this.loadProducts()
+      }
+    }).catch(err => {
+      console.error(err)
+    })
   }
 
   toggleEdit() {

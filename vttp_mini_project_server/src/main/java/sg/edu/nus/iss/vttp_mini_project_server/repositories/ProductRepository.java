@@ -16,16 +16,16 @@ public class ProductRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private final String SQL_INSERT_NEW_PRODUCT = "INSERT INTO products VALUES (null, ?, ?, ?, ?)";
+    private final String SQL_INSERT_NEW_PRODUCT = "INSERT INTO products VALUES (null, ?, ?, ?, ?, ?)";
     private final String SQL_GET_ALL_PRODUCTS_BY_EXHIBITOR_ID = "SELECT * FROM products WHERE exhibitor_id = ?";
     private final String SQL_GET_PRODUCT_BY_PRODUCT_ID = "SELECT * FROM products WHERE product_id = ?";
     private final String SQL_GET_EXHIBITOR_ID_BY_PRODUCT_ID = "SELECT exhibitor_id from products where product_id = ?";
-    private final String SQL_UPDATE_PRODUCT_BY_PRODUCT_ID = "UPDATE products SET name = ?, price = ?, description = ? WHERE product_id = ?";
+    private final String SQL_UPDATE_PRODUCT_BY_PRODUCT_ID = "UPDATE products SET name = ?, price = ?, image_url = ?, description = ? WHERE product_id = ?";
     private final String SQL_DELETE_PRODUCT_BY_PRODUCT_ID = "DELETE FROM products WHERE product_id = ?";
     // private final String SQL_DELETE_ALL_PRODUCTS_BY_EXHIBITOR_ID = "DELETE FROM products WHERE exhibitor_id = ?";
 
-    public Boolean insertNewProduct(Integer exhibitorId, String name, Float price, String description) {
-        return jdbcTemplate.update(SQL_INSERT_NEW_PRODUCT, exhibitorId, name, price, description) > 0;
+    public Boolean insertNewProduct(Integer exhibitorId, String name, Float price, String imageUrl, String description) {
+        return jdbcTemplate.update(SQL_INSERT_NEW_PRODUCT, exhibitorId, name, price, imageUrl, description) > 0;
     }
 
     public List<Product> getAllProductsByExhibitorId(Integer exhibitorId) {
@@ -46,8 +46,8 @@ public class ProductRepository {
         return jdbcTemplate.queryForObject(SQL_GET_EXHIBITOR_ID_BY_PRODUCT_ID, Integer.class, productId);
     }
 
-    public Boolean updateProductById(Integer productId, String name, Float price, String description) {
-        return jdbcTemplate.update(SQL_UPDATE_PRODUCT_BY_PRODUCT_ID, name, price, description, productId) > 0;
+    public Boolean updateProductById(Integer productId, String name, Float price, String imageUrl, String description) {
+        return jdbcTemplate.update(SQL_UPDATE_PRODUCT_BY_PRODUCT_ID, name, price, imageUrl, description, productId) > 0;
     }
 
     public Boolean deleteProductById(Integer productId) {

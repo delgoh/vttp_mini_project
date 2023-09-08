@@ -88,7 +88,7 @@ export class SignupComponent implements OnInit {
         })
       }
     }).catch(err => {
-      console.log(err)
+      console.error(err)
     })
   }
 

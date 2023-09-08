@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.json.Json;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Product;
 import sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos.NewProductDto;
 import sg.edu.nus.iss.vttp_mini_project_server.services.ProductService;
@@ -36,19 +37,32 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProduct(exhibitorId, productId));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> addNewProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @RequestBody NewProductDto dto) {
-        return ResponseEntity.ok(productService.addNewProduct(exhibitorId, dto.getProductName(), dto.getPrice(), dto.getDescription()));
+    // @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
+    public ResponseEntity<String> addNewProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @RequestBody NewProductDto dto) {
+        Boolean isAdded = productService.addNewProduct(exhibitorId, dto.getName(), dto.getPrice(), dto.getImageUrl(), dto.getDescription());
+        return ResponseEntity.ok(Json.createObjectBuilder()
+            .add("isAdded", isAdded)
+            .build()
+            .toString());
     }
 
     @PutMapping(path = "/{product-id}")
-    public ResponseEntity<Boolean> updateProductById(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId, @RequestBody NewProductDto dto) {
-        return ResponseEntity.ok(productService.updateProductById(exhibitorId, productId, dto.getProductName(), dto.getPrice(), dto.getDescription()));
+    public ResponseEntity<String> updateProductById(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId, @RequestBody NewProductDto dto) {
+        Boolean isUpdated = productService.updateProductById(exhibitorId, productId, dto.getName(), dto.getPrice(), dto.getImageUrl(), dto.getDescription());
+        return ResponseEntity.ok(Json.createObjectBuilder()
+            .add("isUpdated", isUpdated)
+            .build()
+            .toString());
     }
 
     @DeleteMapping(path = "/{product-id}")
-    public ResponseEntity<Boolean> deleteProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId) {
-        return ResponseEntity.ok(productService.removeProductById(exhibitorId, productId));
+    public ResponseEntity<String> deleteProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId) {
+        Boolean isDeleted = productService.removeProductById(exhibitorId, productId);
+        return ResponseEntity.ok(Json.createObjectBuilder()
+            .add("isDeleted", isDeleted)
+            .build()
+            .toString());
     }
     
 }
