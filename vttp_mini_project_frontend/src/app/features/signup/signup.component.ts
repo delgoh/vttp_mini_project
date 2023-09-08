@@ -1,7 +1,7 @@
-import { SignupService } from './signup.service';
+import { SignupService } from '../../core/services/signup.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { passwordValidator } from './password.validator';
+import { passwordValidator } from '../../core/utils/password.validator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
 
   signupForm!: FormGroup
   isPasswordShown: boolean = true
+  invalidLoginMessage: string = ""
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -88,7 +89,7 @@ export class SignupComponent implements OnInit {
         })
       }
     }).catch(err => {
-      console.error(err)
+      this.invalidLoginMessage = err.error.message
     })
   }
 

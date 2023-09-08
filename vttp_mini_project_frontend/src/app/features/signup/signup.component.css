@@ -21,6 +21,13 @@
   }
 }
 
+.user-type-radio {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
 .signup-form {
   display: -webkit-box;
   display: -moz-box;
@@ -40,11 +47,9 @@
   margin-bottom: 80px;
 }
 
-.user-type-radio {
-  display: flex;
-  justify-content: space-between;
-  width: 250px;
-  margin-bottom: 10px;
+.invalid-message {
+  padding-bottom: 10px;
+  color: red;
 }
 
 .footer {

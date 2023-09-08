@@ -17,6 +17,13 @@
   }
 }
 
+.user-type-radio {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
 .login-form {
   display: -webkit-box;
   display: -moz-box;
@@ -32,18 +39,15 @@
   padding-top: 10px;
 }
 
-.user-type-radio {
-  display: flex;
-  justify-content: space-between;
-  width: 250px;
-  margin-bottom: 10px;
+.invalid-message {
+  padding-bottom: 10px;
+  color: red;
 }
 
 .footer {
   margin-top: 30px;
   text-align: center;
 }
-
 
 .invalid {
   color: red;

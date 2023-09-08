@@ -53,26 +53,26 @@ public class UserService implements UserDetailsService {
         if (loginUser.getRole().equals("VISITOR")) {
             Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(loginUser.getEmail());
             if (optVisitor.isEmpty()) {
-                throw new UserNotFoundException("Visitor not found.");
+                throw new UserNotFoundException("Visitor email is not registered.");
             }
             Visitor retrievedVisitor = optVisitor.get();
             if (!passwordEncoder.matches(
                     CharBuffer.wrap(loginUser.getPassword()),
                     retrievedVisitor.getPassword())) {
-                throw new InvalidPasswordException("Invalid password.");
+                throw new InvalidPasswordException("Invalid password. Please try again.");
             }
             return Visitor.toUserDto(retrievedVisitor);
 
         } else if (loginUser.getRole().equals("EXHIBITOR")) {
             Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(loginUser.getEmail());
             if (optExhibitor.isEmpty()) {
-                throw new UserNotFoundException("Exhibitor not found.");
+                throw new UserNotFoundException("Exhibitor email is not registered.");
             }
             Exhibitor retrievedExhibitor = optExhibitor.get();
             if (!passwordEncoder.matches(
                     CharBuffer.wrap(loginUser.getPassword()),
                     retrievedExhibitor.getPassword())) {
-                throw new InvalidPasswordException("Invalid password.");
+                throw new InvalidPasswordException("Invalid password. Please try again.");
             }
             return Exhibitor.toUserDto(retrievedExhibitor);
         }

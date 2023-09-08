@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from './login.service';
+import { LoginService } from '../../core/services/login.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup
   isPasswordShown: boolean = true
+  invalidLoginMessage: string = ""
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -68,7 +69,7 @@ export class LoginComponent implements OnInit {
       }
 
     }).catch(err => {
-      console.error(err)
+      this.invalidLoginMessage = err.error.message
     })
   }
 

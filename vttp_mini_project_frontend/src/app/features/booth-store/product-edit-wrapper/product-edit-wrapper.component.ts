@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Product } from 'src/app/_models/product';
+import { Product } from 'src/app/core/models/product';
 import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-dialog.component';
 
 @Component({

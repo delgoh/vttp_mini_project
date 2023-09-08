@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Product } from 'src/app/_models/product';
-import { BoothStoreService } from '../booth-store.service';
+import { Product } from 'src/app/core/models/product';
+import { BoothStoreService } from '../../../core/services/booth-store.service';
 import { ProductDeleteConfirmationComponent } from '../product-delete-confirmation/product-delete-confirmation.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

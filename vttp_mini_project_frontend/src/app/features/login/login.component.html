@@ -8,7 +8,7 @@
 
   <mat-card-content>
     <form [formGroup]="loginForm" (submit)="onLogin()" class="login-form">
-      
+
       <mat-radio-group formControlName="userType" aria-label="Select user type" class="user-type-radio">
         <mat-radio-button value="VISITOR">Visitor</mat-radio-button>
         <mat-radio-button value="EXHIBITOR">Exhibitor</mat-radio-button>
@@ -28,6 +28,12 @@
         </button>
         <mat-error *ngIf="loginForm.get('password')!.errors != null">{{getValidationError('password')}}</mat-error>
       </mat-form-field>
+
+      <span
+        class="invalid-message"
+        *ngIf="invalidLoginMessage != ''">
+        {{invalidLoginMessage}}
+      </span>
 
       <button mat-fab extended color="primary" [disabled]="loginForm.invalid">Log In</button>
     </form>

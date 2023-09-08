@@ -54,6 +54,12 @@
         <mat-error *ngIf="signupForm.get('name')!.errors != null">{{getValidationError('name')}}</mat-error>
       </mat-form-field>
 
+      <span
+        class="invalid-message"
+        *ngIf="invalidLoginMessage != ''">
+        {{invalidLoginMessage}}
+      </span>
+
       <button mat-fab extended color="primary" [disabled]="signupForm.invalid">Sign Up</button>
     </form>
   </mat-card-content>

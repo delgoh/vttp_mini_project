@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StoreListingsComponent } from './booth-store/store-listings/store-listings.component';
-import { ProductSummaryCardComponent } from './booth-store/product-summary-card/product-summary-card.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { UserExhibitorComponent } from './user-exhibitor/user-exhibitor.component';
-import { UserVisitorComponent } from './user-visitor/user-visitor.component';
-import { authGuard } from './_guards/auth.guard';
-import { roleGuard } from './_guards/role.guard';
-import { autologinGuard } from './_guards/autologin.guard';
+import { StoreListingsComponent } from './features/booth-store/store-listings/store-listings.component';
+import { ProductSummaryCardComponent } from './features/booth-store/product-summary-card/product-summary-card.component';
+import { LoginComponent } from './features/login/login.component';
+import { SignupComponent } from './features/signup/signup.component';
+import { UserExhibitorComponent } from './features/user-exhibitor/user-exhibitor.component';
+import { UserVisitorComponent } from './features/user-visitor/user-visitor.component';
+import { authGuard } from './core/guards/auth.guard';
+import { roleGuard } from './core/guards/role.guard';
+import { autologinGuard } from './core/guards/autologin.guard';
 
 const routes: Routes = [
   {
