@@ -58,8 +58,8 @@ import { ProductDeleteConfirmationComponent } from './booth-store/product-delete
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => localStorage.getItem("ACCESS_TOKEN"),
-        allowedDomains: ["localhost:4200"]
+        tokenGetter: () => localStorage.getItem("access_token"),
+        allowedDomains: ["localhost:4200", "localhost:8080"]
       }
     })
   ],

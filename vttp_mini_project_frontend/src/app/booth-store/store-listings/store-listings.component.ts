@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Product } from 'src/app/_models/product';
 import { BoothStoreService } from '../booth-store.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-store-listings',
@@ -10,14 +11,20 @@ import { BoothStoreService } from '../booth-store.service';
 export class StoreListingsComponent implements OnInit {
 
   boothStoreService = inject(BoothStoreService)
+  authService = inject(AuthService)
 
   boothName: string = ""
   products: Product[] = []
-  exhibitorId: number = 1;
+  exhibitorId: number = 0;
 
   isEdit: boolean = true
 
   ngOnInit(): void {
+    const retrievedId = this.authService.getTokenId()
+    if (retrievedId === null) {
+      return
+    }
+    this.exhibitorId = retrievedId
     this.loadProducts()
   }
 

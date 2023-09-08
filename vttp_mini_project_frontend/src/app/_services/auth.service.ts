@@ -38,6 +38,15 @@ export class AuthService {
     return this.jwtHelper.decodeToken(token).role
   }
 
+  getTokenId(): number | null {
+    const token = this.getAccessToken()
+    if (!token) {
+      return null;
+    }
+
+    return this.jwtHelper.decodeToken(token).id
+  }
+
   clearToken(): void {
     localStorage.removeItem("access_token")
   }

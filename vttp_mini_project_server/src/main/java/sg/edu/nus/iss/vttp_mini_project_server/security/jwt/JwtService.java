@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.vttp_mini_project_server.security.services;
+package sg.edu.nus.iss.vttp_mini_project_server.security.jwt;
 
 import java.util.Base64;
 

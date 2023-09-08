@@ -28,7 +28,6 @@ public class AuthController {
     @PostMapping(path = "/login")
     public ResponseEntity<UserDto> login(@RequestBody LoginRequest req) {
         UserDto loggedInUser = userService.loginUser(req);
-        
         loggedInUser.setToken(userAuthProvider.createToken(loggedInUser));
         return ResponseEntity.ok(loggedInUser);
     }
@@ -40,7 +39,6 @@ public class AuthController {
 
     @PostMapping(path = "/signup")
     public ResponseEntity<String> signup(@RequestBody SignupRequest req) {
-        
         return ResponseEntity.ok(Json.createObjectBuilder()
             .add("isAdded", userService.signupUser(req).toString())
             .build()
