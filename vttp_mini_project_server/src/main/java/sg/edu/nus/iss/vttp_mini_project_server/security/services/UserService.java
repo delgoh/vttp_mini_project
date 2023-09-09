@@ -50,8 +50,10 @@ public class UserService implements UserDetailsService {
 
     public UserDto loginUser(LoginRequest loginUser) {
 
+        String loginEmail = loginUser.getEmail().trim().toLowerCase();
+
         if (loginUser.getRole().equals("VISITOR")) {
-            Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(loginUser.getEmail());
+            Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(loginEmail);
             if (optVisitor.isEmpty()) {
                 throw new UserNotFoundException("Visitor email is not registered.");
             }
@@ -64,7 +66,7 @@ public class UserService implements UserDetailsService {
             return Visitor.toUserDto(retrievedVisitor);
 
         } else if (loginUser.getRole().equals("EXHIBITOR")) {
-            Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(loginUser.getEmail());
+            Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(loginEmail);
             if (optExhibitor.isEmpty()) {
                 throw new UserNotFoundException("Exhibitor email is not registered.");
             }
@@ -81,21 +83,23 @@ public class UserService implements UserDetailsService {
     }
 
     public Boolean signupUser(SignupRequest newUser) {
+        
+        String newEmail = newUser.getEmail().trim().toLowerCase();
 
         if (newUser.getRole().equals("VISITOR")) {
-            Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(newUser.getEmail());
+            Optional<Visitor> optVisitor = visitorRepository.getVisitorByEmail(newEmail);
             if (optVisitor.isPresent()) {
                 throw new ConflictingRegistrationException("Email is already registered.");
             }
-            Boolean isAdded = visitorRepository.insertNewVisitor(newUser.getName(), newUser.getEmail(), passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
+            Boolean isAdded = visitorRepository.insertNewVisitor(newUser.getName(), newEmail, passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
             return isAdded;
 
         } else if (newUser.getRole().equals("EXHIBITOR")) {
-            Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(newUser.getEmail());
+            Optional<Exhibitor> optExhibitor = exhibitorRepository.getExhibitorByEmail(newEmail);
             if (optExhibitor.isPresent()) {
                 throw new ConflictingRegistrationException("Email is already registered.");
             }
-            Integer isAdded = exhibitorRepository.insertNewExhibitor(newUser.getName(), newUser.getEmail(), passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
+            Integer isAdded = exhibitorRepository.insertNewExhibitor(newUser.getName(), newEmail, passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword())));
             return isAdded > 0;
         }
 

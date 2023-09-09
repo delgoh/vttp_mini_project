@@ -20,12 +20,14 @@ import { LoginComponent } from './features/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './features/signup/signup.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HeaderComponent } from './shared/layout/header/header/header.component';
-import { FooterComponent } from './shared/layout/footer/footer/footer.component';
+import { HeaderComponent } from './shared/header/header/header.component';
+import { FooterComponent } from './shared/footer/footer/footer.component';
 import { ProductEditWrapperComponent } from './features/booth-store/product-edit-wrapper/product-edit-wrapper.component';
 import { ProductNewCardComponent } from './features/booth-store/product-new-card/product-new-card.component';
 import { ProductEditDialogComponent } from './features/booth-store/product-edit-dialog/product-edit-dialog.component';
 import { ProductDeleteConfirmationComponent } from './features/booth-store/product-delete-confirmation/product-delete-confirmation.component';
+import { SideNavComponent } from './shared/side-nav/side-nav.component';
+import { SideNavListComponent } from './shared/side-nav/side-nav-list/side-nav-list.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { ProductDeleteConfirmationComponent } from './features/booth-store/produ
     ProductEditWrapperComponent,
     ProductNewCardComponent,
     ProductEditDialogComponent,
-    ProductDeleteConfirmationComponent
+    ProductDeleteConfirmationComponent,
+    SideNavComponent,
+    SideNavListComponent
   ],
   imports: [
     BrowserModule,

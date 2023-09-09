@@ -20,5 +20,7 @@ export const autologinGuard: CanActivateFn = (route, state) => {
     }
   }
 
+  console.log(">> AutoLoginGuard: Allows activate")
+
   return true;
 };

@@ -1,0 +1,32 @@
+.toggle {
+  width: 100%;
+  display: flex;
+  padding: 25px 20px;
+}
+
+.toggle:hover {
+  cursor: pointer;
+}
+
+.item {
+  user-select: none;
+  background: transparent;
+}
+
+.item:hover {
+  cursor: pointer;
+  border-left: solid 3px var(--mat-badge-background-color); /* #673ab7; */
+}
+
+.item-selected {
+  background-color: #e9f5f5;
+  border-left: solid 3px #673ab7;
+}
+
+mat-icon {
+  color: var(--mat-badge-background-color); /* #673ab7; */
+}
+
+.route-name {
+  padding: 0 20px;
+}

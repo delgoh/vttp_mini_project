@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreListingsComponent } from './features/booth-store/store-listings/store-listings.component';
-import { ProductSummaryCardComponent } from './features/booth-store/product-summary-card/product-summary-card.component';
 import { LoginComponent } from './features/login/login.component';
 import { SignupComponent } from './features/signup/signup.component';
 import { UserExhibitorComponent } from './features/user-exhibitor/user-exhibitor.component';
@@ -11,16 +10,31 @@ import { roleGuard } from './core/guards/role.guard';
 import { autologinGuard } from './core/guards/autologin.guard';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   component: PreLoginLayoutComponent,
+  //   pathMatch: 'full',
+  //   canActivate: [autologinGuard],
+    // children: [
+    //   {
+    //     path: 'signup',
+    //     component: SignupComponent,
+    //     canActivate: [autologinGuard],
+    //     title: "Sign Up | VenteSphere"
+    //   },
+    //   {
+    //     path: '',
+    //     component: LoginComponent,
+    //     canActivate: [autologinGuard],
+    //     title: "Login | VenteSphere"
+    //   },
+
+    // ]
+  // },
   {
     path: '',
     component: LoginComponent,
     pathMatch: 'full',
-    canActivate: [autologinGuard],
-    title: "Login | VenteSphere"
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
     canActivate: [autologinGuard],
     title: "Login | VenteSphere"
   },
@@ -30,12 +44,7 @@ const routes: Routes = [
     canActivate: [autologinGuard],
     title: "Sign Up | VenteSphere"
   },
-  {
-    path: 'booth',
-    component: StoreListingsComponent,
-    canActivate: [authGuard],
-    title: "Products | VenteSphere"
-  },
+
   {
     path: 'exhibitor',
     component: UserExhibitorComponent,
@@ -43,7 +52,25 @@ const routes: Routes = [
     data: {
       expectedRole: "EXHIBITOR"
     },
-    title: "Events - Exhibitor | VenteSphere"
+    title: "Events - Exhibitor | VenteSphere",
+
+    children: [
+      {
+        path: 'products',
+        component: StoreListingsComponent,
+        title: "Products - Exhibitor | VenteSphere"
+      },
+      {
+        path: 'orders',
+        component: StoreListingsComponent,
+        title: "Orders - Exhibitor | VenteSphere"
+      },
+      {
+        path: 'completed',
+        component: StoreListingsComponent,
+        title: "Completed - Exhibitor | VenteSphere"
+      },
+    ]
   },
   {
     path: 'visitor',
@@ -52,7 +79,24 @@ const routes: Routes = [
     data: {
       expectedRole: "VISITOR"
     },
-    title: "Events - Visitor | VenteSphere"
+    title: "Booths - Visitor | VenteSphere",
+    children: [
+      {
+        path: 'booths',
+        component: StoreListingsComponent,
+        title: "Booths - Visitor | VenteSphere"
+      },
+      {
+        path: 'cart',
+        component: StoreListingsComponent,
+        title: "Cart - Visitor | VenteSphere"
+      },
+      {
+        path: 'collection',
+        component: StoreListingsComponent,
+        title: "Collections - Visitor | VenteSphere"
+      }
+    ]
   },
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
