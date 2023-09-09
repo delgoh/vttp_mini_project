@@ -10,5 +10,6 @@ import { Product } from 'src/app/core/models/product';
 export class ProductDetailsDialogComponent {
 
   product: Product = inject(MAT_DIALOG_DATA).product
+  isAddToCartEnabled = inject(MAT_DIALOG_DATA).isAddToCartEnabled
 
 }

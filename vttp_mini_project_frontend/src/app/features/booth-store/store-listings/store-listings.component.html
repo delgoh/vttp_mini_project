@@ -3,11 +3,11 @@
     <span class="toolbar-spacer"></span>
     <button
       type="button"
+      mat-raised-button
+      *ngIf="!isViewedByVisitor"
       (click)="toggleEdit()"
       [color]="isEdit ? 'primary' : ''"
-      mat-raised-button
-      aria-label="Edit Products"
-    >
+      aria-label="Edit Products">
       <mat-icon>{{!isEdit ? "edit" : "check"}}</mat-icon>
       {{!isEdit ? "Edit Products" : "Done Editing"}}
     </button>
@@ -18,17 +18,22 @@
       [product]="product"
       [exhibitorId]="exhibitorId"
       (productUpdatedEvent)="loadProducts()"
-      *ngIf="isEdit; else notEdit"
-    >
-      <app-product-summary-card [isClickEnabled]="false" [product]="product"></app-product-summary-card>
+      *ngIf="isEdit; else notEdit">
+      <app-product-summary-card
+        [isClickEnabled]="false"
+        [product]="product">
+      </app-product-summary-card>
     </app-product-edit-wrapper>
     <ng-template #notEdit>
-      <app-product-summary-card [isClickEnabled]="true" [product]="product"></app-product-summary-card>
+      <app-product-summary-card
+        [isClickEnabled]="true"
+        [product]="product"
+        [isViewedByVisitor]="isViewedByVisitor">
+      </app-product-summary-card>
     </ng-template>
   </div>
   <app-product-new-card
     (click)="addNewProduct()"
-    *ngIf="isEdit"
-  >
+    *ngIf="isEdit">
   </app-product-new-card>
 </div>

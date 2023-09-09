@@ -20,8 +20,6 @@ export class SideNavListComponent implements OnInit {
 
   changeSelection(route: string) {
     this.selectedItem = route
-
-    console.log(this.selectedItem)
   }
 
 }

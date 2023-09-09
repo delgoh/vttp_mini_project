@@ -1,0 +1,22 @@
+<form [formGroup]="exhibitorSelection" *ngIf="exhibitors.length > 0; else noBoothsMessage">
+  <mat-form-field>
+    <mat-label>Select booth</mat-label>
+    <mat-select formControlName="selectedExhibitor" (selectionChange)="loadBooth($event.value)">
+      <mat-option
+        *ngFor="let exhibitor of exhibitors"
+        [value]="exhibitor.exhibitorId">
+        {{exhibitor.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<ng-template #noBoothsMessage>
+  <h2>No booths available.</h2>
+</ng-template>
+
+<app-store-listings
+  *ngIf="displayedExhibitorId !== 0"
+  [isViewedByVisitor]="true"
+  [exhibitorId]="displayedExhibitorId">
+</app-store-listings>

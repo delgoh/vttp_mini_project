@@ -14,10 +14,14 @@ export class ProductSummaryCardComponent {
 
   @Input() product?: Product
   @Input() isClickEnabled: boolean = true
+  @Input() isViewedByVisitor: boolean = false
 
   openProductDetails(product: Product) {
     const dialogRef = this.dialog.open(ProductDetailsDialogComponent, {
-      data: { product: product }
+      data: {
+        product: product,
+        isAddToCartEnabled: this.isViewedByVisitor
+      }
     })
   }
 

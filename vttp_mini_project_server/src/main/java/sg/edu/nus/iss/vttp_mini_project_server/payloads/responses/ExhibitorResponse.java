@@ -14,13 +14,10 @@ public class ExhibitorResponse {
 
     private String name;
 
-    private String email;
-
     public static ExhibitorResponse create(Exhibitor exhibitor) {
         return new ExhibitorResponse(
             exhibitor.getExhibitorId(),
-            exhibitor.getName(),
-            exhibitor.getEmail()
+            exhibitor.getName()
         );
     }
     

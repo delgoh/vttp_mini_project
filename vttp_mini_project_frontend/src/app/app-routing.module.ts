@@ -8,6 +8,7 @@ import { UserVisitorComponent } from './features/user-visitor/user-visitor.compo
 import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
 import { autologinGuard } from './core/guards/autologin.guard';
+import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-page.component';
 
 const routes: Routes = [
   // {
@@ -83,7 +84,7 @@ const routes: Routes = [
     children: [
       {
         path: 'booths',
-        component: StoreListingsComponent,
+        component: BoothsPageComponent,
         title: "Booths - Visitor | VenteSphere"
       },
       {

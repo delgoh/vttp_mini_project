@@ -6,6 +6,10 @@
   </div>
   <div mat-dialog-content>{{product.description}}</div>
   <div class="dialog-footer" mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Add To Cart</button>
+    <button
+      mat-button
+      [mat-dialog-close]="!isAddToCartEnabled">
+      {{isAddToCartEnabled ? "Add To Cart" : "Close"}}
+    </button>
   </div>
 </div>

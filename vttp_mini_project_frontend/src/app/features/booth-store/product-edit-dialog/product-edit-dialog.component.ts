@@ -46,6 +46,13 @@ export class ProductEditDialogComponent implements OnInit {
     .then(res => {
       if (res['isUpdated']) {
         this.dialogRef.close()
+        this.snackBar.open("Successfully saved changes!", "Dismiss", {
+          duration: 5000
+        })
+      } else {
+        this.snackBar.open("Failed to save changes. Please try again later.", "Dismiss", {
+          duration: 10000
+        })
       }
     }).catch(err => {
       console.error(err)
@@ -64,10 +71,12 @@ export class ProductEditDialogComponent implements OnInit {
               duration: 5000
             })
           } else {
-            this.snackBar.open("Failed to delete product. Try again later.", "Dismiss", {
+            this.snackBar.open("Failed to delete product. Please try again later.", "Dismiss", {
               duration: 10000
             })
           }
+        }).catch(err => {
+          console.error(err)
         })
       }
     })

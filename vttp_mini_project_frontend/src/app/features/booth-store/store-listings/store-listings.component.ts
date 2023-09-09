@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Product } from 'src/app/core/models/product';
 import { BoothStoreService } from '../../../core/services/booth-store.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -8,23 +8,32 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './store-listings.component.html',
   styleUrls: ['./store-listings.component.css']
 })
-export class StoreListingsComponent implements OnInit {
+export class StoreListingsComponent implements OnInit, OnChanges {
 
   boothStoreService = inject(BoothStoreService)
   authService = inject(AuthService)
 
+  @Input() isViewedByVisitor: boolean = false
+  @Input() exhibitorId!: number;
+
   boothName: string = ""
   products: Product[] = []
-  exhibitorId: number = 0;
 
   isEdit: boolean = false
 
   ngOnInit(): void {
-    const retrievedId = this.authService.getTokenId()
-    if (retrievedId === null) {
-      return
+    if (!this.isViewedByVisitor) {
+      const retrievedId = this.authService.getTokenId()
+      if (retrievedId === null) {
+        return
+      }
+      this.exhibitorId = retrievedId
     }
-    this.exhibitorId = retrievedId
+
+    this.loadProducts()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.loadProducts()
   }
 
