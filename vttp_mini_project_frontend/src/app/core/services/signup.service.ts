@@ -8,7 +8,7 @@ import { Credentials } from 'src/app/core/models/credentials';
 })
 export class SignupService {
 
-  http: HttpClient = inject(HttpClient)
+  http = inject(HttpClient)
 
   signupUser(credentials: Credentials) {
     return firstValueFrom(

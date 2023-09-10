@@ -8,13 +8,17 @@ import { Exhibitor } from '../models/exhibitor';
 })
 export class ExhibitorService {
 
-  private httpClient = inject(HttpClient)
-
-  constructor() { }
+  http = inject(HttpClient)
 
   getAllExhibitors() {
     return firstValueFrom(
-      this.httpClient.get<Exhibitor[]>(`/api/exhibitors`)
+      this.http.get<Exhibitor[]>(`/api/exhibitors`)
+    )
+  }
+
+  getExhibitorById(exhibitorId: string) {
+    return firstValueFrom(
+      this.http.get<Exhibitor>(`/api/exhibitors/${exhibitorId}`)
     )
   }
 

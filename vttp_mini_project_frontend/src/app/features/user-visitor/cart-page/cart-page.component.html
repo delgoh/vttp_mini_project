@@ -1,2 +1,10 @@
-<p>cart-page works!</p>
-<app-cart></app-cart>
+<mat-toolbar>
+  <span>Shopping Cart</span>
+  <span class="toolbar-spacer"></span>
+  <button mat-raised-button color="primary">Checkout</button>
+</mat-toolbar>
+<app-cart
+  *ngFor="let group of groupedOrders | keyvalue"
+  [exhibitorId]="group.key"
+  [orders]="group.value">
+</app-cart>

@@ -8,7 +8,7 @@ import { Credentials } from 'src/app/core/models/credentials';
 })
 export class LoginService {
 
-  http: HttpClient = inject(HttpClient)
+  http = inject(HttpClient)
 
   loginUser(credentials: Credentials) {
     return firstValueFrom(

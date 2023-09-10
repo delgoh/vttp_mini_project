@@ -1,1 +1,22 @@
-<p>cart works!</p>
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <mat-checkbox
+      color="primary"
+      [checked]="isBoothChecked"
+      (click)="$event.stopPropagation(); selectBooth()"
+      (keydown)="$event.stopPropagation()">
+      <label class="booth-name">{{exhibitorName}}</label>
+    </mat-checkbox>
+  </mat-expansion-panel-header>
+
+  <ul>
+    <li *ngFor="let order of orders; let i = index">
+      <mat-checkbox
+        color="primary"
+        (click)="selectProduct(i)"
+        [checked]="order.isSelected">
+      </mat-checkbox>
+      <label class="product-name">{{order.productName}}</label>
+    </li>
+  </ul>
+</mat-expansion-panel>

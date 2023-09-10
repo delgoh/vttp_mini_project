@@ -49,6 +49,8 @@ export class StoreListingsComponent implements OnInit, OnChanges {
 
   addNewProduct() {
     const newProduct: Product = {
+      productId: "",
+      exhibitorId: this.exhibitorId,
       name: 'New Product',
       price: 0,
       imageUrl: 'https://picsum.photos/200',

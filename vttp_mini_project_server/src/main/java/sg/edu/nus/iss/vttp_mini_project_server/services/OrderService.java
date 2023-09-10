@@ -24,6 +24,9 @@ public class OrderService {
     @Autowired
     private VisitorService visitorService;
 
+    @Autowired
+    private ProductService productService;
+
     public Boolean addNewOrder(String visitorId, String exhibitorId, NewOrderDto newOrder) {
         visitorService.checkVisitorIdExists(visitorId);
         exhibitorService.checkExhibitorIdExists(exhibitorId);
@@ -38,8 +41,13 @@ public class OrderService {
         );
     }
 
-    public List<Order> getVisitorOrders(String visitorId) {
-        return orderRepository.getVisitorOrders(visitorId);
+    public List<Order> getVisitorPendingOrders(String visitorId) {
+        List<Order> orders = orderRepository.getVisitorPendingOrders(visitorId);
+        for (Order order : orders) {
+            String productName = productService.getProductNameById(order.getProductId());
+            order.setProductName(productName);
+        }
+        return orders;
     }
 
     public Boolean deleteOrderById(String orderId) {

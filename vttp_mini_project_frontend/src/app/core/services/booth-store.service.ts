@@ -9,36 +9,34 @@ import { Exhibitor } from '../models/exhibitor';
 })
 export class BoothStoreService {
 
-  private httpClient = inject(HttpClient)
-
-  constructor() { }
+  private http = inject(HttpClient)
 
   getBoothByExhibitorId(exhibitorId: string) {
     return Promise.all([
       firstValueFrom(
-        this.httpClient.get<Exhibitor>(`/api/exhibitors/${exhibitorId}`)
+        this.http.get<Exhibitor>(`/api/exhibitors/${exhibitorId}`)
       ),
       firstValueFrom(
-        this.httpClient.get<Product[]>(`/api/exhibitors/${exhibitorId}/products`)
+        this.http.get<Product[]>(`/api/exhibitors/${exhibitorId}/products`)
       )
     ])
   }
 
   addNewProduct(exhibitorId: string, product: Product) {
     return firstValueFrom(
-      this.httpClient.post<any>(`/api/exhibitors/${exhibitorId}/products`, product)
+      this.http.post<any>(`/api/exhibitors/${exhibitorId}/products`, product)
     )
   }
 
   editProductById(exhibitorId: string, productId: string, product: Product) {
     return firstValueFrom(
-      this.httpClient.put<any>(`/api/exhibitors/${exhibitorId}/products/${productId}`, product)
+      this.http.put<any>(`/api/exhibitors/${exhibitorId}/products/${productId}`, product)
     )
   }
 
   deleteProductById(exhibitorId: string, productId: string) {
     return firstValueFrom(
-      this.httpClient.delete<any>(`/api/exhibitors/${exhibitorId}/products/${productId}`)
+      this.http.delete<any>(`/api/exhibitors/${exhibitorId}/products/${productId}`)
     )
   }
 

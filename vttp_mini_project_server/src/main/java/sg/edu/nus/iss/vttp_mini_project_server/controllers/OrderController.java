@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.json.Json;
 import sg.edu.nus.iss.vttp_mini_project_server.dtos.NewOrderDto;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Order;
@@ -26,10 +26,10 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> getVisitorOrders(
+    public ResponseEntity<List<Order>> getVisitorPendingOrders(
         @RequestParam("visitor-id") String visitorId
     ) {
-        return ResponseEntity.ok(orderService.getVisitorOrders(visitorId));
+        return ResponseEntity.ok(orderService.getVisitorPendingOrders(visitorId));
     }
 
     @PostMapping

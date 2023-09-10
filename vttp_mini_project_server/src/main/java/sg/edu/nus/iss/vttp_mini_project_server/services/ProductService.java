@@ -62,6 +62,10 @@ public class ProductService {
         return product;
     }
 
+    public String getProductNameById(String productId) {
+        return productRepository.getProductNameById(productId);
+    }
+
     public Boolean updateProductById(
         String exhibitorId,
         String productId,

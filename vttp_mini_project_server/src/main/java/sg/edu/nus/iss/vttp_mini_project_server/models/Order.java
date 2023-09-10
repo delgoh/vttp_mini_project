@@ -19,6 +19,8 @@ public class Order {
 
     private String productId;
 
+    private String productName;
+
     private Integer quantity;
 
     private Timestamp orderTimestamp;

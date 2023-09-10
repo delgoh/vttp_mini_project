@@ -36,6 +36,7 @@ export class ProductEditDialogComponent implements OnInit {
     const editFormValue = this.editForm.value
     const editedProduct: Product = {
       productId: this.product.productId,
+      exhibitorId: this.product.exhibitorId,
       name: editFormValue.name,
       price: editFormValue.price,
       imageUrl: editFormValue.imageUrl,

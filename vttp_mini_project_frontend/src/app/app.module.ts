@@ -11,7 +11,6 @@ import { UserOrganizerComponent } from './features/user-organizer/user-organizer
 import { PaymentComponent } from './features/payment/payment.component';
 import { CollectionComponent } from './features/collection/collection.component';
 import { UserExhibitorComponent } from './features/user-exhibitor/user-exhibitor.component';
-import { CartComponent } from './features/cart/cart.component';
 import { ProductSummaryCardComponent } from './features/booth-store/product-summary-card/product-summary-card.component';
 import { ProductDetailsDialogComponent } from './features/booth-store/product-details-dialog/product-details-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +29,7 @@ import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { SideNavListComponent } from './shared/side-nav/side-nav-list/side-nav-list.component';
 import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-page.component';
 import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
+import { CartComponent } from './features/cart/cart.component';
 
 @NgModule({
   declarations: [

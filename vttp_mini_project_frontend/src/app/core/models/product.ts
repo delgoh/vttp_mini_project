@@ -1,5 +1,6 @@
 export interface Product {
-  productId?: string
+  productId: string
+  exhibitorId: string
   name: string
   price: number
   imageUrl: string
