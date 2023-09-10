@@ -9,6 +9,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
 import { autologinGuard } from './core/guards/autologin.guard';
 import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-page.component';
+import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
 
 const routes: Routes = [
   // {
@@ -89,7 +90,7 @@ const routes: Routes = [
       },
       {
         path: 'cart',
-        component: StoreListingsComponent,
+        component: CartPageComponent,
         title: "Cart - Visitor | VenteSphere"
       },
       {

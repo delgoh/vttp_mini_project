@@ -29,6 +29,7 @@ import { ProductDeleteConfirmationComponent } from './features/booth-store/produ
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { SideNavListComponent } from './shared/side-nav/side-nav-list/side-nav-list.component';
 import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-page.component';
+import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-
     ProductDeleteConfirmationComponent,
     SideNavComponent,
     SideNavListComponent,
-    BoothsPageComponent
+    BoothsPageComponent,
+    CartPageComponent
   ],
   imports: [
     BrowserModule,

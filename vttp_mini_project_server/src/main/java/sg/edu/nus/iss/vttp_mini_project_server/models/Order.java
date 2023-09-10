@@ -15,6 +15,8 @@ public class Order {
 
     private Integer visitorId;
 
+    private Integer exhibitorId;
+
     private Integer productId;
 
     private Integer quantity;

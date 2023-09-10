@@ -10,14 +10,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import sg.edu.nus.iss.vttp_mini_project_server.dtos.LoginDto;
+import sg.edu.nus.iss.vttp_mini_project_server.dtos.SignupDto;
+import sg.edu.nus.iss.vttp_mini_project_server.dtos.UserDto;
 import sg.edu.nus.iss.vttp_mini_project_server.exceptions.ConflictingRegistrationException;
 import sg.edu.nus.iss.vttp_mini_project_server.exceptions.InvalidPasswordException;
 import sg.edu.nus.iss.vttp_mini_project_server.exceptions.UserNotFoundException;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Exhibitor;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Visitor;
-import sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos.UserDto;
-import sg.edu.nus.iss.vttp_mini_project_server.payloads.requests.LoginRequest;
-import sg.edu.nus.iss.vttp_mini_project_server.payloads.requests.SignupRequest;
 import sg.edu.nus.iss.vttp_mini_project_server.repositories.ExhibitorRepository;
 import sg.edu.nus.iss.vttp_mini_project_server.repositories.VisitorRepository;
 
@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public UserDto loginUser(LoginRequest loginUser) {
+    public UserDto loginUser(LoginDto loginUser) {
 
         String loginEmail = loginUser.getEmail().trim().toLowerCase();
 
@@ -82,7 +82,7 @@ public class UserService implements UserDetailsService {
         return null;
     }
 
-    public Boolean signupUser(SignupRequest newUser) {
+    public Boolean signupUser(SignupDto newUser) {
         
         String newEmail = newUser.getEmail().trim().toLowerCase();
 

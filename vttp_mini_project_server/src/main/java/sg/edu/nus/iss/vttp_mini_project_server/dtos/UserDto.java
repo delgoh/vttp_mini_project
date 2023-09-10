@@ -1,10 +1,9 @@
-package sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos;
+package sg.edu.nus.iss.vttp_mini_project_server.dtos;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.context.annotation.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,8 +24,6 @@ public class UserDto implements UserDetails {
     private String password;
 
     private String role;
-
-    // private Role role;
     
     private String token;
 

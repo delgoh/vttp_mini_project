@@ -1,11 +1,8 @@
 package sg.edu.nus.iss.vttp_mini_project_server.security.jwt;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.crypto.SecretKey;
@@ -21,7 +18,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
-import sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos.UserDto;
+import sg.edu.nus.iss.vttp_mini_project_server.dtos.UserDto;
 
 @Component
 public class UserAuthProvider {

@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos;
+package sg.edu.nus.iss.vttp_mini_project_server.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.vttp_mini_project_server.payloads.responses;
+package sg.edu.nus.iss.vttp_mini_project_server.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,14 +8,14 @@ import sg.edu.nus.iss.vttp_mini_project_server.models.Exhibitor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExhibitorResponse {
+public class ExhibitorPublicDto {
 
     private Integer exhibitorId;
 
     private String name;
 
-    public static ExhibitorResponse create(Exhibitor exhibitor) {
-        return new ExhibitorResponse(
+    public static ExhibitorPublicDto create(Exhibitor exhibitor) {
+        return new ExhibitorPublicDto(
             exhibitor.getExhibitorId(),
             exhibitor.getName()
         );

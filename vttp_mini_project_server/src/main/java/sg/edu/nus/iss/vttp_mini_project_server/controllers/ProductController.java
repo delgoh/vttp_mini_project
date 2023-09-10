@@ -3,9 +3,7 @@ package sg.edu.nus.iss.vttp_mini_project_server.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.json.Json;
+import sg.edu.nus.iss.vttp_mini_project_server.dtos.NewProductDto;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Product;
-import sg.edu.nus.iss.vttp_mini_project_server.payloads.dtos.NewProductDto;
 import sg.edu.nus.iss.vttp_mini_project_server.services.ProductService;
 
 @RestController
@@ -37,7 +35,6 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProduct(exhibitorId, productId));
     }
 
-    // @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @PostMapping
     public ResponseEntity<String> addNewProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @RequestBody NewProductDto dto) {
         Boolean isAdded = productService.addNewProduct(exhibitorId, dto.getName(), dto.getPrice(), dto.getImageUrl(), dto.getDescription());
