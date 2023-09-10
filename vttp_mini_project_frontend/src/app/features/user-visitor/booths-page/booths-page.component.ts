@@ -18,7 +18,7 @@ export class BoothsPageComponent implements OnInit {
   boothStoreService = inject(BoothStoreService)
 
   exhibitors: Exhibitor[] = []
-  displayedExhibitorId = 0
+  displayedExhibitorId = ""
 
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class BoothsPageComponent implements OnInit {
     })
   }
 
-  loadBooth(exhibitorId: number) {
+  loadBooth(exhibitorId: string) {
     this.displayedExhibitorId = exhibitorId
   }
 

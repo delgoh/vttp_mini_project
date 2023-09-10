@@ -15,7 +15,10 @@ public class GlobalExceptionHandler {
         UserNotFoundException.class,
         ProductNotFoundException.class
     })
-    public ResponseEntity<ApiErrorResponse> handleEntityNotFound(RuntimeException ex, WebRequest req) {
+    public ResponseEntity<ApiErrorResponse> handleEntityNotFound(
+        RuntimeException ex,
+        WebRequest req
+    ) {
         return new ResponseEntity<ApiErrorResponse>(
             new ApiErrorResponse(
                 HttpStatus.NOT_FOUND,
@@ -27,7 +30,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidPasswordException.class)
-    public ResponseEntity<ApiErrorResponse> handleInvalidPassword(InvalidPasswordException ex, WebRequest req) {
+    public ResponseEntity<ApiErrorResponse> handleInvalidPassword(
+        InvalidPasswordException ex,
+        WebRequest req
+    ) {
         return new ResponseEntity<ApiErrorResponse>(
             new ApiErrorResponse(
                 HttpStatus.UNAUTHORIZED,
@@ -39,7 +45,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ConflictingRegistrationException.class)
-    public ResponseEntity<ApiErrorResponse> handleConflictingRegistration(ConflictingRegistrationException ex, WebRequest req) {
+    public ResponseEntity<ApiErrorResponse> handleConflictingRegistration(
+        ConflictingRegistrationException ex,
+        WebRequest req
+    ) {
         return new ResponseEntity<ApiErrorResponse>(
             new ApiErrorResponse(
                 HttpStatus.CONFLICT,
@@ -51,7 +60,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidProductExhibitorException.class)
-    public ResponseEntity<ApiErrorResponse> handleInvalidProductExhibitor(InvalidProductExhibitorException ex, WebRequest req) {
+    public ResponseEntity<ApiErrorResponse> handleInvalidProductExhibitor(
+        InvalidProductExhibitorException ex,
+        WebRequest req
+    ) {
         return new ResponseEntity<ApiErrorResponse>(
             new ApiErrorResponse(
                 HttpStatus.FORBIDDEN,

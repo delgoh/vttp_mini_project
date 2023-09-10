@@ -2,6 +2,7 @@ package sg.edu.nus.iss.vttp_mini_project_server.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,60 +21,72 @@ public class ProductService {
     @Autowired
     private ExhibitorService exhibitorService;
 
-    public Boolean addNewProduct(Integer exhibitorId, String name, Float price, String imageUrl, String description) {
+    public Boolean addNewProduct(
+        String exhibitorId,
+        String name,
+        Float price,
+        String imageUrl,
+        String description
+    ) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
-        return productRepository.insertNewProduct(exhibitorId, name, price, imageUrl, description);
+        return productRepository.insertNewProduct(
+            UUID.randomUUID().toString(),
+            exhibitorId,
+            name,
+            price,
+            imageUrl,
+            description
+        );
     }
 
-    public List<Product> getAllProductsByExhibitorId(Integer exhibitorId) {
+    public List<Product> getAllProductsByExhibitorId(String exhibitorId) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
         return productRepository.getAllProductsByExhibitorId(exhibitorId);
     }
 
-    public Product getProduct(Integer exhibitorId, Integer productId) {
+    public Product getProduct(String exhibitorId, String productId) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
         Optional<Product> productOpt = productRepository.getProductById(productId);
         if (productOpt.isEmpty()) {
-            throw new ProductNotFoundException("Product with ID %s not found.".formatted(productId.toString()));
+            throw new ProductNotFoundException(
+                "Product with ID %s not found.".formatted(productId)
+            );
         }
         Product product = productOpt.get();
-        if (product.getExhibitorId() != exhibitorId) {
-            throw new InvalidProductExhibitorException("Product with ID %s does not belong to Exhibitor with ID %s.".formatted(productId.toString(), exhibitorId.toString()));
+        if (!product.getExhibitorId().equals(exhibitorId)) {
+            throw new InvalidProductExhibitorException(
+                "Product with ID %s does not belong to Exhibitor with ID %s."
+                    .formatted(productId, exhibitorId)
+            );
         }
         return product;
     }
 
-    public Boolean updateProductById(Integer exhibitorId, Integer productId, String name, Float price, String imageUrl, String description) {
+    public Boolean updateProductById(
+        String exhibitorId,
+        String productId,
+        String name,
+        Float price,
+        String imageUrl,
+        String description
+    ) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
-        Optional<Product> productOpt = productRepository.getProductById(productId);
-        if (productOpt.isEmpty()) {
-            throw new ProductNotFoundException("Product with ID %s not found.".formatted(productId.toString()));
-        }
-        Product productToUpdate = productOpt.get();
-        if (productToUpdate.getExhibitorId() != exhibitorId) {
-            throw new InvalidProductExhibitorException("Product with ID %s does not belong to Exhibitor with ID %s.".formatted(productId.toString(), exhibitorId.toString()));
-        }
+        Product productToUpdate = this.getProduct(exhibitorId, productId);
+
         productToUpdate.setName(name);
         productToUpdate.setPrice(price);
         productToUpdate.setImageUrl(imageUrl);
         productToUpdate.setDescription(description);
+
         return productRepository.updateProductById(productId, name, price, imageUrl, description);
     } 
 
-    public Boolean removeProductById(Integer exhibitorId, Integer productId) {
+    public Boolean removeProductById(String exhibitorId, String productId) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
-        Optional<Product> productOpt = productRepository.getProductById(productId);
-        if (productOpt.isEmpty()) {
-            throw new ProductNotFoundException("Product with ID %s not found.".formatted(productId.toString()));
-        }
-        Product product = productOpt.get();
-        if (product.getExhibitorId() != exhibitorId) {
-            throw new InvalidProductExhibitorException("Product with ID %s does not belong to Exhibitor with ID %s.".formatted(productId.toString(), exhibitorId.toString()));
-        }
         return productRepository.deleteProductById(productId);
     }
 
-    // public Boolean removeAllProductsByExhibitorId(Integer exhibitorId) {
+    // public Boolean removeAllProductsByExhibitorId(String exhibitorId) {
     //     return productRepository.deleteAllProductsByExhibitorId(exhibitorId);
     // }
     

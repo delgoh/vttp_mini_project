@@ -14,7 +14,7 @@ export class StoreListingsComponent implements OnInit, OnChanges {
   authService = inject(AuthService)
 
   @Input() isViewedByVisitor: boolean = false
-  @Input() exhibitorId!: number;
+  @Input() exhibitorId!: string;
 
   boothName: string = ""
   products: Product[] = []

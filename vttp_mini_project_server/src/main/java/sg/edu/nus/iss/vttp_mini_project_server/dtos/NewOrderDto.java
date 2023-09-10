@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NewOrderDto {
 
-    private Integer productId;
+    private String productId;
 
     private Integer quantity;
     

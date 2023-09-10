@@ -1,6 +1,6 @@
 <div>
-  <div class="toggle">
-    <mat-icon (click)="toggleMenu.emit(null)">menu</mat-icon>
+  <div class="toggle" (click)="toggleMenu.emit(null)">
+    <mat-icon>menu</mat-icon>
   </div>
 
   <mat-list *ngFor="let sideNavRoute of sideNavRoutes">

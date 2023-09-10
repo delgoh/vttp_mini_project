@@ -19,7 +19,7 @@ export class ProductEditDialogComponent implements OnInit {
   deleteDialog = inject(MatDialog)
   snackBar = inject(MatSnackBar)
   product: Product = inject(MAT_DIALOG_DATA).product
-  exhibitorId: number = inject(MAT_DIALOG_DATA).exhibitorId
+  exhibitorId: string = inject(MAT_DIALOG_DATA).exhibitorId
 
   editForm!: FormGroup
 

@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Product {
 
-    private Integer productId;
+    private String productId;
 
-    private Integer exhibitorId;
+    private String exhibitorId;
 
     private String name;
 

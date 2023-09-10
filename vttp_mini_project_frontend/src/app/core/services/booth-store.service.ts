@@ -13,7 +13,7 @@ export class BoothStoreService {
 
   constructor() { }
 
-  getBoothByExhibitorId(exhibitorId: number) {
+  getBoothByExhibitorId(exhibitorId: string) {
     return Promise.all([
       firstValueFrom(
         this.httpClient.get<Exhibitor>(`/api/exhibitors/${exhibitorId}`)
@@ -24,19 +24,19 @@ export class BoothStoreService {
     ])
   }
 
-  addNewProduct(exhibitorId: number, product: Product) {
+  addNewProduct(exhibitorId: string, product: Product) {
     return firstValueFrom(
       this.httpClient.post<any>(`/api/exhibitors/${exhibitorId}/products`, product)
     )
   }
 
-  editProductById(exhibitorId: number, productId: number, product: Product) {
+  editProductById(exhibitorId: string, productId: string, product: Product) {
     return firstValueFrom(
       this.httpClient.put<any>(`/api/exhibitors/${exhibitorId}/products/${productId}`, product)
     )
   }
 
-  deleteProductById(exhibitorId: number, productId: number) {
+  deleteProductById(exhibitorId: string, productId: string) {
     return firstValueFrom(
       this.httpClient.delete<any>(`/api/exhibitors/${exhibitorId}/products/${productId}`)
     )

@@ -38,7 +38,7 @@ export class AuthService {
     return this.jwtHelper.decodeToken(token).role
   }
 
-  getTokenId(): number | null {
+  getTokenId(): string | null {
     const token = this.getAccessToken()
     if (!token) {
       return null;

@@ -10,7 +10,7 @@ import sg.edu.nus.iss.vttp_mini_project_server.dtos.UserDto;
 @AllArgsConstructor
 public class Visitor {
 
-    private Integer visitorId;
+    private String visitorId;
     
     private String name;
 

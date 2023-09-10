@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Order {
 
-    private Integer orderId;
+    private String orderId;
 
-    private Integer visitorId;
+    private String visitorId;
 
-    private Integer exhibitorId;
+    private String exhibitorId;
 
-    private Integer productId;
+    private String productId;
 
     private Integer quantity;
 

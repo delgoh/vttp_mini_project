@@ -1,4 +1,9 @@
-<div class="edit-overlay" (click)="openProductEdit(product)" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+<div
+  class="edit-overlay"
+  (click)="openProductEdit(product)"
+  (mouseenter)="isHovered = true"
+  (mouseleave)="isHovered = false"
+>
   <mat-icon class="edit-icon" *ngIf="isHovered">edit</mat-icon>
   <ng-content class="inner-content"></ng-content>
 </div>

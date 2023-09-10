@@ -59,12 +59,14 @@ public class UserAuthProvider {
             .getBody();
 
         UserDto validatedUser = new UserDto();
-        validatedUser.setId(jwtClaims.get("id", Integer.class));
+        validatedUser.setId(jwtClaims.get("id", String.class));
         validatedUser.setUsername(jwtClaims.get("username", String.class));
         validatedUser.setRole(jwtClaims.get("role", String.class));
 
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(jwtClaims.get("role", String.class)));
+        authorities.add(
+            new SimpleGrantedAuthority(jwtClaims.get("role", String.class))
+        );
         
         return new UsernamePasswordAuthenticationToken(validatedUser, null, authorities);
     }

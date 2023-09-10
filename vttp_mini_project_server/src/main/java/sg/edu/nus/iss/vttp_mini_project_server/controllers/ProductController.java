@@ -26,18 +26,32 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProductsByExhibitorId(@PathVariable("exhibitor-id") Integer exhibitorId) {
+    public ResponseEntity<List<Product>> getAllProductsByExhibitorId(
+        @PathVariable("exhibitor-id") String exhibitorId
+    ) {
         return ResponseEntity.ok(productService.getAllProductsByExhibitorId(exhibitorId));
     }
 
     @GetMapping(path = "/{product-id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId) {
+    public ResponseEntity<Product> getProductById(
+        @PathVariable("exhibitor-id") String exhibitorId,
+        @PathVariable("product-id") String productId
+    ) {
         return ResponseEntity.ok(productService.getProduct(exhibitorId, productId));
     }
 
     @PostMapping
-    public ResponseEntity<String> addNewProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @RequestBody NewProductDto dto) {
-        Boolean isAdded = productService.addNewProduct(exhibitorId, dto.getName(), dto.getPrice(), dto.getImageUrl(), dto.getDescription());
+    public ResponseEntity<String> addNewProduct(
+        @PathVariable("exhibitor-id") String exhibitorId,
+        @RequestBody NewProductDto dto
+    ) {
+        Boolean isAdded = productService.addNewProduct(
+            exhibitorId,
+            dto.getName(),
+            dto.getPrice(),
+            dto.getImageUrl(),
+            dto.getDescription()
+        );
         return ResponseEntity.ok(Json.createObjectBuilder()
             .add("isAdded", isAdded)
             .build()
@@ -45,8 +59,19 @@ public class ProductController {
     }
 
     @PutMapping(path = "/{product-id}")
-    public ResponseEntity<String> updateProductById(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId, @RequestBody NewProductDto dto) {
-        Boolean isUpdated = productService.updateProductById(exhibitorId, productId, dto.getName(), dto.getPrice(), dto.getImageUrl(), dto.getDescription());
+    public ResponseEntity<String> updateProductById(
+        @PathVariable("exhibitor-id") String exhibitorId,
+        @PathVariable("product-id") String productId,
+        @RequestBody NewProductDto dto
+    ) {
+        Boolean isUpdated = productService.updateProductById(
+            exhibitorId,
+            productId,
+            dto.getName(),
+            dto.getPrice(),
+            dto.getImageUrl(),
+            dto.getDescription()
+        );
         return ResponseEntity.ok(Json.createObjectBuilder()
             .add("isUpdated", isUpdated)
             .build()
@@ -54,7 +79,10 @@ public class ProductController {
     }
 
     @DeleteMapping(path = "/{product-id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable("exhibitor-id") Integer exhibitorId, @PathVariable("product-id") Integer productId) {
+    public ResponseEntity<String> deleteProduct(
+        @PathVariable("exhibitor-id") String exhibitorId,
+        @PathVariable("product-id") String productId
+    ) {
         Boolean isDeleted = productService.removeProductById(exhibitorId, productId);
         return ResponseEntity.ok(Json.createObjectBuilder()
             .add("isDeleted", isDeleted)

@@ -10,7 +10,7 @@ import sg.edu.nus.iss.vttp_mini_project_server.models.Exhibitor;
 @AllArgsConstructor
 public class ExhibitorPublicDto {
 
-    private Integer exhibitorId;
+    private String exhibitorId;
 
     private String name;
 

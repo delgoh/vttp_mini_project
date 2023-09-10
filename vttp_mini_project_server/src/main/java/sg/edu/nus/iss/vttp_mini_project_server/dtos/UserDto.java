@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDto implements UserDetails {
 
-    private Integer id;
+    private String id;
 
     private String username;
 

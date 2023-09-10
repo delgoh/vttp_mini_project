@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
+// import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +26,18 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> getVisitorOrders(@RequestParam("visitor-id") Integer visitorId) {
+    public ResponseEntity<List<Order>> getVisitorOrders(
+        @RequestParam("visitor-id") String visitorId
+    ) {
         return ResponseEntity.ok(orderService.getVisitorOrders(visitorId));
     }
 
     @PostMapping
-    public ResponseEntity<String> addNewOrder(@RequestParam("visitor-id") Integer visitorId, @RequestParam("exhibitor-id") Integer exhibitorId, @RequestBody NewOrderDto newOrder) {
+    public ResponseEntity<String> addNewOrder(
+        @RequestParam("visitor-id") String visitorId,
+        @RequestParam("exhibitor-id") String exhibitorId,
+        @RequestBody NewOrderDto newOrder
+    ) {
         Boolean isAdded = orderService.addNewOrder(visitorId, exhibitorId, newOrder);
         return ResponseEntity.ok(Json.createObjectBuilder()
             .add("isAdded", isAdded)
@@ -41,9 +47,10 @@ public class OrderController {
 
     @DeleteMapping
     public ResponseEntity<String> deletePendingOrder(
-        @RequestParam(name = "order-id", required = false) Integer orderId,
-        @RequestParam(name = "visitor-id", required = false) Integer visitorId,
-        @RequestParam(name = "exhibitor-id", required = false) Integer exhibitorId) {
+        @RequestParam(name = "order-id", required = false) String orderId,
+        @RequestParam(name = "visitor-id", required = false) String visitorId,
+        @RequestParam(name = "exhibitor-id", required = false) String exhibitorId
+    ) {
 
         // if (StringUtils.hasLength(orderId) )
 
@@ -55,7 +62,10 @@ public class OrderController {
     }
     
     // @DeleteMapping
-    // public ResponseEntity<String> deleteCartOrders(@RequestParam("visitor-id") Integer visitorId, @RequestParam("exhibitor-id") Integer exhibitorId) {
+    // public ResponseEntity<String> deleteCartOrders(
+    //     @RequestParam("visitor-id") String visitorId,
+    //     @RequestParam("exhibitor-id") String exhibitorId
+    // ) {
     //     Boolean isDeleted = orderService.deleteOrderByCart(visitorId, exhibitorId);
     //     return ResponseEntity.ok(Json.createObjectBuilder()
     //         .add("isDeleted", isDeleted)

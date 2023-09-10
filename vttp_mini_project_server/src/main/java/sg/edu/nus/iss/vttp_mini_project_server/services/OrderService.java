@@ -3,6 +3,7 @@ package sg.edu.nus.iss.vttp_mini_project_server.services;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,21 +24,29 @@ public class OrderService {
     @Autowired
     private VisitorService visitorService;
 
-    public Boolean addNewOrder(Integer visitorId, Integer exhibitorId, NewOrderDto newOrder) {
+    public Boolean addNewOrder(String visitorId, String exhibitorId, NewOrderDto newOrder) {
         visitorService.checkVisitorIdExists(visitorId);
         exhibitorService.checkExhibitorIdExists(exhibitorId);
-        return orderRepository.insertNewOrder(visitorId, exhibitorId, newOrder.getProductId(), newOrder.getQuantity(), new Timestamp(new Date().getTime()), "PENDING");
+        return orderRepository.insertNewOrder(
+            UUID.randomUUID().toString(),
+            visitorId,
+            exhibitorId,
+            newOrder.getProductId(),
+            newOrder.getQuantity(),
+            new Timestamp(new Date().getTime()),
+            "PENDING"
+        );
     }
 
-    public List<Order> getVisitorOrders(Integer visitorId) {
+    public List<Order> getVisitorOrders(String visitorId) {
         return orderRepository.getVisitorOrders(visitorId);
     }
 
-    public Boolean deleteOrderById(Integer orderId) {
+    public Boolean deleteOrderById(String orderId) {
         return orderRepository.deleteOrderById(orderId);
     }
 
-    public Boolean deleteOrderByCart(Integer visitorId, Integer exhibitorId) {
+    public Boolean deleteOrderByCart(String visitorId, String exhibitorId) {
         return orderRepository.deleteOrderByVisitorAndExhibitorId(visitorId, exhibitorId);
     }
 }

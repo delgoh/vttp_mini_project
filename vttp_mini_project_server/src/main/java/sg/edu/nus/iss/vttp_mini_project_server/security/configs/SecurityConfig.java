@@ -24,23 +24,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionManagement(customizer -> customizer
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
             .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
-            .authorizeHttpRequests(requests -> {
-                requests
-                    // .requestMatchers(HttpMethod.POST, "/api/auth/**")
-                    // .permitAll()
+            .authorizeHttpRequests(requests -> requests
+                // .requestMatchers(HttpMethod.POST, "/api/auth/**")
+                // .permitAll()
 
-                    // .requestMatchers("/api/exhibitor/**")
-                    // .hasRole("EXHIBITOR")
+                // .requestMatchers("/api/exhibitor/**")
+                // .hasRole("EXHIBITOR")
 
-                    // .requestMatchers("/api/visitor/**")
-                    // .hasRole("VISITOR")
+                // .requestMatchers("/api/visitor/**")
+                // .hasRole("VISITOR")
 
-                    // .anyRequest().authenticated();
+                // .anyRequest().authenticated();
 
-                    .anyRequest().permitAll();
-            });
+                .anyRequest().permitAll()
+            );
 
         return http.build();
     }

@@ -13,7 +13,7 @@ export class ProductEditWrapperComponent {
   editDialog = inject(MatDialog)
 
   @Input() product!: Product
-  @Input() exhibitorId!: number
+  @Input() exhibitorId!: string
   @Output() productUpdatedEvent = new EventEmitter<boolean>();
   isHovered: boolean = false
 

@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class Booth {
 
     @JsonProperty("booth_id")
-    private Integer boothId;
+    private String boothId;
 
-    private Integer exhibitorId;
+    private String exhibitorId;
     
     private String boothCode;
 
