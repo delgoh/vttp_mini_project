@@ -1,1 +1,16 @@
-<p>collection works!</p>
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <label class="booth-name">{{exhibitorName}}</label>
+  </mat-expansion-panel-header>
+    <div class="product-list">
+      <ul>
+        <li *ngFor="let order of orders; let i = index">
+          <label class="product-quantity">{{order.quantity}} x</label>
+          <label class="product-name">{{order.productName}}</label>
+        </li>
+      </ul>
+    </div>
+    <div class="qr-code">
+      <span>QR code here</span>
+    </div>
+</mat-expansion-panel>

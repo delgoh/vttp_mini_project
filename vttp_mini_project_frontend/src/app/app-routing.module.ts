@@ -11,6 +11,7 @@ import { autologinGuard } from './core/guards/autologin.guard';
 import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-page.component';
 import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
 import { TestComponent } from './todelete/test/test.component';
+import { CollectionPageComponent } from './features/user-visitor/collection-page/collection-page.component';
 
 const routes: Routes = [
   // {
@@ -106,7 +107,7 @@ const routes: Routes = [
       },
       {
         path: 'collection',
-        component: StoreListingsComponent,
+        component: CollectionPageComponent,
         title: "Collections - Visitor | VenteSphere"
       }
     ]

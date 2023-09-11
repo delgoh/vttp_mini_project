@@ -26,10 +26,11 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> getVisitorPendingOrders(
-        @RequestParam("visitor-id") String visitorId
+    public ResponseEntity<List<Order>> getVisitorOrdersByStatus(
+        @RequestParam("visitor-id") String visitorId,
+        @RequestParam("order-status") String orderStatus
     ) {
-        return ResponseEntity.ok(orderService.getVisitorPendingOrders(visitorId));
+        return ResponseEntity.ok(orderService.getVisitorOrdersByStatus(visitorId, orderStatus));
     }
 
     @PostMapping
@@ -51,9 +52,6 @@ public class OrderController {
         @RequestParam(name = "visitor-id", required = false) String visitorId,
         @RequestParam(name = "exhibitor-id", required = false) String exhibitorId
     ) {
-
-        // if (StringUtils.hasLength(orderId) )
-
         Boolean isDeleted = orderService.deleteOrderById(orderId);
         return ResponseEntity.ok(Json.createObjectBuilder()
             .add("isDeleted", isDeleted)

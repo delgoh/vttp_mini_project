@@ -16,7 +16,9 @@
         (click)="selectProduct(i)"
         [checked]="order.isSelected">
       </mat-checkbox>
+      <label class="product-quantity">{{order.quantity}} x</label>
       <label class="product-name">{{order.productName}}</label>
+      <label class="order-price">{{order.unitPrice * order.quantity | currency}}</label>
     </li>
   </ul>
 </mat-expansion-panel>

@@ -32,6 +32,7 @@ import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.c
 import { CartComponent } from './features/cart/cart.component';
 import { CheckoutComponent } from './features/checkout/checkout.component';
 import { TestComponent } from './todelete/test/test.component';
+import { CollectionPageComponent } from './features/user-visitor/collection-page/collection-page.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { TestComponent } from './todelete/test/test.component';
     BoothsPageComponent,
     CartPageComponent,
     CheckoutComponent,
-    TestComponent
+    TestComponent,
+    CollectionPageComponent
   ],
   imports: [
     BrowserModule,

@@ -18,8 +18,10 @@ public class OrderRepository {
 
     private final String SQL_INSERT_NEW_ORDER =
         "INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private final String SQL_GET_PENDING_ORDERS_BY_VISITOR_ID =
-        "SELECT * FROM orders WHERE visitor_id = ? AND status = 'PENDING'";
+    private final String SQL_GET_ORDERS_BY_VISITOR_ID_AND_ORDER_STATUS =
+        "SELECT * FROM orders WHERE visitor_id = ? AND status = ?";
+    private final String SQL_CHECK_ORDER_PENDING_BY_ORDER_ID =
+        "SELECT COUNT(*) FROM orders WHERE order_id = ? AND status = 'PENDING'";
     private final String SQL_UPDATE_STATUS_BY_ORDER_ID =
         "UPDATE orders SET status = ? WHERE order_id = ?";
     private final String SQL_UPDATE_STATUS_BY_VISITOR_AND_EXHIBITOR_ID =
@@ -50,12 +52,21 @@ public class OrderRepository {
         ) > 0;
     }
 
-    public List<Order> getVisitorPendingOrders(String visitorId) {
+    public List<Order> getVisitorOrdersByStatus(String visitorId, String orderStatus) {
         return jdbcTemplate.query(
-            SQL_GET_PENDING_ORDERS_BY_VISITOR_ID,
+            SQL_GET_ORDERS_BY_VISITOR_ID_AND_ORDER_STATUS,
             BeanPropertyRowMapper.newInstance(Order.class),
-            visitorId
+            visitorId,
+            orderStatus
         );
+    }
+
+    public Boolean checkOrderIsPending(String orderId) {
+        return jdbcTemplate.queryForObject(
+            SQL_CHECK_ORDER_PENDING_BY_ORDER_ID,
+            Integer.class,
+            orderId
+        ) > 0;
     }
 
     public Boolean updateOrderStatusById (String orderId, String status) {

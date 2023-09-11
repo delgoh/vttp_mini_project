@@ -7,9 +7,12 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.nus.iss.vttp_mini_project_server.dtos.NewOrderDto;
+import sg.edu.nus.iss.vttp_mini_project_server.exceptions.UpdateOrdersFailedException;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Order;
+import sg.edu.nus.iss.vttp_mini_project_server.models.Product;
 import sg.edu.nus.iss.vttp_mini_project_server.repositories.OrderRepository;
 
 @Service
@@ -41,16 +44,32 @@ public class OrderService {
         );
     }
 
-    public List<Order> getVisitorPendingOrders(String visitorId) {
-        List<Order> orders = orderRepository.getVisitorPendingOrders(visitorId);
+    public List<Order> getVisitorOrdersByStatus(String visitorId, String orderStatus) {
+        List<Order> orders = orderRepository.getVisitorOrdersByStatus(visitorId, orderStatus);
         for (Order order : orders) {
-            String productName = productService.getProductNameById(order.getProductId());
-            order.setProductName(productName);
+            Product product = productService.getProductById(order.getProductId());
+            order.setProductName(product.getName());
+            order.setUnitPrice(product.getPrice());
         }
         return orders;
     }
 
+    @Transactional(rollbackFor = UpdateOrdersFailedException.class)
+    public Boolean markOrdersAsPaid(List<String> orderIds) {
+        for (String orderId : orderIds) {
+            if (!orderRepository.updateOrderStatusById(orderId, "PAID")) {
+                throw new UpdateOrdersFailedException(
+                    "Failed to update order status for one or more orders."
+                );
+            }
+        }
+        return true;
+    }
+
     public Boolean deleteOrderById(String orderId) {
+        if (!orderRepository.checkOrderIsPending(orderId)) {
+            return false;
+        }
         return orderRepository.deleteOrderById(orderId);
     }
 

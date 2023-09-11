@@ -3,6 +3,17 @@
   font-weight: bold;
 }
 
+.product-quantity {
+  padding-left: 20px;
+  padding-right: 15px;
+}
+
 .product-name {
   font-size: 16px;
+  padding-right: 15px;
+}
+
+.order-price {
+  font-size: 16px;
+  padding-right: 15px;
 }

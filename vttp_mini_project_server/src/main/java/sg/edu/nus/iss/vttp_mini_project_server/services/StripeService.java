@@ -22,24 +22,6 @@ public class StripeService {
 
     private final String SERVER_API_URL = "http://localhost:4200/";
 
-    /*
-     * THIS FEATURE REQUIRES PROPER SETTING UP OF PERSONAL/COMPANY DETAILS
-     */
-
-    // public String createAccountLink() throws StripeException {
-    //     Stripe.apiKey = STRIPE_API_KEY;
-
-    //     AccountLinkCreateParams params = AccountLinkCreateParams.builder()
-    //         .setAccount(STRIPE_CONNECTED_ACCOUNT_ID)
-    //         .setRefreshUrl("http://localhost:4200/refresh")
-    //         .setReturnUrl("http://localhost:4200/return")
-    //         .setType(AccountLinkCreateParams.Type.ACCOUNT_ONBOARDING)
-    //         .build();
-
-    //     AccountLink accountLink = AccountLink.create(params);
-    //     return accountLink.getUrl();
-    // }
-
     public String createPaymentLink() {
         Stripe.apiKey = STRIPE_API_KEY;
 
@@ -57,12 +39,9 @@ public class StripeService {
                             .setProductData(
                                 SessionCreateParams.LineItem.PriceData.ProductData.builder()
                                     .setName("Total")
-                                    .build()
-                            )
-                            .build()
-                    )
-                    .build()
-            )
+                                    .build())
+                            .build())
+                    .build())
             .build();
 
         try {
@@ -76,24 +55,21 @@ public class StripeService {
     }
 
     /*
-     * post("/create-checkout-session", (request, response) -> {
-        String YOUR_DOMAIN = "http://localhost:4242";
-        SessionCreateParams params =
-          SessionCreateParams.builder()
-            .setMode(SessionCreateParams.Mode.PAYMENT)
-            .setSuccessUrl(YOUR_DOMAIN + "/success.html")
-            .setCancelUrl(YOUR_DOMAIN + "/cancel.html")
-            .addLineItem(
-              SessionCreateParams.LineItem.builder()
-                .setQuantity(1L)
-                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                .setPrice("{{PRICE_ID}}")
-                .build())
-            .build();
-      Session session = Session.create(params);
-
-      response.redirect(session.getUrl(), 303);
-      return "";
+     * THIS FEATURE REQUIRES PROPER SETTING UP OF PERSONAL/COMPANY DETAILS
      */
+
+    // public String createAccountLink() throws StripeException {
+    //     Stripe.apiKey = STRIPE_API_KEY;
+
+    //     AccountLinkCreateParams params = AccountLinkCreateParams.builder()
+    //         .setAccount(STRIPE_CONNECTED_ACCOUNT_ID)
+    //         .setRefreshUrl("http://localhost:4200/refresh")
+    //         .setReturnUrl("http://localhost:4200/return")
+    //         .setType(AccountLinkCreateParams.Type.ACCOUNT_ONBOARDING)
+    //         .build();
+
+    //     AccountLink accountLink = AccountLink.create(params);
+    //     return accountLink.getUrl();
+    // }
     
 }

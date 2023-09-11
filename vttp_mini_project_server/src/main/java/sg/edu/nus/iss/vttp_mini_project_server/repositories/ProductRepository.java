@@ -22,8 +22,8 @@ public class ProductRepository {
         "SELECT * FROM products WHERE exhibitor_id = ?";
     private final String SQL_GET_PRODUCT_BY_PRODUCT_ID =
         "SELECT * FROM products WHERE product_id = ?";
-    private final String SQL_GET_PRODUCT_NAME_BY_PRODUCT_ID =
-        "SELECT name FROM products WHERE product_id = ?";
+    // private final String SQL_GET_PRODUCT_NAME_BY_PRODUCT_ID =
+    //     "SELECT name FROM products WHERE product_id = ?";
     private final String SQL_GET_EXHIBITOR_ID_BY_PRODUCT_ID =
         "SELECT exhibitor_id from products where product_id = ?";
     private final String SQL_UPDATE_PRODUCT_BY_PRODUCT_ID =
@@ -74,13 +74,13 @@ public class ProductRepository {
         }
     }
 
-    public String getProductNameById(String productId) {
-        return jdbcTemplate.queryForObject(
-            SQL_GET_PRODUCT_NAME_BY_PRODUCT_ID, 
-            String.class,
-            productId
-        );
-    }
+    // public String getProductNameById(String productId) {
+    //     return jdbcTemplate.queryForObject(
+    //         SQL_GET_PRODUCT_NAME_BY_PRODUCT_ID, 
+    //         String.class,
+    //         productId
+    //     );
+    // }
 
     public String getExhibitorIdByProductId(String productId) {
         return jdbcTemplate.queryForObject(

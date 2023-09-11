@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/core/models/order';
 import { PaymentService } from 'src/app/core/services/payment.service';
 
@@ -10,6 +11,7 @@ import { PaymentService } from 'src/app/core/services/payment.service';
 })
 export class CheckoutComponent implements OnInit {
 
+  router = inject(Router)
   paymentService = inject(PaymentService)
   dialogRef = inject(MatDialogRef<CheckoutComponent>)
   allOrders: Order[] = inject(MAT_DIALOG_DATA).allOrders
@@ -31,7 +33,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   proceedToPayment() {
-    this.paymentService.goToPayment()
+    const orderIds: string[] = this.checkoutOrders.map(order => order.orderId)
+    this.paymentService.goToPayment(orderIds)
+    .then(res => {
+      console.log(">> PaymentService: Response received")
+      console.log(this.router.navigate(['/visitor/collection']))
+    }).catch(err => {
+      console.log(">> PaymentService: Error occurred")
+      console.error(err)
+    })
   }
 
 }

@@ -73,5 +73,20 @@ public class GlobalExceptionHandler {
             ), HttpStatus.FORBIDDEN
         );
     }
+
+    @ExceptionHandler(UpdateOrdersFailedException.class)
+    public ResponseEntity<ApiErrorResponse> handleUpdateOrdersFailed(
+        UpdateOrdersFailedException ex,
+        WebRequest req
+    ) {
+        return new ResponseEntity<ApiErrorResponse>(
+            new ApiErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                new Date(),
+                ex.getMessage(),
+                req.getDescription(false)
+            ), HttpStatus.INTERNAL_SERVER_ERROR
+        );
+    }
     
 }

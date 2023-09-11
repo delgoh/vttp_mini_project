@@ -23,6 +23,8 @@ public class Order {
 
     private Integer quantity;
 
+    private Float unitPrice;
+
     private Timestamp orderTimestamp;
 
     private String status;

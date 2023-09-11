@@ -1,0 +1,28 @@
+.booth-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.product-list {
+  float: left;
+  width: 70%;
+}
+
+.qr-code {
+  float: right;
+  width: 20%;
+}
+
+.product-quantity {
+  padding-right: 15px;
+}
+
+.product-name {
+  font-size: 16px;
+  padding-right: 15px;
+}
+
+.order-price {
+  font-size: 16px;
+  padding-right: 15px;
+}

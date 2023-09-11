@@ -62,9 +62,19 @@ public class ProductService {
         return product;
     }
 
-    public String getProductNameById(String productId) {
-        return productRepository.getProductNameById(productId);
+    public Product getProductById(String productId) {
+        Optional<Product> productOpt = productRepository.getProductById(productId);
+        if (productOpt.isEmpty()) {
+            throw new ProductNotFoundException(
+                "Product with ID %s not found.".formatted(productId)
+            );
+        }
+        return productOpt.get();
     }
+
+    // public String getProductNamePriceById(String productId) {
+    //     return productRepository.getProductNamePriceById(productId);
+    // }
 
     public Boolean updateProductById(
         String exhibitorId,

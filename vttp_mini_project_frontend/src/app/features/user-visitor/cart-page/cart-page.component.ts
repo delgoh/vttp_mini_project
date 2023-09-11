@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Order } from 'src/app/core/models/order';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { CartService } from 'src/app/core/services/cart.service';
+import { OrderService } from 'src/app/core/services/order.service';
 import { CheckoutComponent } from '../../checkout/checkout.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -11,21 +11,21 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css']
 })
-export class CartPageComponent implements OnInit {
+export class CartPageComponent implements OnInit, OnDestroy {
 
   router = inject(Router)
   checkoutDialog = inject(MatDialog)
-  cartService = inject(CartService)
+  orderService = inject(OrderService)
   allOrders: Order[] = []
   groupedOrders!: Map<string, Order[]>
 
   isPaymentEnabled = false
 
   ngOnInit(): void {
-    this.cartService.getAllOrdersByVisitor()
+    this.orderService.getVisitorOrders('PENDING')
     .then(res => {
       this.allOrders = res
-      this.groupedOrders = this.groupOrdersByExhibitor(res)
+      this.groupedOrders = this.orderService.groupOrdersByExhibitor(res)
     }).catch(err => {
       console.error(err)
     })
@@ -33,13 +33,8 @@ export class CartPageComponent implements OnInit {
     localStorage.setItem('checkout_orders', JSON.stringify([]))
   }
 
-  groupOrdersByExhibitor(allOrders: Order[]) {
-    return allOrders.reduce((res, cur) => {
-      res[cur.exhibitorId] = res[cur.exhibitorId] || []
-      cur.isSelected = false
-      res[cur.exhibitorId].push(cur)
-      return res
-    }, Object.create(null))
+  ngOnDestroy(): void {
+    localStorage.removeItem('checkout_orders')
   }
 
   updateCheckoutButton(event: boolean) {

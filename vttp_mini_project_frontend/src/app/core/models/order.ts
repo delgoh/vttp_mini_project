@@ -5,5 +5,6 @@ export interface Order {
   productId: string
   productName: string
   quantity: number
+  unitPrice: number
   isSelected: boolean
 }
