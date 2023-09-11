@@ -30,6 +30,7 @@ import { SideNavListComponent } from './shared/side-nav/side-nav-list/side-nav-l
 import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-page.component';
 import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
 import { CartComponent } from './features/cart/cart.component';
+import { CheckoutComponent } from './features/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CartComponent } from './features/cart/cart.component';
     SideNavComponent,
     SideNavListComponent,
     BoothsPageComponent,
-    CartPageComponent
+    CartPageComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
