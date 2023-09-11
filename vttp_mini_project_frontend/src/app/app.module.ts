@@ -31,6 +31,7 @@ import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-
 import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
 import { CartComponent } from './features/cart/cart.component';
 import { CheckoutComponent } from './features/checkout/checkout.component';
+import { TestComponent } from './todelete/test/test.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CheckoutComponent } from './features/checkout/checkout.component';
     SideNavListComponent,
     BoothsPageComponent,
     CartPageComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

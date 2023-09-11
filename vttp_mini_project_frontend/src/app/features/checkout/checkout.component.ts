@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Order } from 'src/app/core/models/order';
+import { PaymentService } from 'src/app/core/services/payment.service';
 
 @Component({
   selector: 'app-checkout',
@@ -9,6 +10,7 @@ import { Order } from 'src/app/core/models/order';
 })
 export class CheckoutComponent implements OnInit {
 
+  paymentService = inject(PaymentService)
   dialogRef = inject(MatDialogRef<CheckoutComponent>)
   allOrders: Order[] = inject(MAT_DIALOG_DATA).allOrders
 
@@ -29,7 +31,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   proceedToPayment() {
-
+    this.paymentService.goToPayment()
   }
 
 }

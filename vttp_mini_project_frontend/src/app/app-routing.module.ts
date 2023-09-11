@@ -10,6 +10,7 @@ import { roleGuard } from './core/guards/role.guard';
 import { autologinGuard } from './core/guards/autologin.guard';
 import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-page.component';
 import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
+import { TestComponent } from './todelete/test/test.component';
 
 const routes: Routes = [
   // {
@@ -45,6 +46,16 @@ const routes: Routes = [
     component: SignupComponent,
     canActivate: [autologinGuard],
     title: "Sign Up | VenteSphere"
+  },
+  {
+    path: 'return',
+    component: TestComponent,
+    title: "Stripe Return"
+  },
+  {
+    path: 'refresh',
+    component: TestComponent,
+    title: "Stripe Refresh"
   },
 
   {
