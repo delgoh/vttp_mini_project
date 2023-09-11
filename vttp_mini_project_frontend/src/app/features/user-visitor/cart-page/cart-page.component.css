@@ -1,3 +1,12 @@
 .toolbar-spacer {
   flex: 1 1 auto;
 }
+
+.total-price {
+  font-size: 20px;
+  font-weight: 400;
+  float: right;
+  padding-top: 30px;
+  padding-right: 10px;
+  padding-left: 30px;
+}

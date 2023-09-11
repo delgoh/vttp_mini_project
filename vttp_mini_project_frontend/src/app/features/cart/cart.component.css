@@ -4,6 +4,7 @@
 }
 
 .product-quantity {
+  font-size: 16px;
   padding-left: 20px;
   padding-right: 15px;
 }
@@ -14,6 +15,12 @@
 }
 
 .order-price {
+  float: right;
   font-size: 16px;
-  padding-right: 15px;
+  font-weight: 600;
+  /* padding-right: 15px; */
+}
+
+.spacer {
+  flex: 1 1 auto;
 }

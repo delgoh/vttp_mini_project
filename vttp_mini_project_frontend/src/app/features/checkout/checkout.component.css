@@ -1,0 +1,12 @@
+.dialog-container {
+  width: 300px;
+  padding: 20px;
+}
+
+.title {
+  padding: 0;
+}
+
+.content {
+  padding: 0;
+}

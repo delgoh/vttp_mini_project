@@ -5,7 +5,7 @@
       [checked]="isBoothChecked"
       (click)="$event.stopPropagation(); selectBooth()"
       (keydown)="$event.stopPropagation()">
-      <label class="booth-name">{{exhibitorName}}</label>
+      <span class="booth-name">{{exhibitorName}}</span>
     </mat-checkbox>
   </mat-expansion-panel-header>
 
@@ -16,9 +16,9 @@
         (click)="selectProduct(i)"
         [checked]="order.isSelected">
       </mat-checkbox>
-      <label class="product-quantity">{{order.quantity}} x</label>
-      <label class="product-name">{{order.productName}}</label>
-      <label class="order-price">{{order.unitPrice * order.quantity | currency}}</label>
+      <span class="product-quantity">{{order.quantity}} x</span>
+      <span class="product-name">{{order.productName}}</span>
+      <span class="order-price">{{order.unitPrice * order.quantity | currency}}</span>
     </li>
   </ul>
 </mat-expansion-panel>

@@ -29,19 +29,19 @@ public class SecurityConfig {
             )
             .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
             .authorizeHttpRequests(requests -> requests
-                // .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
                 // .requestMatchers("/api/refresh").permitAll()
                 // .requestMatchers("/api/return").permitAll()
 
-                // .requestMatchers("/api/exhibitor/**")
-                // .hasRole("EXHIBITOR")
+                .requestMatchers("/api/exhibitor/**")
+                .hasRole("EXHIBITOR")
 
-                // .requestMatchers("/api/visitor/**")
-                // .hasRole("VISITOR")
+                .requestMatchers("/api/visitor/**")
+                .hasRole("VISITOR")
 
-                // .anyRequest().authenticated()
+                .anyRequest().authenticated()
 
-                .anyRequest().permitAll()
+                // .anyRequest().permitAll()
             );
 
         return http.build();

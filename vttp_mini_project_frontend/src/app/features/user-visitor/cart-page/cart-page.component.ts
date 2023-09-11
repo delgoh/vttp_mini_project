@@ -16,9 +16,10 @@ export class CartPageComponent implements OnInit, OnDestroy {
   router = inject(Router)
   checkoutDialog = inject(MatDialog)
   orderService = inject(OrderService)
+
   allOrders: Order[] = []
   groupedOrders!: Map<string, Order[]>
-
+  totalCost = 0
   isPaymentEnabled = false
 
   ngOnInit(): void {
@@ -47,9 +48,9 @@ export class CartPageComponent implements OnInit, OnDestroy {
         allOrders: this.allOrders
       }
     })
-    checkoutDialogRef.afterClosed().subscribe(res => {
-      // if (res) {
-      // }
-    })
+    // // checkoutDialogRef.afterClosed().subscribe(res => {
+    //   if (res) {
+    //   }
+    // // })
   }
 }

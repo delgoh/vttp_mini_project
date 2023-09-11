@@ -1,9 +1,10 @@
 <div class="dialog-container">
-  <div class="product-text-header">
-    <h1 mat-dialog-title>Checkout</h1>
+  <div>
+    <h1 mat-dialog-title class="title">Checkout</h1>
+    <p>Please confirm your order before proceeding to pay.</p>
   </div>
 
-  <div mat-dialog-content>
+  <div mat-dialog-content class="content">
     <ul>
       <li *ngFor="let order of checkoutOrders">
         <span>{{order.quantity}} x </span>
