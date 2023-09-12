@@ -33,6 +33,8 @@ import { CartComponent } from './features/cart/cart.component';
 import { CheckoutComponent } from './features/checkout/checkout.component';
 import { TestComponent } from './todelete/test/test.component';
 import { CollectionPageComponent } from './features/user-visitor/collection-page/collection-page.component';
+import { StoreModule } from '@ngrx/store';
+import { checkedOrdersReducer } from './core/store/checked-orders.reducer';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { CollectionPageComponent } from './features/user-visitor/collection-page
         tokenGetter: () => localStorage.getItem("access_token"),
         allowedDomains: ["localhost:4200", "localhost:8080"]
       }
-    })
+    }),
+    StoreModule.forRoot({checkedOrders: checkedOrdersReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]

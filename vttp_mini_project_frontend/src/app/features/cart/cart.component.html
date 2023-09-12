@@ -13,8 +13,10 @@
     <li *ngFor="let order of orders; let i = index">
       <mat-checkbox
         color="primary"
-        (click)="selectProduct(i)"
-        [checked]="order.isSelected">
+        (click)="selectProduct(order, checkbox)"
+        [id]="order.orderId"
+        #checkbox
+        #productCheckboxes>
       </mat-checkbox>
       <span class="product-quantity">{{order.quantity}} x</span>
       <span class="product-name">{{order.productName}}</span>
@@ -22,3 +24,6 @@
     </li>
   </ul>
 </mat-expansion-panel>
+
+<!-- [checked]="order.isSelected" -->
+        <!-- [checked]="areProductsChecked[i]" -->

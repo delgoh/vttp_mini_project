@@ -1,8 +1,12 @@
+import { firstValueFrom } from 'rxjs';
 import { Component, OnInit, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Order } from 'src/app/core/models/order';
 import { PaymentService } from 'src/app/core/services/payment.service';
+import { selectAllCheckedOrders } from 'src/app/core/store/checked-orders.selectors';
+import { clearOrders } from 'src/app/core/store/checked-orders.actions';
 
 @Component({
   selector: 'app-checkout',
@@ -15,20 +19,16 @@ export class CheckoutComponent implements OnInit {
   paymentService = inject(PaymentService)
   dialogRef = inject(MatDialogRef<CheckoutComponent>)
   allOrders: Order[] = inject(MAT_DIALOG_DATA).allOrders
+  totalCost = inject(MAT_DIALOG_DATA).totalCost
+  store = inject(Store)
 
   checkoutOrders: Order[] = []
 
   ngOnInit(): void {
-    const orderIdsJson = localStorage.getItem('checkout_orders')
-    if (orderIdsJson === null) {
-      this.dialogRef.close()
-      return
-    }
-    const orderIds: string[] = JSON.parse(orderIdsJson)
-    console.log("orderIds: ")
-    console.log(orderIds)
-    this.checkoutOrders = this.allOrders.filter(order => {
-      return orderIds.includes(order.orderId)
+    firstValueFrom(
+      this.store.select(selectAllCheckedOrders)
+    ).then(res => {
+      this.checkoutOrders = res
     })
   }
 
@@ -37,6 +37,7 @@ export class CheckoutComponent implements OnInit {
     this.paymentService.goToPayment(orderIds)
     .then(res => {
       console.log(">> PaymentService: Response received")
+      this.store.dispatch(clearOrders())
       console.log(this.router.navigate(['/visitor/collection']))
     }).catch(err => {
       console.log(">> PaymentService: Error occurred")
