@@ -18,6 +18,7 @@ import sg.edu.nus.iss.vttp_mini_project_server.exceptions.InvalidPasswordExcepti
 import sg.edu.nus.iss.vttp_mini_project_server.exceptions.UserNotFoundException;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Exhibitor;
 import sg.edu.nus.iss.vttp_mini_project_server.models.Visitor;
+import sg.edu.nus.iss.vttp_mini_project_server.services.EmailService;
 import sg.edu.nus.iss.vttp_mini_project_server.services.ExhibitorService;
 import sg.edu.nus.iss.vttp_mini_project_server.services.VisitorService;
 
@@ -32,6 +33,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -97,6 +101,12 @@ public class UserService implements UserDetailsService {
                 newEmail,
                 passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword()))
             );
+            if (isAdded) {
+                emailService.sendEmail(
+                    newEmail,
+                    emailService.getSubject("VISITOR"),
+                    emailService.getMessage("VISITOR"));
+            }
             return isAdded;
 
         } else if (newUser.getRole().equals("EXHIBITOR")) {
@@ -109,6 +119,12 @@ public class UserService implements UserDetailsService {
                 newEmail,
                 passwordEncoder.encode(CharBuffer.wrap(newUser.getPassword()))
             );
+            if (isAdded) {
+                emailService.sendEmail(
+                    newEmail,
+                    emailService.getSubject("EXHIBITOR"),
+                    emailService.getMessage("EXHIBITOR"));
+            }
             return isAdded;
         }
 
