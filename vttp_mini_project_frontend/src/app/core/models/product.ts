@@ -3,6 +3,6 @@ export interface Product {
   exhibitorId: string
   name: string
   price: number
-  imageUrl: string
+  imageUrl?: string
   description: string
 }

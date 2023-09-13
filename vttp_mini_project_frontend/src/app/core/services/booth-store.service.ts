@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { ElementRef, Injectable, inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Product } from '../models/product';
 import { Exhibitor } from '../models/exhibitor';
@@ -22,15 +22,33 @@ export class BoothStoreService {
     ])
   }
 
-  addNewProduct(exhibitorId: string, product: Product) {
+  addNewProduct(exhibitorId: string, product: Product, imageRef?: ElementRef) {
+    const formData = new FormData()
+    formData.set('name', product.name)
+    formData.set('price', product.price.toString())
+    formData.set('description', product.description)
+    if (imageRef) {
+      formData.set('image', imageRef.nativeElement.files[0])
+    }
+
     return firstValueFrom(
-      this.http.post<any>(`/api/exhibitors/${exhibitorId}/products`, product)
+      this.http.post<any>(`/api/exhibitors/${exhibitorId}/products`, formData)
     )
   }
 
-  editProductById(exhibitorId: string, productId: string, product: Product) {
+  editProductById(exhibitorId: string, productId: string, product: Product, imageRef?: ElementRef) {
+    const formData = new FormData()
+    formData.set('name', product.name)
+    formData.set('price', product.price.toString())
+    formData.set('description', product.description)
+    if (product.imageUrl !== null && product.imageUrl !== "") {
+      formData.set('imageUrl', product.imageUrl!)
+    } else if (imageRef) {
+      formData.set('image', imageRef.nativeElement.files[0])
+    }
+
     return firstValueFrom(
-      this.http.put<any>(`/api/exhibitors/${exhibitorId}/products/${productId}`, product)
+      this.http.put<any>(`/api/exhibitors/${exhibitorId}/products/${productId}`, formData)
     )
   }
 

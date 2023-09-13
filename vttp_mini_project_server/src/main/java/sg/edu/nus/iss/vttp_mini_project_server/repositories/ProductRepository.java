@@ -48,8 +48,7 @@ public class ProductRepository {
             name,
             price,
             imageUrl,
-            description
-        ) > 0;
+            description) > 0;
     }
 
     public List<Product> getAllProductsByExhibitorId(String exhibitorId) {

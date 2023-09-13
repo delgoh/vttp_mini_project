@@ -1,12 +1,19 @@
-<div class="dialog-container" *ngIf="product != null">
-  <img class="product-image" [src]="product.imageUrl" />
-  <div class="product-text-header">
-    <h1 mat-dialog-title>{{product.name}}</h1>
-    <h1 mat-dialog-title>{{product.price | currency}}</h1>
+<div class="dialog">
+  <div mat-dialog-content class="dialog-content" *ngIf="product != null">
+    <img
+      class="product-image"
+      [src]="product.imageUrl != '' ? product.imageUrl : '/assets/images/no-image.png'">
+    <div class="body-container">
+      <div class="product-text-header">
+        <h1>{{product.name}}</h1>
+        <h1>{{product.price | currency}}</h1>
+      </div>
+      <div>{{product.description}}</div>
+    </div>
   </div>
-  <div mat-dialog-content>{{product.description}}</div>
+  <div class="content-spacer"></div>
   <div class="dialog-footer" mat-dialog-actions align="end">
-    <span>Quantity: </span>
+    <label>Quantity: </label>
     <button
       class="quantity-button"
       mat-button

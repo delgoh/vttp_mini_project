@@ -2,7 +2,14 @@
   class="product-card"
   *ngIf="product != null"
   (click)="isClickEnabled && openProductDetails(product)">
-  <img mat-card-image [src]="product.imageUrl" alt="Product image">
+  <div class="image-container">
+    <img
+      class="image"
+      mat-card-image
+      [src]="product.imageUrl != '' ? product.imageUrl : '/assets/images/no-image.png'"
+      alt="Product image">
+  </div>
+
   <mat-card-footer class="product-footer">
     <mat-card-title>{{product.name}}</mat-card-title>
     <mat-card-title>{{product.price | currency}}</mat-card-title>

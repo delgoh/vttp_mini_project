@@ -58,7 +58,7 @@ public class ExhibitorService {
         Optional<Exhibitor> exhibitorOpt = exhibitorRepository.getExhibitorById(exhibitorId);
         if (exhibitorOpt.isEmpty()) {
             throw new UserNotFoundException(
-                "Exhibitor with ID %s not found.".formatted(exhibitorOpt)
+                "Exhibitor with ID %s not found.".formatted(exhibitorId)
             );
         }
     }

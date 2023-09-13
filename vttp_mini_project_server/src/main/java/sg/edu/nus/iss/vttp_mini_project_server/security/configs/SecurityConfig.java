@@ -33,15 +33,16 @@ public class SecurityConfig {
                 // .requestMatchers("/api/refresh").permitAll()
                 // .requestMatchers("/api/return").permitAll()
 
-                .requestMatchers("/api/exhibitor/**")
-                .hasRole("EXHIBITOR")
+                // .requestMatchers("/api/exhibitor/**")
+                // .hasRole("EXHIBITOR")
+                // .hasAnyRole("EXHIBITOR")
 
-                .requestMatchers("/api/visitor/**")
-                .hasRole("VISITOR")
+                // .requestMatchers("/api/visitor/**")
+                // .hasRole("VISITOR")
 
-                .anyRequest().authenticated()
-
-                // .anyRequest().permitAll()
+                // .anyRequest().authenticated()
+                .requestMatchers("/**").permitAll()
+                .anyRequest().permitAll()
             );
 
         return http.build();

@@ -35,6 +35,7 @@ import { TestComponent } from './todelete/test/test.component';
 import { CollectionPageComponent } from './features/user-visitor/collection-page/collection-page.component';
 import { StoreModule } from '@ngrx/store';
 import { checkedOrdersReducer } from './core/store/checked-orders.reducer';
+import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { checkedOrdersReducer } from './core/store/checked-orders.reducer';
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DropzoneCdkModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem("access_token"),

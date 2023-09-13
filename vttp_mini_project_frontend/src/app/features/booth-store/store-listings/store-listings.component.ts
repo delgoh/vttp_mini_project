@@ -53,7 +53,6 @@ export class StoreListingsComponent implements OnInit, OnChanges {
       exhibitorId: this.exhibitorId,
       name: 'New Product',
       price: 0,
-      imageUrl: 'https://picsum.photos/200',
       description: 'Enter product description'
     }
     this.boothStoreService.addNewProduct(this.exhibitorId, newProduct)
