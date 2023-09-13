@@ -1,0 +1,23 @@
+
+<div *ngIf="apiLoaded | async">
+  <google-map
+    height="400px"
+    width="750px"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="moveMap($event)"
+    (mapMousemove)="move($event)"
+    #mapRef>
+  </google-map>
+</div>
+<mat-form-field appearance="fill">
+  <mat-label>Address</mat-label>
+  <input
+    class="input"
+    type="text"
+    matInput
+    [formControl]="autocompleteInputControl"
+    ngx-gp-autocomplete
+    #ngxPlaces="ngx-places"
+    (onAddressChange)="selectAddress($event)">
+</mat-form-field>

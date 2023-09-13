@@ -1,0 +1,21 @@
+<mat-toolbar class="mat-elevation-z3">
+  Floor Plan
+  <span class="toolbar-spacer"></span>
+  <button
+    mat-stroked-button
+    color="secondary"
+    type="button"
+    id="deleteRect">
+    Delete Rect
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    type="button"
+    (click)="addRect()">
+    Add Rect
+  </button>
+</mat-toolbar>
+<div class="mat-elevation-z3 konva-container">
+  <div id="konva-floor-plan"></div>
+</div>

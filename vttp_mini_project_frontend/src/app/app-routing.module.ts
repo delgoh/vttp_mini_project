@@ -12,6 +12,9 @@ import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-
 import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
 import { TestComponent } from './todelete/test/test.component';
 import { CollectionPageComponent } from './features/user-visitor/collection-page/collection-page.component';
+import { UserOrganizerComponent } from './features/user-organizer/user-organizer.component';
+import { EditEventPageComponent } from './features/user-organizer/edit-event-page/edit-event-page.component';
+import { EditBoothsPageComponent } from './features/user-organizer/edit-booths-page/edit-booths-page.component';
 
 const routes: Routes = [
   // {
@@ -37,8 +40,15 @@ const routes: Routes = [
   // },
   {
     path: '',
-    component: LoginComponent,
+    // component: LoginComponent,
     pathMatch: 'full',
+    redirectTo: '/login'
+    // canActivate: [autologinGuard],
+    // title: "Login | VenteSphere"
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
     canActivate: [autologinGuard],
     title: "Login | VenteSphere"
   },
@@ -109,6 +119,27 @@ const routes: Routes = [
         path: 'collection',
         component: CollectionPageComponent,
         title: "Collections - Visitor | VenteSphere"
+      }
+    ]
+  },
+  {
+    path: 'organizer',
+    component: UserOrganizerComponent,
+    // canActivate: [authGuard, roleGuard],
+    data: {
+      expectedRole: "ORGANIZER"
+    },
+    title: "Event - Settings | VenteSphere",
+    children: [
+      {
+        path: 'edit-booths',
+        component: EditBoothsPageComponent,
+        title: "Edit Booths - Organizer | VenteSphere"
+      },
+      {
+        path: 'edit-event',
+        component: EditEventPageComponent,
+        title: "Edit Event - Organizer | VenteSphere"
       }
     ]
   },

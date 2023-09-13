@@ -13,7 +13,7 @@ import { CollectionComponent } from './features/collection/collection.component'
 import { UserExhibitorComponent } from './features/user-exhibitor/user-exhibitor.component';
 import { ProductSummaryCardComponent } from './features/booth-store/product-summary-card/product-summary-card.component';
 import { ProductDetailsDialogComponent } from './features/booth-store/product-details-dialog/product-details-dialog.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { BoothLocationComponent } from './features/booth-location/booth-location.component';
 import { LoginComponent } from './features/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +36,14 @@ import { CollectionPageComponent } from './features/user-visitor/collection-page
 import { StoreModule } from '@ngrx/store';
 import { checkedOrdersReducer } from './core/store/checked-orders.reducer';
 import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
+import { EditEventPageComponent } from './features/user-organizer/edit-event-page/edit-event-page.component';
+import { EditBoothsPageComponent } from './features/user-organizer/edit-booths-page/edit-booths-page.component';
+import { ExhibitionsOverviewComponent } from './features/exhibitions-overview/exhibitions-overview.component';
+import { LocationComponent } from './features/location/location.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GeolocationComponent } from './features/geolocation/geolocation.component';
+import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
+import { FloorPlanComponent } from './features/floor-plan/floor-plan.component';
 
 @NgModule({
   declarations: [
@@ -64,13 +72,20 @@ import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
     CartPageComponent,
     CheckoutComponent,
     TestComponent,
-    CollectionPageComponent
+    CollectionPageComponent,
+    EditEventPageComponent,
+    EditBoothsPageComponent,
+    ExhibitionsOverviewComponent,
+    LocationComponent,
+    GeolocationComponent,
+    FloorPlanComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientJsonpModule,
     HttpClientModule,
     ReactiveFormsModule,
     DropzoneCdkModule,
@@ -80,7 +95,14 @@ import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
         allowedDomains: ["localhost:4200", "localhost:8080"]
       }
     }),
-    StoreModule.forRoot({checkedOrders: checkedOrdersReducer})
+    StoreModule.forRoot({checkedOrders: checkedOrdersReducer}),
+    GoogleMapsModule,
+    NgxGpAutocompleteModule.forRoot({
+      loaderOptions: {
+        apiKey: 'AIzaSyCqNpXakfL4h_rIYUAjuXvs40ObioETkXY',
+        libraries: ['places', 'maps'],
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
