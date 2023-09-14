@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,6 +45,7 @@ import { FloorPlanComponent } from './features/floor-plan/floor-plan.component';
 import { SuccessPageComponent } from './features/checkout/success-page/success-page.component';
 import { CancelPageComponent } from './features/checkout/cancel-page/cancel-page.component';
 import { ordersToPayReducer } from './core/store/paid-orders.reducer';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,12 @@ import { ordersToPayReducer } from './core/store/paid-orders.reducer';
         apiKey: 'AIzaSyCqNpXakfL4h_rIYUAjuXvs40ObioETkXY',
         libraries: ['places', 'maps'],
       }
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
   providers: [],
