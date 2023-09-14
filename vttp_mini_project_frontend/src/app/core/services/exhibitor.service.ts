@@ -16,6 +16,12 @@ export class ExhibitorService {
     )
   }
 
+  getAllExhibitorsAsOrganizer() {
+    return firstValueFrom(
+      this.http.get<Exhibitor[]>(`/api/organizer/exhibitors`)
+    )
+  }
+
   getExhibitorById(exhibitorId: string) {
     return firstValueFrom(
       this.http.get<Exhibitor>(`/api/exhibitors/${exhibitorId}`)

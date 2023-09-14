@@ -18,7 +18,7 @@ export class ExhibitionsOverviewComponent implements OnInit {
   }[] = []
 
   ngOnInit(): void {
-    this.exhibitorService.getAllExhibitors()
+    this.exhibitorService.getAllExhibitorsAsOrganizer()
       .then(res => {
         this.tableData = res.map((exhibitor, index) => {
           return {

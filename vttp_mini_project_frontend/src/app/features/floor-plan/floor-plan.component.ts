@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import Konva from 'konva';
 import { FloorplanService } from 'src/app/core/services/floorplan.service';
 
@@ -10,6 +11,7 @@ import { FloorplanService } from 'src/app/core/services/floorplan.service';
 export class FloorPlanComponent implements OnInit {
 
   floorplanService = inject(FloorplanService)
+  snackBar = inject(MatSnackBar)
 
   rectangles: Konva.Rect[] = []
   layer = new Konva.Layer();
@@ -156,6 +158,13 @@ export class FloorPlanComponent implements OnInit {
       () => {
         const dataUrl = stage.toDataURL()
         this.floorplanService.saveFloorPlan(dataUrl)
+        .then(res => {
+          if (res['isSaved']) {
+            this.snackBar.open("Image saved successfully!", "Dismiss", {
+              duration: 5000
+            })
+          }
+        })
       }
     )
   }
