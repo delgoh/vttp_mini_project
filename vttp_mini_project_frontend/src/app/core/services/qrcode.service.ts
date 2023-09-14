@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
@@ -16,12 +16,15 @@ export class QrcodeService {
   createQrCode(data: string) {
     console.log(">> QrcodeService: Generating QR code for data " + data + "...")
 
+    const headers = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', '*')
+
     const params = new HttpParams()
-    params.set('data', data)
-    params.set('bgcolor', 'fae3ff')
+      .set('data', data)
+      .set('bgcolor', 'fae3ff')
 
     return firstValueFrom(
-      this.http.get<any>(this.QR_CODE_API_URL, {params})
+      this.http.get<any>(this.QR_CODE_API_URL, {headers: headers, params: params})
     )
   }
 

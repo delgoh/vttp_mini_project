@@ -11,8 +11,10 @@
       </ul>
     </div>
     <div class="qr-code">
-      <span>QR code here</span>
-      <img [src]="qrCode" alt="QR Code">
+      <!-- <span>QR code here</span>
+      <img [src]="qrCode" alt="QR Code"> -->
+      <qrcode [qrdata]="exhibitorId" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
+      <span>{{exhibitorId}}</span>
     </div>
     <mat-divider [vertical]="true"></mat-divider>
 </mat-expansion-panel>

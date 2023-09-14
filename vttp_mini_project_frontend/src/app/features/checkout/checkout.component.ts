@@ -8,6 +8,7 @@ import { PaymentService } from 'src/app/core/services/payment.service';
 import { selectAllCheckedOrders } from 'src/app/core/store/checked-orders.selectors';
 import { clearOrders } from 'src/app/core/store/checked-orders.actions';
 import { addOrdersToPay } from 'src/app/core/store/paid-orders.actions';
+import { selectOrdersToPay } from 'src/app/core/store/paid-orders.selectors';
 
 @Component({
   selector: 'app-checkout',
@@ -42,6 +43,7 @@ export class CheckoutComponent implements OnInit {
     console.log(orderIds)
     this.store.dispatch(addOrdersToPay({ordersToPay: orderIds}))
     console.log(">> CheckoutComponent: Current store value")
+    firstValueFrom(this.store.select(selectOrdersToPay)).then(res => console.log(res))
 
     this.paymentService.goToPayment(orderIds)
     .then(res => {

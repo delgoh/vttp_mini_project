@@ -46,6 +46,7 @@ import { SuccessPageComponent } from './features/checkout/success-page/success-p
 import { CancelPageComponent } from './features/checkout/cancel-page/cancel-page.component';
 import { ordersToPayReducer } from './core/store/paid-orders.reducer';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         libraries: ['places', 'maps'],
       }
     }),
+    QRCodeModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

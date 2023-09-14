@@ -30,7 +30,7 @@ public class PaymentController {
         @RequestBody List<String> orderIds
     ) {
         System.out.println(">> PaymentController: Processing paid orders...");
-        System.out.println(">> PaymentController: First orderId " + orderIds.size());
+        System.out.println(">> PaymentController: Order size " + orderIds.size());
         Boolean isPaid = orderService.markOrdersAsPaid(orderIds);
         return ResponseEntity.ok(Json.createObjectBuilder()
             .add("isStatusUpdated", isPaid)

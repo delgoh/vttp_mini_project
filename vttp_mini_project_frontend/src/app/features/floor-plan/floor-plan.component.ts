@@ -164,4 +164,8 @@ export class FloorPlanComponent implements OnInit {
     this.layer.add(newRect)
   }
 
+  saveImage() {
+    // save floor plan image
+  }
+
 }

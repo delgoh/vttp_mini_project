@@ -17,19 +17,19 @@ export class CollectionComponent implements OnInit {
   @Input() orders: Order[] = []
 
   exhibitorName = ""
-  qrCode: any;
+  // qrCode: any;
 
   ngOnInit(): void {
     this.exhibitorService.getExhibitorById(this.exhibitorId)
     .then(res => this.exhibitorName = res.name)
     .catch(err => console.error(err))
 
-    this.qrcodeService.createQrCode(this.exhibitorId)
-    .then(res => {
-      this.qrCode = res
-    }).catch(err => {
-      console.error("Unable to get QR.")
-    })
+    // this.qrcodeService.createQrCode(this.exhibitorId)
+    // .then(res => {
+    //   this.qrCode = res
+    // }).catch(err => {
+    //   console.error("Unable to get QR.")
+    // })
   }
 
 

@@ -38,8 +38,9 @@ export class PaymentService {
       HOWEVER, RAILWAY DEPLOYMENT IS PREVENTING CHILD ROUTE ACCESS.
       THIS IS A QUICK-FIX SOLUTION, BY ASSUMING CHECKOUT IS SUCCESS */
       // this.store.dispatch(clearOrders())
-      // this.paymentService.paymentSuccess()
+      // this.paymentSuccess(orderIds)
       /**/
+      localStorage.setItem("ordersToPay", JSON.stringify(orderIds))
 
       stripe?.redirectToCheckout({
         sessionId: res['sessionId']
@@ -57,6 +58,12 @@ export class PaymentService {
     ).then(res => {
       ordersToPay = res
     })
+
+    // temp solution
+    if (localStorage.getItem('ordersToPay') !== null) {
+      ordersToPay = JSON.parse(localStorage.getItem('ordersToPay')!)
+      localStorage.removeItem('ordersToPay')
+    }
 
     return firstValueFrom(
       this.http.post<any>('/api/checkout/process-orders', ordersToPay)

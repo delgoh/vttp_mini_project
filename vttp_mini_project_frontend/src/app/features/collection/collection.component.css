@@ -10,7 +10,9 @@
 
 .qr-code {
   float: right;
+  padding-right: 40px;
   width: 20%;
+  font-size: 12px;
 }
 
 .product-quantity {
