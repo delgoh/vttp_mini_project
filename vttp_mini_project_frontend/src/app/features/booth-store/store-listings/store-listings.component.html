@@ -21,13 +21,15 @@
       *ngIf="isEdit; else notEdit">
       <app-product-summary-card
         [isClickEnabled]="false"
-        [product]="product">
+        [product]="product"
+        (updateProducts)="loadProducts()">
       </app-product-summary-card>
     </app-product-edit-wrapper>
     <ng-template #notEdit>
       <app-product-summary-card
         [isClickEnabled]="true"
         [product]="product"
+        (updateProducts)="loadProducts()"
         [isViewedByVisitor]="isViewedByVisitor">
       </app-product-summary-card>
     </ng-template>

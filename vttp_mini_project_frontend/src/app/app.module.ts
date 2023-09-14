@@ -8,7 +8,6 @@ import { MaterialModule } from './core/material/material.module';
 import { StoreListingsComponent } from './features/booth-store/store-listings/store-listings.component';
 import { UserVisitorComponent } from './features/user-visitor/user-visitor.component';
 import { UserOrganizerComponent } from './features/user-organizer/user-organizer.component';
-import { PaymentComponent } from './features/payment/payment.component';
 import { CollectionComponent } from './features/collection/collection.component';
 import { UserExhibitorComponent } from './features/user-exhibitor/user-exhibitor.component';
 import { ProductSummaryCardComponent } from './features/booth-store/product-summary-card/product-summary-card.component';
@@ -31,7 +30,6 @@ import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-
 import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
 import { CartComponent } from './features/cart/cart.component';
 import { CheckoutComponent } from './features/checkout/checkout.component';
-import { TestComponent } from './todelete/test/test.component';
 import { CollectionPageComponent } from './features/user-visitor/collection-page/collection-page.component';
 import { StoreModule } from '@ngrx/store';
 import { checkedOrdersReducer } from './core/store/checked-orders.reducer';
@@ -44,6 +42,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { GeolocationComponent } from './features/geolocation/geolocation.component';
 import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
 import { FloorPlanComponent } from './features/floor-plan/floor-plan.component';
+import { SuccessPageComponent } from './features/checkout/success-page/success-page.component';
+import { CancelPageComponent } from './features/checkout/cancel-page/cancel-page.component';
+import { ordersToPayReducer } from './core/store/paid-orders.reducer';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,6 @@ import { FloorPlanComponent } from './features/floor-plan/floor-plan.component';
     StoreListingsComponent,
     UserVisitorComponent,
     UserOrganizerComponent,
-    PaymentComponent,
     CollectionComponent,
     UserExhibitorComponent,
     CartComponent,
@@ -71,14 +71,15 @@ import { FloorPlanComponent } from './features/floor-plan/floor-plan.component';
     BoothsPageComponent,
     CartPageComponent,
     CheckoutComponent,
-    TestComponent,
     CollectionPageComponent,
     EditEventPageComponent,
     EditBoothsPageComponent,
     ExhibitionsOverviewComponent,
     LocationComponent,
     GeolocationComponent,
-    FloorPlanComponent
+    FloorPlanComponent,
+    SuccessPageComponent,
+    CancelPageComponent
   ],
   imports: [
     BrowserModule,
@@ -92,10 +93,13 @@ import { FloorPlanComponent } from './features/floor-plan/floor-plan.component';
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem("access_token"),
-        allowedDomains: ["localhost:4200", "localhost:8080"]
+        allowedDomains: ["localhost:4200", "localhost:8080", "ventesphere.up.railway.app"]
       }
     }),
-    StoreModule.forRoot({checkedOrders: checkedOrdersReducer}),
+    StoreModule.forRoot({
+      checkedOrders: checkedOrdersReducer,
+      ordersToPay: ordersToPayReducer
+    }),
     GoogleMapsModule,
     NgxGpAutocompleteModule.forRoot({
       loaderOptions: {

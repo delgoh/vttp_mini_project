@@ -7,6 +7,7 @@ import { Order } from 'src/app/core/models/order';
 import { PaymentService } from 'src/app/core/services/payment.service';
 import { selectAllCheckedOrders } from 'src/app/core/store/checked-orders.selectors';
 import { clearOrders } from 'src/app/core/store/checked-orders.actions';
+import { addOrdersToPay } from 'src/app/core/store/paid-orders.actions';
 
 @Component({
   selector: 'app-checkout',
@@ -25,23 +26,31 @@ export class CheckoutComponent implements OnInit {
   checkoutOrders: Order[] = []
 
   ngOnInit(): void {
+    console.log("CheckoutComponent: Init, reading selectAllCheckedOrders")
     firstValueFrom(
       this.store.select(selectAllCheckedOrders)
     ).then(res => {
+      console.log("CheckoutComponent: Read selectAllCheckedOrders success")
+      console.log("CheckoutComponent: " + res)
       this.checkoutOrders = res
     })
   }
 
   proceedToPayment() {
     const orderIds: string[] = this.checkoutOrders.map(order => order.orderId)
+    console.log(">> CheckoutComponent: Adding orders to store...")
+    console.log(orderIds)
+    this.store.dispatch(addOrdersToPay({ordersToPay: orderIds}))
+    console.log(">> CheckoutComponent: Current store value")
+
     this.paymentService.goToPayment(orderIds)
     .then(res => {
-      console.log(">> PaymentService: Response received")
+      console.log(">> CheckoutComponent: Response received from Service")
       this.store.dispatch(clearOrders())
-      console.log(this.router.navigate(['/visitor/collection']))
+      console.log(">> CheckoutComponent: Redirecting to /visitor/collection")
+      this.router.navigate(['/visitor/collection'])
     }).catch(err => {
-      console.log(">> PaymentService: Error occurred")
-      console.error(err)
+      console.log(">> CheckoutComponent: Error occurred" + err)
     })
   }
 

@@ -23,7 +23,7 @@ export class ProductEditDialogComponent implements OnInit {
   exhibitorId: string = inject(MAT_DIALOG_DATA).exhibitorId
 
   @ViewChild('imageToUpload') imageRef!: ElementRef
-  previewImageUrl: string = "/assets/images/click-to-add.png"
+  previewImageUrl!: string
   doesImageExist = false
 
   editForm!: FormGroup
@@ -38,6 +38,9 @@ export class ProductEditDialogComponent implements OnInit {
     if (this.product.imageUrl !== null && this.product.imageUrl !== '') {
       this.doesImageExist = true
       this.previewImageUrl = this.product.imageUrl!
+    } else {
+      this.doesImageExist = false
+      this.previewImageUrl = "/assets/images/click-to-add.png"
     }
   }
 
@@ -46,8 +49,9 @@ export class ProductEditDialogComponent implements OnInit {
     reader.onload = (event: any) => {
       this.previewImageUrl = event.target.result;
     }
-    const uploadedFile = this.editForm.get('image')?.value
+    const uploadedFile = this.imageRef.nativeElement.files[0]
     if (uploadedFile instanceof File) {
+      console.log("uploadFile was a File")
       reader.readAsDataURL(uploadedFile);
     }
   }
@@ -59,7 +63,7 @@ export class ProductEditDialogComponent implements OnInit {
       exhibitorId: this.product.exhibitorId,
       name: editFormValue.name,
       price: editFormValue.price,
-      imageUrl: this.doesImageExist ? this.product.imageUrl : "",
+      imageUrl: this.doesImageExist ? this.product.imageUrl : '',
       description: editFormValue.description
     }
 
@@ -86,25 +90,27 @@ export class ProductEditDialogComponent implements OnInit {
 
   deleteProduct() {
     const deleteDialogRef = this.deleteDialog.open(ProductDeleteConfirmationComponent)
-    deleteDialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        this.dialogRef.close()
-        this.boothStoreService.deleteProductById(this.exhibitorId, this.product.productId!)
-        .then(res => {
-          if (res['isDeleted']) {
-            this.snackBar.open("Successfully deleted product!", "Dismiss", {
-              duration: 5000
-            })
-          } else {
-            this.snackBar.open("Failed to delete product. Please try again later.", "Dismiss", {
-              duration: 10000
-            })
-          }
-        }).catch(err => {
-          console.error(err)
-        })
-      }
-    })
+      .afterClosed()
+      .subscribe(res => {
+        deleteDialogRef.unsubscribe()
+        if (res) {
+          this.dialogRef.close()
+          this.boothStoreService.deleteProductById(this.exhibitorId, this.product.productId!)
+          .then(res => {
+            if (res['isDeleted']) {
+              this.snackBar.open("Successfully deleted product!", "Dismiss", {
+                duration: 5000
+              })
+            } else {
+              this.snackBar.open("Failed to delete product. Please try again later.", "Dismiss", {
+                duration: 10000
+              })
+            }
+          }).catch(err => {
+            console.error(err)
+          })
+        }
+      })
   }
 
 }

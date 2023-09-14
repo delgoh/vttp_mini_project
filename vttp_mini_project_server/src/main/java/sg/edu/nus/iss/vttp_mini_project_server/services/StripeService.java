@@ -10,6 +10,8 @@ import com.stripe.model.checkout.Session;
 // import com.stripe.param.AccountLinkCreateParams;
 import com.stripe.param.checkout.SessionCreateParams;
 
+import sg.edu.nus.iss.vttp_mini_project_server.dtos.PaymentRequestDto;
+
 
 @Service
 public class StripeService {
@@ -20,15 +22,18 @@ public class StripeService {
     @Value("${stripe.connected.account.id}")
     private String STRIPE_CONNECTED_ACCOUNT_ID;
 
-    private final String SERVER_API_URL = "http://localhost:4200/";
+    @Value("${server.api.url}")
+    private String SERVER_API_URL;
 
-    public String createPaymentLink() {
+    public String createPaymentLink(PaymentRequestDto urls) {
         Stripe.apiKey = STRIPE_API_KEY;
+
+        System.out.println(">> StripeService: successUrl will be " + SERVER_API_URL + urls.getSuccessUrl());
 
         SessionCreateParams params = SessionCreateParams.builder()
             .setMode(SessionCreateParams.Mode.PAYMENT)
-            .setSuccessUrl(SERVER_API_URL + "/success")
-            .setCancelUrl(SERVER_API_URL + "/cancel")
+            .setSuccessUrl(SERVER_API_URL + urls.getSuccessUrl())
+            .setCancelUrl(SERVER_API_URL + urls.getCancelUrl())
             .addLineItem(
                 SessionCreateParams.LineItem.builder()
                     .setQuantity(1L)
@@ -46,7 +51,8 @@ public class StripeService {
 
         try {
             Session session = Session.create(params);
-            return session.getUrl();
+            System.out.println(">> StripeService: Created session with ID " + session.getId());
+            return session.getId();
         } catch (StripeException ex) {
             System.out.println(ex);
         }

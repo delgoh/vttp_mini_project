@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../core/services/login.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   http: HttpClient = inject(HttpClient)
   loginService: LoginService = inject(LoginService)
   router: Router = inject(Router)
+  activatedRoute = inject(ActivatedRoute)
 
   loginForm!: FormGroup
   isPasswordShown: boolean = true

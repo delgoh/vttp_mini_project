@@ -2,7 +2,6 @@ import { firstValueFrom } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { AuthService } from './auth.service';
-import { Product } from '../models/product';
 import { Order } from '../models/order';
 
 @Injectable({

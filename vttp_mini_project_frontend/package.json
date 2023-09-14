@@ -27,6 +27,7 @@
     "@ngrx/store": "^16.2.0",
     "@ngx-dropzone/cdk": "^16.1.1",
     "@ngx-dropzone/material": "^16.1.1",
+    "@stripe/stripe-js": "^2.1.5",
     "@types/google.maps": "^3.54.0",
     "konva": "^9.2.0",
     "ng2-konva": "^6.0.0",

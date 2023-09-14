@@ -24,7 +24,9 @@ export class ProductEditWrapperComponent {
         exhibitorId: this.exhibitorId
       }
     })
-    dialogRef.afterClosed().subscribe(() => {
+    .afterClosed()
+    .subscribe(() => {
+      dialogRef.unsubscribe()
       this.productUpdatedEvent.emit(true)
     })
   }

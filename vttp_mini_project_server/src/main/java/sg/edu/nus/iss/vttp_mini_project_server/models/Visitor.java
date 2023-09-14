@@ -18,8 +18,6 @@ public class Visitor {
 
     private String password;
 
-    // private String googleAuthToken;
-
     public static UserDto toUserDto(Visitor visitor) {
         UserDto userDto = new UserDto();
         userDto.setUsername(visitor.getEmail());

@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from '../../core/utils/password.validator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   signupService = inject(SignupService)
   fb = inject(FormBuilder)
   router = inject(Router)
+  activatedRoute = inject(ActivatedRoute)
   snackBar = inject(MatSnackBar)
 
   signupForm!: FormGroup

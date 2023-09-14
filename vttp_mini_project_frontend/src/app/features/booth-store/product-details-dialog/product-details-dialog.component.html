@@ -13,22 +13,25 @@
   </div>
   <div class="content-spacer"></div>
   <div class="dialog-footer" mat-dialog-actions align="end">
-    <label>Quantity: </label>
-    <button
-      class="quantity-button"
-      mat-button
-      (click)="decreaseQty()"
-      tabindex="-1">
-      -
-    </button>
-    <span>{{quantity}}</span>
-    <button
-      class="quantity-button"
-      mat-button
-      (click)="increaseQty()"
-      tabindex="-1">
-      +
-    </button>
+    <div *ngIf="isAddToCartEnabled">
+      <label>Quantity: </label>
+      <button
+        class="quantity-button"
+        mat-button
+        (click)="decreaseQty()"
+        tabindex="-1">
+        -
+      </button>
+      <span>{{quantity}}</span>
+      <button
+        class="quantity-button"
+        mat-button
+        (click)="increaseQty()"
+        tabindex="-1">
+        +
+      </button>
+    </div>
+
     <span class="footer-spacer"></span>
     <button
       mat-stroked-button

@@ -7,7 +7,12 @@
         alt="Preview">
     <form [formGroup]="editForm">
       <div class="upload-image-container">
-        <input class="" type="file" formControlName="image" #imageToUpload>
+        <input
+          class=""
+          type="file"
+          formControlName="image"
+          #imageToUpload
+          (change)="updatePreview()">
       </div>
       <div class="product-text-header">
         <mat-form-field>

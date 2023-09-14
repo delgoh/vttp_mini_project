@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/core/models/product';
 import { ProductDetailsDialogComponent } from '../product-details-dialog/product-details-dialog.component';
@@ -15,6 +15,7 @@ export class ProductSummaryCardComponent {
   @Input() product?: Product
   @Input() isClickEnabled: boolean = true
   @Input() isViewedByVisitor: boolean = false
+  @Output() updateProducts = new EventEmitter<void>()
 
   openProductDetails(product: Product) {
     const dialogRef = this.dialog.open(ProductDetailsDialogComponent, {
@@ -22,6 +23,11 @@ export class ProductSummaryCardComponent {
         product: product,
         isAddToCartEnabled: this.isViewedByVisitor
       }
+    })
+    .afterClosed()
+    .subscribe(() => {
+      dialogRef.unsubscribe()
+      this.updateProducts.emit()
     })
   }
 

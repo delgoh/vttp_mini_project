@@ -10,11 +10,11 @@ import { roleGuard } from './core/guards/role.guard';
 import { autologinGuard } from './core/guards/autologin.guard';
 import { BoothsPageComponent } from './features/user-visitor/booths-page/booths-page.component';
 import { CartPageComponent } from './features/user-visitor/cart-page/cart-page.component';
-import { TestComponent } from './todelete/test/test.component';
 import { CollectionPageComponent } from './features/user-visitor/collection-page/collection-page.component';
 import { UserOrganizerComponent } from './features/user-organizer/user-organizer.component';
 import { EditEventPageComponent } from './features/user-organizer/edit-event-page/edit-event-page.component';
 import { EditBoothsPageComponent } from './features/user-organizer/edit-booths-page/edit-booths-page.component';
+import { SuccessPageComponent } from './features/checkout/success-page/success-page.component';
 
 const routes: Routes = [
   // {
@@ -40,12 +40,17 @@ const routes: Routes = [
   // },
   {
     path: '',
-    // component: LoginComponent,
     pathMatch: 'full',
-    redirectTo: '/login'
-    // canActivate: [autologinGuard],
+    redirectTo: '/login',
     // title: "Login | VenteSphere"
   },
+  // {
+  //   path: '',
+  //   component: LoginComponent,
+  //   pathMatch: 'full',
+  //   canActivate: [autologinGuard],
+  //   title: "Login | VenteSphere"
+  // },
   {
     path: 'login',
     component: LoginComponent,
@@ -57,16 +62,6 @@ const routes: Routes = [
     component: SignupComponent,
     canActivate: [autologinGuard],
     title: "Sign Up | VenteSphere"
-  },
-  {
-    path: 'return',
-    component: TestComponent,
-    title: "Stripe Return"
-  },
-  {
-    path: 'refresh',
-    component: TestComponent,
-    title: "Stripe Refresh"
   },
 
   {
@@ -119,7 +114,7 @@ const routes: Routes = [
         path: 'collection',
         component: CollectionPageComponent,
         title: "Collections - Visitor | VenteSphere"
-      }
+      },
     ]
   },
   {
@@ -143,11 +138,20 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'success',
+    component: SuccessPageComponent,
+    title: "Payment Success - Redirecting..."
+  },
+  {
+    path: 'cancel',
+    redirectTo: 'cart'
+  },
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

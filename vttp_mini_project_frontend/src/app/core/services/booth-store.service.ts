@@ -43,7 +43,8 @@ export class BoothStoreService {
     formData.set('description', product.description)
     if (product.imageUrl !== null && product.imageUrl !== "") {
       formData.set('imageUrl', product.imageUrl!)
-    } else if (imageRef) {
+    }
+    if (imageRef) {
       formData.set('image', imageRef.nativeElement.files[0])
     }
 

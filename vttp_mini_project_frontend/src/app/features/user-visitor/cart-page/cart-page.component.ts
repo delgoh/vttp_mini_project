@@ -53,7 +53,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
   }
 
   checkout() {
-    const checkoutDialogRef = this.checkoutDialog.open(CheckoutComponent, {
+    this.checkoutDialog.open(CheckoutComponent, {
       data: {
         allOrders: this.allOrders,
         totalCost: this.totalCost
