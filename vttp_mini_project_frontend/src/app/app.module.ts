@@ -13,7 +13,6 @@ import { UserExhibitorComponent } from './features/user-exhibitor/user-exhibitor
 import { ProductSummaryCardComponent } from './features/booth-store/product-summary-card/product-summary-card.component';
 import { ProductDetailsDialogComponent } from './features/booth-store/product-details-dialog/product-details-dialog.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-import { BoothLocationComponent } from './features/booth-location/booth-location.component';
 import { LoginComponent } from './features/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './features/signup/signup.component';
@@ -47,6 +46,7 @@ import { CancelPageComponent } from './features/checkout/cancel-page/cancel-page
 import { ordersToPayReducer } from './core/store/paid-orders.reducer';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { QRCodeModule } from 'angularx-qrcode';
+import { DevelopmentComponent } from './shared/others/development/development.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,6 @@ import { QRCodeModule } from 'angularx-qrcode';
     CartComponent,
     ProductSummaryCardComponent,
     ProductDetailsDialogComponent,
-    BoothLocationComponent,
     LoginComponent,
     SignupComponent,
     HeaderComponent,
@@ -81,7 +80,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     GeolocationComponent,
     FloorPlanComponent,
     SuccessPageComponent,
-    CancelPageComponent
+    CancelPageComponent,
+    DevelopmentComponent
   ],
   imports: [
     BrowserModule,

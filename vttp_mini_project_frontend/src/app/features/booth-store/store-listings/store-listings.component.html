@@ -3,6 +3,16 @@
     <span class="toolbar-spacer"></span>
     <button
       type="button"
+      mat-stroked-button
+      *ngIf="!isViewedByVisitor"
+      (click)="generateNewProduct()"
+      color="primary"
+      aria-label="Generate New Product">
+      <mat-icon>add</mat-icon>
+      Generate Random
+    </button>
+    <button
+      type="button"
       mat-raised-button
       *ngIf="!isViewedByVisitor"
       (click)="toggleEdit()"

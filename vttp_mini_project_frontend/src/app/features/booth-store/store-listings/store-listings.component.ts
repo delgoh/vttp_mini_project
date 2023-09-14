@@ -1,3 +1,4 @@
+import { FakeStoreService } from './../../../core/services/fake-store.service';
 import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Product } from 'src/app/core/models/product';
 import { BoothStoreService } from '../../../core/services/booth-store.service';
@@ -12,6 +13,7 @@ export class StoreListingsComponent implements OnInit, OnChanges {
 
   boothStoreService = inject(BoothStoreService)
   authService = inject(AuthService)
+  fakeStoreService = inject(FakeStoreService)
 
   @Input() isViewedByVisitor: boolean = false
   @Input() exhibitorId!: string;
@@ -67,5 +69,33 @@ export class StoreListingsComponent implements OnInit, OnChanges {
 
   toggleEdit() {
     this.isEdit = !this.isEdit
+  }
+
+  generateNewProduct() {
+    // let newProduct: Product;
+    this.fakeStoreService.generateProduct()
+    .then(res => {
+      let productName: string = res.title
+      if (productName.length > 15) {
+        productName = productName.slice(0, 15)
+      }
+      const newProduct: Product = {
+        productId: "",
+        exhibitorId: this.exhibitorId,
+        name: productName,
+        price: res.price,
+        description: res.description,
+      }
+      return newProduct
+    }).then((newProduct) => {
+      this.boothStoreService.addNewProduct(this.exhibitorId, newProduct)
+      .then(res => {
+        if (res['isAdded']) {
+          this.loadProducts()
+        }
+      }).catch(err => {
+        console.error(err)
+      })
+    })
   }
 }

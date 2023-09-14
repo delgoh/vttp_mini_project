@@ -15,6 +15,7 @@ import { UserOrganizerComponent } from './features/user-organizer/user-organizer
 import { EditEventPageComponent } from './features/user-organizer/edit-event-page/edit-event-page.component';
 import { EditBoothsPageComponent } from './features/user-organizer/edit-booths-page/edit-booths-page.component';
 import { SuccessPageComponent } from './features/checkout/success-page/success-page.component';
+import { DevelopmentComponent } from './shared/others/development/development.component';
 
 const routes: Routes = [
   // {
@@ -80,13 +81,8 @@ const routes: Routes = [
         title: "Products - Exhibitor | VenteSphere"
       },
       {
-        path: 'orders',
-        component: StoreListingsComponent,
-        title: "Orders - Exhibitor | VenteSphere"
-      },
-      {
         path: 'completed',
-        component: StoreListingsComponent,
+        component: DevelopmentComponent,
         title: "Completed - Exhibitor | VenteSphere"
       },
     ]

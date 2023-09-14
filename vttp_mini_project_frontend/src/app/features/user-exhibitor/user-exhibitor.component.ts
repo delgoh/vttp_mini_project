@@ -10,7 +10,6 @@ export class UserExhibitorComponent {
 
   sideNavRoutes: SideNavRoute[] = [
     {route: 'products', label: 'Products', matIconName: 'store'},
-    {route: 'orders', label: 'Orders', matIconName: 'shopping_cart'},
     {route: 'completed', label: 'Completed', matIconName: 'attach_money'},
   ]
 
