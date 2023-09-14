@@ -32,26 +32,20 @@ public class SecurityConfig {
 
 
                 .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-                // .requestMatchers("/api/refresh").permitAll()
-                // .requestMatchers("/api/return").permitAll()
 
                 .requestMatchers("/api/exhibitor/**")
                 .hasRole("EXHIBITOR")
-                // .hasAnyRole("EXHIBITOR")
 
                 .requestMatchers("/api/visitor/**")
                 .hasRole("VISITOR")
 
+                //Authentication for Organizer not prepared
+                .requestMatchers("/api/organizer/**").permitAll()
+
                 .requestMatchers("/api/**").authenticated()
 
-                // .requestMatchers("/**").permitAll()
-
-                // .requestMatchers("/login").permitAll()
-                // .requestMatchers("/signup").permitAll()
-                // .requestMatchers("/organizer/**").permitAll()
-                // .anyRequest().authenticated()
-                // .requestMatchers("/**").permitAll()
                 .anyRequest().permitAll()
+                // .anyRequest().permitAll()
             );
 
         return http.build();

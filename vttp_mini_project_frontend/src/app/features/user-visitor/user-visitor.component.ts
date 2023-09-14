@@ -9,6 +9,7 @@ import { SideNavRoute } from 'src/app/core/models/side-nav-route';
 export class UserVisitorComponent {
 
   sideNavRoutes: SideNavRoute[] = [
+    {route: 'home', label: 'Home', matIconName: 'home'},
     {route: 'booths', label: 'Booths', matIconName: 'store'},
     {route: 'cart', label: 'Cart', matIconName: 'shopping_cart'},
     {route: 'collection', label: 'Collection', matIconName: 'assignment_returned'},

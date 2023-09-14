@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import Konva from 'konva';
+import { FloorplanService } from 'src/app/core/services/floorplan.service';
 
 @Component({
   selector: 'app-floor-plan',
@@ -8,9 +9,10 @@ import Konva from 'konva';
 })
 export class FloorPlanComponent implements OnInit {
 
+  floorplanService = inject(FloorplanService)
+
   rectangles: Konva.Rect[] = []
   layer = new Konva.Layer();
-
 
   ngOnInit(): void {
     this.generateKonva()
@@ -148,6 +150,14 @@ export class FloorPlanComponent implements OnInit {
         console.log(tr.nodes())
       }
     )
+
+    document.getElementById('saveImage')?.addEventListener(
+      'click',
+      () => {
+        const dataUrl = stage.toDataURL()
+        this.floorplanService.saveFloorPlan(dataUrl)
+      }
+    )
   }
 
   addRect() {
@@ -162,10 +172,6 @@ export class FloorPlanComponent implements OnInit {
     });
     this.rectangles.push(newRect)
     this.layer.add(newRect)
-  }
-
-  saveImage() {
-    // save floor plan image
   }
 
 }

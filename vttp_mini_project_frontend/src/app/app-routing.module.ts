@@ -16,6 +16,7 @@ import { EditEventPageComponent } from './features/user-organizer/edit-event-pag
 import { EditBoothsPageComponent } from './features/user-organizer/edit-booths-page/edit-booths-page.component';
 import { SuccessPageComponent } from './features/checkout/success-page/success-page.component';
 import { DevelopmentComponent } from './shared/others/development/development.component';
+import { HomePageComponent } from './features/user-visitor/home-page/home-page.component';
 
 const routes: Routes = [
   // {
@@ -96,6 +97,11 @@ const routes: Routes = [
     },
     title: "Booths - Visitor | VenteSphere",
     children: [
+      {
+        path: 'home',
+        component: HomePageComponent,
+        title: "Home - Visitor | VenteSphere"
+      },
       {
         path: 'booths',
         component: BoothsPageComponent,

@@ -38,7 +38,6 @@ import { EditBoothsPageComponent } from './features/user-organizer/edit-booths-p
 import { ExhibitionsOverviewComponent } from './features/exhibitions-overview/exhibitions-overview.component';
 import { LocationComponent } from './features/location/location.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { GeolocationComponent } from './features/geolocation/geolocation.component';
 import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
 import { FloorPlanComponent } from './features/floor-plan/floor-plan.component';
 import { SuccessPageComponent } from './features/checkout/success-page/success-page.component';
@@ -47,6 +46,7 @@ import { ordersToPayReducer } from './core/store/paid-orders.reducer';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { QRCodeModule } from 'angularx-qrcode';
 import { DevelopmentComponent } from './shared/others/development/development.component';
+import { HomePageComponent } from './features/user-visitor/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -77,11 +77,11 @@ import { DevelopmentComponent } from './shared/others/development/development.co
     EditBoothsPageComponent,
     ExhibitionsOverviewComponent,
     LocationComponent,
-    GeolocationComponent,
     FloorPlanComponent,
     SuccessPageComponent,
     CancelPageComponent,
-    DevelopmentComponent
+    DevelopmentComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
