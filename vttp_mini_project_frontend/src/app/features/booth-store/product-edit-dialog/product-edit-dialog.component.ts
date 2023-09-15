@@ -37,7 +37,7 @@ export class ProductEditDialogComponent implements OnInit {
     })
     if (this.product.imageUrl !== null && this.product.imageUrl !== '') {
       this.doesImageExist = true
-      this.previewImageUrl = this.product.imageUrl!
+      // this.previewImageUrl = this.product.imageUrl!
     } else {
       this.doesImageExist = false
       this.previewImageUrl = "/assets/images/click-to-add.png"
@@ -79,6 +79,7 @@ export class ProductEditDialogComponent implements OnInit {
           duration: 5000
         })
       } else {
+        console.log(res)
         this.snackBar.open("Failed to save changes. Please try again later.", "Dismiss", {
           duration: 10000
         })

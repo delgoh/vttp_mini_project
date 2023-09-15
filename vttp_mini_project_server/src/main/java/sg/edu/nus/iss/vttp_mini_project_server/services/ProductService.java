@@ -107,6 +107,7 @@ public class ProductService {
     ) {
         exhibitorService.checkExhibitorIdExists(exhibitorId);
         this.checkProductIdExists(productId);
+        System.out.println("check is correct");
 
         String imageUrl = "";
         try {
@@ -117,6 +118,7 @@ public class ProductService {
         } catch (IOException ex) {
             System.out.println(">> Please handle this error");
         }
+        System.out.println("uploading product...");
 
         return productRepository.updateProductById(productId, name, price, imageUrl, description);
     }

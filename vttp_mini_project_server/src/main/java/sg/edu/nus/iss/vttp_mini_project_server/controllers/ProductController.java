@@ -85,7 +85,7 @@ public class ProductController {
                 Float.valueOf(price),
                 image,
                 description);
-        } else if (imageUrl != null) {
+        } else {
             isUpdated = productService.updateProductById(
                 exhibitorId,
                 productId,
